@@ -1,10 +1,10 @@
 {
-  "name": "react-native-common",
-  "version": "0.1.0",
-  "description": "a library that contains common react native And React And Typescript Code",
-  "source": "./src/index.tsx",
-  "main": "./lib/commonjs/index.js",
-  "module": "./lib/module/index.js",
+  "name": "@mohammad_obed/react-native-common",
+  "version": "0.1.2",
+  "description": "a library that contains common react native and react and typescript code",
+  "source": "src/index.tsx",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
   "exports": {
     ".": {
       "import": {
@@ -81,7 +81,8 @@
     "react-native": "0.76.6",
     "react-native-builder-bob": "^0.32.0",
     "release-it": "^17.10.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "@react-native-community/cli": "latest"
   },
   "resolutions": {
     "@types/react": "^18.2.44"
