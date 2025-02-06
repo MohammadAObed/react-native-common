@@ -26,9 +26,11 @@ Note: we will pretend that our package name is: react-native-common and my npm l
 8. in terminal, run: git sparse-checkout reapply
 9. git sparse-checkout reapply
 10. react-native-common-original, copy everything inside it to your new react-native-common folder except src
-11. you can work now
+11. you can work now, pull push, whatever
+
+Note: just make sure npm has the newest version from git (meaning when you push work to git, you might as well pull in the main react-native-common folder, then npm publish again) (why? so you might wan to use the common in many other projects, so you just hit with npm install again, or update or whatever just read the other note below)
 
 Note: now you have two approaches to updating the library inside a certain project that already did the steps above:
 
 - just pull changes into your installed library that is inside the node_modules
-- or you published the library and you already setup .git/SPARSE of the library in that project but did not commit stuff or wanna test freshly, then just just make copy of .git folder in @mohammad_obed → react-native-common in any folder, run npm i @mohammad_obed/react-native-common, then put the .git folder again in the react-native-common (if its not removed)
+- or you published the library and you already setup .git/SPARSE of the library in that project but did not commit stuff or wanna test freshly, then just just make backup of .git folder from @mohammad_obed → react-native-common, run npm i @mohammad_obed/react-native-common, then put the .git folder again in the react-native-common
