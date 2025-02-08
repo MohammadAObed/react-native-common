@@ -24,7 +24,7 @@ Note: we will pretend that our package name is: react-native-common and my npm l
 6. git sparse-checkout set src
 7. in file explorer: Modify the .git/info/sparse-checkout file, delete everything in it and type: /src/\*
 8. in terminal, run: git sparse-checkout reapply
-9. git sparse-checkout reapply
+9. git checkout HEAD
 10. react-native-common-original, copy everything inside it to your new react-native-common folder except src
 11. you can work now, pull push, whatever
 
