@@ -10,14 +10,14 @@ export class Common {
   }
   // [key: string]: unknown;
 
-  static create(...args: unknown[]) {
+  static create(..._args: unknown[]) {
     return new this();
   }
 
   static update<Model>(
     item: Common,
     fields: Fields<Model>,
-    ...args: any[]
+    ..._args: any[]
   ): any {
     const fieldNames = getKeys(fields) as Extract<
       keyof Fields<Model>,
@@ -32,7 +32,7 @@ export class Common {
   }
 
   //...args needed for child classes
-  static copy(item: Common, ...args: unknown[]) {
+  static copy(item: Common, ..._args: unknown[]) {
     let newItem = cloneDeep(item);
     let newItemPartial: any = new (this as any)({});
     newItem.Id = newItemPartial.Id;
