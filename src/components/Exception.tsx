@@ -7,7 +7,7 @@ import { isValidComponent } from '../utils';
 import { ButtonCustom } from './ButtonCustom';
 import { SafeAreaViewCustom } from './SafeAreaViewCustom';
 
-export const Exception = ({ children, error, resetError }: ExceptionProps) => {
+export const Exception = ({ children, resetError }: ExceptionProps) => {
   const { styles } = useStyles(getErrorStyles);
   return (
     <SafeAreaViewCustom style={styles.container}>
