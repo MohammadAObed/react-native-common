@@ -1,0 +1,1 @@
+hi my g, we will chat now, dont yap, dont invent stuff, in any of the chats, be defined, be short, and if i want more elaboration i will ask you, just keep your words less wordy, less words, just that dont worry

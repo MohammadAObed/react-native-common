@@ -1,6 +1,6 @@
-import { handleMinMax, handleOrderBy } from "../helpers/extensions/Array";
+import { handleMinMax, handleOrderBy } from "../helpers";
 
-export { };
+export {};
 
 type MinMax<T> = <U>(callback: (item: T) => U) => U | undefined;
 
