@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
+import { StyleSheet } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
 
 export const getSliderCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -15,10 +15,10 @@ export const getSliderCustomStyles = (theme: MD3Theme) =>
       color: theme.colors.secondary,
     },
     container: {
-      flexDirection: "row",
-      alignItems: "center",
-      flexWrap: "wrap",
-      justifyContent: "space-around",
+      flexDirection: 'row',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
     },
     numberInputContainer: { transform: [{ translateY: -5 }] },
     numberInput: {
@@ -26,6 +26,6 @@ export const getSliderCustomStyles = (theme: MD3Theme) =>
       marginBottom: -15,
     },
     inputContentStyle: {
-      textAlign: "center",
+      textAlign: 'center',
     },
   });

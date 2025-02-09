@@ -1,6 +1,6 @@
-import { NEW_ID, NewIdsTracker } from "../constants";
-import { Fields } from "../types/models";
-import { cloneDeep, getKeys } from "../utils";
+import { NEW_ID, NewIdsTracker } from '../constants';
+import type { Fields } from '../types/models';
+import { cloneDeep, getKeys } from '../utils';
 
 //? functions must only be static
 export class Common {
@@ -14,18 +14,25 @@ export class Common {
     return new this();
   }
 
-  static update<Model>(item: Common, fields: Fields<Model>, ...args: any[]): any {
-    const fieldNames = getKeys(fields) as Extract<keyof Fields<Model>, string>[];
+  static update<Model>(
+    item: Common,
+    fields: Fields<Model>,
+    ...args: any[]
+  ): any {
+    const fieldNames = getKeys(fields) as Extract<
+      keyof Fields<Model>,
+      string
+    >[];
     for (let i = 0; i < fieldNames.length; i++) {
       let fieldName = fieldNames[i]!;
       let fieldValue = fields[fieldName];
-      Common.setNestedPropertyValue(item, fieldName.split("."), fieldValue);
+      Common.setNestedPropertyValue(item, fieldName.split('.'), fieldValue);
     }
     return { ...item };
   }
 
   //...args needed for child classes
-  static copy(item: Common, ...agrs: unknown[]) {
+  static copy(item: Common, ...args: unknown[]) {
     let newItem = cloneDeep(item);
     let newItemPartial: any = new (this as any)({});
     newItem.Id = newItemPartial.Id;
@@ -34,12 +41,19 @@ export class Common {
 
   static validate() {}
 
-  static setNestedPropertyValue(item: any, proptiesNames: string[], value: unknown) {
+  static setNestedPropertyValue(
+    item: any,
+    proptiesNames: string[],
+    value: unknown
+  ) {
     let currentObj: Record<string, unknown> = item;
     for (let i = 0; i < proptiesNames.length - 1; i++) {
       let propertyName = proptiesNames[i]!;
 
-      if (!currentObj[propertyName] || typeof currentObj[propertyName] !== "object") {
+      if (
+        !currentObj[propertyName] ||
+        typeof currentObj[propertyName] !== 'object'
+      ) {
         currentObj[propertyName] = {};
       }
 

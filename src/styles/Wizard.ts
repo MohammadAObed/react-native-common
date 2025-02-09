@@ -1,8 +1,7 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
+import { StyleSheet } from 'react-native';
 
-export const getWizardCustomStyles = (theme: MD3Theme) =>
+export const getWizardCustomStyles = () =>
   StyleSheet.create({
-    container: { alignItems: "center" },
+    container: { alignItems: 'center' },
     buttons: { width: 75 },
   });

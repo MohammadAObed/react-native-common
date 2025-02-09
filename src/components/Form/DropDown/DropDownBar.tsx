@@ -1,10 +1,13 @@
-import { useState } from "react";
-import { View } from "react-native";
-import { Checkbox, CheckboxProps } from "react-native-paper";
-import { useStyles } from "../../../hooks";
-import { getDropDownCustomStyles } from "../../../styles";
-import { DropDownBarProps, TextInputCustomProps } from "../../../types/components";
-import { TextInputCustom } from "../TextInputCustom";
+import { useState } from 'react';
+import { View } from 'react-native';
+import { Checkbox, type CheckboxProps } from 'react-native-paper';
+import { useStyles } from '../../../hooks';
+import { getDropDownCustomStyles } from '../../../styles';
+import type {
+  DropDownBarProps,
+  TextInputCustomProps,
+} from '../../../types/components';
+import { TextInputCustom } from '../TextInputCustom';
 
 export const DropDownBar = <T,>({
   searchPlaceholder,
@@ -17,20 +20,23 @@ export const DropDownBar = <T,>({
   onSearch,
 }: DropDownBarProps<T>) => {
   const { styles } = useStyles(getDropDownCustomStyles);
-  const [text, setText] = useState("");
-  const [selectAllstatus, setSelectAllstatus] = useState<CheckboxProps["status"]>("unchecked");
+  const [text, setText] = useState('');
+  const [selectAllstatus, setSelectAllstatus] =
+    useState<CheckboxProps['status']>('unchecked');
 
-  const onChangeText: TextInputCustomProps["onChangeText"] = (newText) => {
-    setText((prev) => newText);
+  const onChangeText: TextInputCustomProps['onChangeText'] = (newText) => {
+    setText(() => newText);
     onSearch(newText);
   };
 
   const onSelectAll = () => {
     setSelectAllstatus((prev) => {
-      const status = prev !== "checked" ? "checked" : "unchecked";
+      const status = prev !== 'checked' ? 'checked' : 'unchecked';
       let selectedValues: string[] = [];
-      if (status === "checked") {
-        selectedValues = data.filter((x) => !text || x[labelField]!.toString().vIncludes(text)).map((x) => x[valueField]!.toString());
+      if (status === 'checked') {
+        selectedValues = data
+          .filter((x) => !text || x[labelField]!.toString().vIncludes(text))
+          .map((x) => x[valueField]!.toString());
       }
       onChange(selectedValues);
       return status;
@@ -41,7 +47,14 @@ export const DropDownBar = <T,>({
 
   return (
     <View style={styles.dropDownBarContainer}>
-      {search && <TextInputCustom style={styles.inputSearchCustom} value={text} onChangeText={onChangeText} placeholder={searchPlaceholder} />}
+      {search && (
+        <TextInputCustom
+          style={styles.inputSearchCustom}
+          value={text}
+          onChangeText={onChangeText}
+          placeholder={searchPlaceholder}
+        />
+      )}
       {showSelectAllCheckBox && (
         <View style={styles.selectAllCheckboxContainer}>
           <Checkbox status={selectAllstatus} onPress={onSelectAll} />

@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
+import { StyleSheet } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
 
 export const getSafeAreaViewCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({

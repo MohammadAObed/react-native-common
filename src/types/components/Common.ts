@@ -1,19 +1,26 @@
-import { Key } from "react";
+import type { Key } from 'react';
 
-export type OptionalChildren<Props> = Omit<Props, "children"> & { children?: React.ReactNode };
+export type OptionalChildren<Props> = Omit<Props, 'children'> & {
+  children?: React.ReactNode;
+};
 
-export type DisplayDataItemFrom<DataType extends Key, Label extends React.ReactNode | React.ReactNode = React.ReactNode> = {
+export type DisplayDataItemFrom<
+  DataType extends Key,
+  Label extends React.ReactNode | React.ReactNode = React.ReactNode,
+> = {
   value: DataType;
   label: Label;
   props?: Record<string, unknown>;
 };
 
-export type DynamicProps = Record<string, unknown> & { props?: Record<string, unknown> };
+export type DynamicProps = Record<string, unknown> & {
+  props?: Record<string, unknown>;
+};
 
 export type IsMultiProps<
   Value extends ValueProperty,
   AdditionalMultiProps extends Record<string, unknown> = {},
-  AdditionalSingleProps extends Record<string, unknown> = {}
+  AdditionalSingleProps extends Record<string, unknown> = {},
 > =
   | ({
       isMultiSelect: true;

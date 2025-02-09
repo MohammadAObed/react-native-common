@@ -1,11 +1,11 @@
-import { getDecreaseIncreaseNumberStyles } from "../../styles";
+import { getDecreaseIncreaseNumberStyles } from '../../styles';
 // import React from "react";
-import { View } from "react-native";
-import { Text } from "react-native-paper";
-import { useStyles } from "../../hooks";
-import { DecreaseIncreaseNumberProps } from "../../types/components";
-import { PressableIcon } from "../PressableIcon";
-import { NumberInput } from "./NumberInput";
+import { View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { useStyles } from '../../hooks';
+import type { DecreaseIncreaseNumberProps } from '../../types/components';
+import { PressableIcon } from '../PressableIcon';
+import { NumberInput } from './NumberInput';
 
 export const DecreaseIncreaseNumber = ({
   children,
@@ -22,8 +22,14 @@ export const DecreaseIncreaseNumber = ({
   return (
     <>
       {visible && (
-        <View style={[styles.container, inputMode && styles.containerWithInput]}>
-          <PressableIcon name="minus" onPress={(e) => onChangeValue(value - 1)} disabled={value <= min} />
+        <View
+          style={[styles.container, inputMode && styles.containerWithInput]}
+        >
+          <PressableIcon
+            name="minus"
+            onPress={() => onChangeValue(value - 1)}
+            disabled={value <= min}
+          />
           {!inputMode && <Text style={styles.label}>{children ?? value}</Text>}
           {inputMode && (
             <NumberInput
@@ -38,7 +44,11 @@ export const DecreaseIncreaseNumber = ({
             />
           )}
 
-          <PressableIcon name="plus" onPress={(e) => onChangeValue(value + 1)} disabled={value >= max} />
+          <PressableIcon
+            name="plus"
+            onPress={() => onChangeValue(value + 1)}
+            disabled={value >= max}
+          />
         </View>
       )}
     </>

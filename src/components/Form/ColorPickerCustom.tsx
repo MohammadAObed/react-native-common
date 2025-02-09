@@ -1,13 +1,17 @@
-import { getColorPickerCustomStyles } from "../../styles";
+import { getColorPickerCustomStyles } from '../../styles';
 // import React from "react";
-import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import ColorPicker from "react-native-wheel-color-picker";
-import { useStyles } from "../../hooks";
-import { ColorPickerBugHelper } from "../../lib/Bugs";
-import { ColorPickerCustomProps } from "../../types/components";
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import ColorPicker from 'react-native-wheel-color-picker';
+import { useStyles } from '../../hooks';
+import { ColorPickerBugHelper } from '../../libs/Bugs';
+import type { ColorPickerCustomProps } from '../../types/components';
 
-export const ColorPickerCustom = ({ value, onColorChange, ...rest }: ColorPickerCustomProps) => {
+export const ColorPickerCustom = ({
+  value,
+  onColorChange,
+  ...rest
+}: ColorPickerCustomProps) => {
   const { styles } = useStyles(getColorPickerCustomStyles);
 
   let correctValue = ColorPickerBugHelper.HandleTransparentColor(value);
@@ -19,7 +23,9 @@ export const ColorPickerCustom = ({ value, onColorChange, ...rest }: ColorPicker
           swatches={false}
           gapSize={-10}
           color={correctValue ?? value}
-          onColorChangeComplete={(val) => val !== correctValue && onColorChange?.(val)}
+          onColorChangeComplete={(val) =>
+            val !== correctValue && onColorChange?.(val)
+          }
           thumbSize={30}
           sliderSize={30}
           noSnap={true}

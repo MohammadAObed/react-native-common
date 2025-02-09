@@ -1,11 +1,12 @@
-import { ButtonCustomProps } from "../ButtonCustom";
-import { OptionalChildren } from "../Common";
-import { NumberInputModeProps } from "./NumberInput";
+import type { ButtonCustomProps } from '../ButtonCustom';
+import type { OptionalChildren } from '../Common';
+import type { NumberInputModeProps } from './NumberInput';
 
-export type DecreaseIncreaseNumberProps = OptionalChildren<ButtonCustomProps> & {
-  value: number;
-  min?: number;
-  max?: number;
-  visible?: boolean;
-  onChangeValue: (value: number) => void;
-} & NumberInputModeProps;
+export type DecreaseIncreaseNumberProps =
+  OptionalChildren<ButtonCustomProps> & {
+    value: number;
+    min?: number;
+    max?: number;
+    visible?: boolean;
+    onChangeValue: (value: number) => void;
+  } & NumberInputModeProps;

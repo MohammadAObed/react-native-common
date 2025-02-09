@@ -12,67 +12,85 @@ import {
   StarIcon,
   TrashIcon,
   XMarkIcon,
-} from "react-native-heroicons/solid";
-import { useStyles } from "../hooks";
-import { getPressableIconStyles } from "../styles";
-import { PressableIconProps } from "../types/components";
-import { ButtonCustom } from "./ButtonCustom";
+} from 'react-native-heroicons/solid';
+import { useStyles } from '../hooks';
+import { getPressableIconStyles } from '../styles';
+import type { PressableIconProps } from '../types/components';
+import { ButtonCustom } from './ButtonCustom';
 
-export const PressableIcon = ({ children, style, name, disabled, color, size = 35, iconMode = "circle", ...rest }: PressableIconProps) => {
+export const PressableIcon = ({
+  children,
+  style,
+  name,
+  disabled,
+  color,
+  size = 35,
+  iconMode = 'circle',
+  ...rest
+}: PressableIconProps) => {
   const { styles } = useStyles(getPressableIconStyles);
 
-  const IconColor = color ?? (disabled ? styles.disabledIcon.color : styles.icon.color);
+  const IconColor =
+    color ?? (disabled ? styles.disabledIcon.color : styles.icon.color);
 
   return (
     <ButtonCustom style={style} disabled={disabled} {...rest}>
-      {name === "plus" ? (
+      {name === 'plus' ? (
         <>
-          {iconMode === "circle" && <PlusCircleIcon color={IconColor} size={size} />}
-          {iconMode === "bare" && <PlusIcon color={IconColor} size={size} />}
+          {iconMode === 'circle' && (
+            <PlusCircleIcon color={IconColor} size={size} />
+          )}
+          {iconMode === 'bare' && <PlusIcon color={IconColor} size={size} />}
         </>
-      ) : name === "minus" ? (
+      ) : name === 'minus' ? (
         <>
-          {iconMode === "circle" && <MinusCircleIcon color={IconColor} size={size} />}
-          {iconMode === "bare" && <MinusIcon color={IconColor} size={size} />}
+          {iconMode === 'circle' && (
+            <MinusCircleIcon color={IconColor} size={size} />
+          )}
+          {iconMode === 'bare' && <MinusIcon color={IconColor} size={size} />}
         </>
-      ) : name === "trash" ? (
+      ) : name === 'trash' ? (
         <>
           <TrashIcon color={IconColor} size={size} />
         </>
-      ) : name === "xmark" ? (
+      ) : name === 'xmark' ? (
         <>
           <XMarkIcon color={IconColor} size={size} />
         </>
-      ) : name === "eye" ? (
+      ) : name === 'eye' ? (
         <>
           <EyeIcon color={IconColor} size={size} />
         </>
-      ) : name === "eye-dropper" ? (
+      ) : name === 'eye-dropper' ? (
         <>
           <EyeSlashIcon color={IconColor} size={size} />
         </>
-      ) : name === "device" ? (
+      ) : name === 'device' ? (
         <>
           <DevicePhoneMobileIcon color={IconColor} size={size} />
         </>
-      ) : name === "landscape-device" ? (
+      ) : name === 'landscape-device' ? (
         <>
-          <DevicePhoneMobileIcon color={IconColor} size={size} style={styles.landscapeDevice} />
+          <DevicePhoneMobileIcon
+            color={IconColor}
+            size={size}
+            style={styles.landscapeDevice}
+          />
         </>
-      ) : name === "star" ? (
+      ) : name === 'star' ? (
         <>
           <StarIcon color={IconColor} size={size} />
         </>
-      ) : name === "play" ? (
+      ) : name === 'play' ? (
         <>
           <PlayIcon color={IconColor} size={size} />
         </>
-      ) : name === "Flag" ? (
+      ) : name === 'Flag' ? (
         <>
           <FlagIcon color={IconColor} size={size} />
         </>
       ) : (
-        ""
+        ''
       )}
       {children}
     </ButtonCustom>

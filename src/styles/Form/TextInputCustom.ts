@@ -1,17 +1,17 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
+import { StyleSheet } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
 import {
   DEFAULT_FONT_SIZE,
   FORM_BACKGROUND_OPACITY,
   FORM_LABEL_OPACITY,
   SECONDARY_HIGH_OPACITY,
   SECONDARY_MEDIUM_OPACITY,
-} from "../../constants";
+} from '../../constants';
 
 export const getTextInputCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     input: {
-      backgroundColor: "transparent",
+      backgroundColor: 'transparent',
       color: theme.colors.onSurface,
       fontSize: DEFAULT_FONT_SIZE * 1.0714,
     },
@@ -35,8 +35,10 @@ export const getTextInputCustomStyles = (theme: MD3Theme) =>
 
 export const getTextInputCustomModeStyles = (theme: MD3Theme) =>
   StyleSheet.create({
-    form: { backgroundColor: `${theme.colors.secondary}${FORM_BACKGROUND_OPACITY}` },
+    form: {
+      backgroundColor: `${theme.colors.secondary}${FORM_BACKGROUND_OPACITY}`,
+    },
     text: {
-      backgroundColor: "transparent",
+      backgroundColor: 'transparent',
     },
   });

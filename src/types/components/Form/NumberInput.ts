@@ -1,7 +1,10 @@
-import { TextInputProps } from "react-native-paper";
-import { TextInputCustomProps } from "./TextInputCustom";
+import type { TextInputProps } from 'react-native-paper';
+import type { TextInputCustomProps } from './TextInputCustom';
 
-export type NumberInputProps = Omit<TextInputCustomProps, "onChangeDecimal" | "onChangeNumber"> & {
+export type NumberInputProps = Omit<
+  TextInputCustomProps,
+  'onChangeDecimal' | 'onChangeNumber'
+> & {
   value?: number;
   minValue?: number;
   maxValue?: number;
@@ -11,10 +14,10 @@ export type NumberInputProps = Omit<TextInputCustomProps, "onChangeDecimal" | "o
 
 export type NumberInputModeProps =
   | {
-      inputMode?: Extract<TextInputProps["inputMode"], "numeric">;
+      inputMode?: Extract<TextInputProps['inputMode'], 'numeric'>;
       decimalPlaces?: undefined;
     }
   | {
-      inputMode?: Extract<TextInputProps["inputMode"], "decimal">;
+      inputMode?: Extract<TextInputProps['inputMode'], 'decimal'>;
       decimalPlaces?: number;
     };

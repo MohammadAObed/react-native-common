@@ -1,10 +1,10 @@
-import Slider from "@react-native-community/slider";
+import Slider from '@react-native-community/slider';
 // import React from "react";
-import { View } from "react-native";
-import { useStyles } from "../../hooks";
-import { getSliderCustomStyles } from "../../styles";
-import { SliderCustomProps } from "../../types/components";
-import { NumberInput } from "./NumberInput";
+import { View } from 'react-native';
+import { useStyles } from '../../hooks';
+import { getSliderCustomStyles } from '../../styles';
+import type { SliderCustomProps } from '../../types/components';
+import { NumberInput } from './NumberInput';
 
 export const SliderCustom = ({
   style,

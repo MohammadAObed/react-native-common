@@ -1,10 +1,10 @@
-import { TextInputProps } from "react-native-paper";
+import type { TextInputProps } from 'react-native-paper';
 
-export type TextInputCustomProps = Omit<TextInputProps, "value" | "ref"> & {
-  modeCustom?: "text" | "form"; //text: show only text without any border or underlines
+export type TextInputCustomProps = Omit<TextInputProps, 'value' | 'ref'> & {
+  modeCustom?: 'text' | 'form'; //text: show only text without any border or underlines
 } & (
     | {
-        inputMode?: Extract<TextInputProps["inputMode"], "numeric">;
+        inputMode?: Extract<TextInputProps['inputMode'], 'numeric'>;
         value?: number;
         minValue?: number;
         maxValue?: number;
@@ -13,7 +13,7 @@ export type TextInputCustomProps = Omit<TextInputProps, "value" | "ref"> & {
         decimalPlaces?: undefined;
       }
     | {
-        inputMode?: Extract<TextInputProps["inputMode"], "decimal">;
+        inputMode?: Extract<TextInputProps['inputMode'], 'decimal'>;
         value?: number;
         minValue?: number;
         maxValue?: number;
@@ -22,7 +22,7 @@ export type TextInputCustomProps = Omit<TextInputProps, "value" | "ref"> & {
         decimalPlaces?: number;
       }
     | {
-        inputMode?: TextInputProps["inputMode"];
+        inputMode?: TextInputProps['inputMode'];
         value?: string;
         onChangeNumber?: undefined;
         onChangeDecimal?: undefined;

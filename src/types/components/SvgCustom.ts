@@ -1,5 +1,5 @@
-import { SvgShapeValues } from "@mohammad_obed/react-native-common/src/constants";
-import { ColorValue } from "react-native";
+import type { ColorValue } from 'react-native';
+import type { SvgShapeValues } from '../../constants';
 
 export type SvgCustomProps = {
   shape: SvgShapeValues;

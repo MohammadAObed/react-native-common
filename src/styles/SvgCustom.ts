@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
-import { DEFAULT_FONT_SIZE } from "../constants";
+import { StyleSheet } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
+import { DEFAULT_FONT_SIZE } from '../constants';
 
 export const getSvgCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({

@@ -1,6 +1,10 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
-import { SECONDARY_HIGH_OPACITY, SECONDARY_LOW_OPACITY, SMALL_FONT_SIZE } from "../../constants";
+import { StyleSheet } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
+import {
+  SECONDARY_HIGH_OPACITY,
+  SECONDARY_LOW_OPACITY,
+  SMALL_FONT_SIZE,
+} from '../../constants';
 
 export const getColorStyles = (theme: MD3Theme) =>
   StyleSheet.create({

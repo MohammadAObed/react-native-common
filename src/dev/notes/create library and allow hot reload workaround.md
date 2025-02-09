@@ -28,7 +28,7 @@ Note: we will pretend that our package name is: react-native-common and my npm l
 10. react-native-common-original, copy everything inside it to your new react-native-common folder except src
 11. you can work now, pull push, whatever
 
-Note: just make sure npm has the newest version from git (meaning when you push work to git, you might as well pull in the main react-native-common folder, then npm publish again) (why? so you might wan to use the common in many other projects, so you just hit with npm install again, or update or whatever just read the other note below)
+Note: just make sure npm has the newest version from git (meaning when you push work to git, you pull in the main react-native-common folder, then go npm publish again) (why? so when you pull changes you have the newest git data, so when creating backup from .get folder, you dont have old stuff, so you pull, then optional: npm uninstall, then install)
 
 Note: now you have two approaches to updating the library inside a certain project that already did the steps above:
 

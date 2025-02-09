@@ -1,13 +1,13 @@
 import {
   createContext as createContextOrig,
-  ProviderExoticComponent,
-  ProviderProps,
-  ReactNode,
+  type ProviderExoticComponent,
+  type ProviderProps,
+  type ReactNode,
   useContext as useContextOrig,
   useEffect,
   useRef,
   useSyncExternalStore,
-} from "react";
+} from 'react';
 
 //? This file taken from: https://github.com/dai-shi/use-context-selector/issues/109#issuecomment-1785147682
 //? this file is basically to optimize the context, so we can use  useContextSelector, and  prevent rerenders if data does not change (the ones we are getting from the useContextSelector used in any component)
@@ -23,11 +23,16 @@ type ContextProviderProps<T> = {
   children: ReactNode;
 };
 
-export function createContextCommon<T>(defaultValue?: T) {
-  const context = createContextOrig<ContextValue<T> | undefined>(undefined);
+export function createContextCommon<T>(
+  defaultValue?: ContextValue<T> | undefined
+) {
+  const context = createContextOrig<ContextValue<T> | undefined>(defaultValue);
   const ProviderOrig = context.Provider;
 
-  const Provider = ({ value, children }: ContextProviderProps<T>): JSX.Element => {
+  const Provider = ({
+    value,
+    children,
+  }: ContextProviderProps<T>): JSX.Element => {
     const storeRef = useRef<ContextValue<T> | undefined>();
     let store = storeRef.current;
 
@@ -54,15 +59,20 @@ export function createContextCommon<T>(defaultValue?: T) {
     return <ProviderOrig value={store}>{children}</ProviderOrig>;
   };
 
-  context.Provider = Provider as ProviderExoticComponent<ProviderProps<ContextValue<T> | undefined>>;
+  context.Provider = Provider as ProviderExoticComponent<
+    ProviderProps<ContextValue<T> | undefined>
+  >;
 
   return context;
 }
 
-export function useContextSelector<T, R>(context: React.Context<ContextValue<T> | undefined>, selector: (value: T) => R): R {
+export function useContextSelector<T, R>(
+  context: React.Context<ContextValue<T> | undefined>,
+  selector: (value: T) => R
+): R {
   const store = useContextOrig(context);
   if (!store) {
-    throw new Error("useContextSelector must be used within a Provider");
+    throw new Error('useContextSelector must be used within a Provider');
   }
   return useSyncExternalStore(store.subscribe, () => selector(store.value));
 }

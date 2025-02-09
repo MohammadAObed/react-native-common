@@ -1,4 +1,4 @@
-import { ColorPickerProps } from "react-native-wheel-color-picker";
+import type { ColorPickerProps } from 'react-native-wheel-color-picker';
 
 export type ColorPickerCustomProps = ColorPickerProps & {
   value: string;

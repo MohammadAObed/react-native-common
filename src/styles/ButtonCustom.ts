@@ -1,14 +1,14 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
-import { DEFAULT_FONT_SIZE } from "../constants";
+import { StyleSheet } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
+import { DEFAULT_FONT_SIZE } from '../constants';
 // TODO brainstorm better style structure
 
-export const getButtonCustomStyles = (theme: MD3Theme) =>
+export const getButtonCustomStyles = () =>
   StyleSheet.create({
     button: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
       gap: 5,
     },
     withRadius: {

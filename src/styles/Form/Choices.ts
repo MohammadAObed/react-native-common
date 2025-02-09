@@ -1,15 +1,15 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
-import { DEFAULT_FONT_SIZE, SECONDARY_MEDIUM_OPACITY } from "../../constants";
+import { StyleSheet } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
+import { DEFAULT_FONT_SIZE, SECONDARY_MEDIUM_OPACITY } from '../../constants';
 
 export const getChoicesStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     container: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
       gap: 10,
-      flexWrap: "wrap",
+      flexWrap: 'wrap',
     },
     option: {
       paddingVertical: 9,
@@ -23,10 +23,10 @@ export const getChoicesStyles = (theme: MD3Theme) =>
     },
 
     containerWithClearButton: {
-      width: "auto",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
+      width: 'auto',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       gap: 5,
     },
     text: {

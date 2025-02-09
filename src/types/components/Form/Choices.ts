@@ -1,9 +1,17 @@
-import { ViewStyle } from "react-native";
-import { ButtonCustomProps } from "../ButtonCustom";
-import { ButtonCustomWithIconProps } from "../ButtonCustomWithIcon";
-import { DynamicProps, IsMultiProps, OptionalChildren, ValueProperty } from "../Common";
+import type { ViewStyle } from 'react-native';
+import type { ButtonCustomProps } from '../ButtonCustom';
+import type { ButtonCustomWithIconProps } from '../ButtonCustomWithIcon';
+import type {
+  DynamicProps,
+  IsMultiProps,
+  OptionalChildren,
+  ValueProperty,
+} from '../Common';
 
-export type ChoicesProps<Model extends DynamicProps, Value extends ChoiceValueField = number> = OptionalChildren<ButtonCustomWithIconProps> & {
+export type ChoicesProps<
+  Model extends DynamicProps,
+  Value extends ChoiceValueField = number,
+> = OptionalChildren<ButtonCustomWithIconProps> & {
   containerStyle?: ViewStyle;
   data: Model[];
   valueField?: keyof Model;

@@ -1,12 +1,18 @@
-import { /* React, */ useState } from "react";
-import { View } from "react-native";
-import { useStyles } from "../../hooks";
-import { getColorStyles } from "../../styles";
-import { ColorProps } from "../../types/components";
-import { ButtonCustom } from "../ButtonCustom";
-import { ColorPickerCustom } from "./ColorPickerCustom";
+import { /* React, */ useState } from 'react';
+import { View } from 'react-native';
+import { useStyles } from '../../hooks';
+import { getColorStyles } from '../../styles';
+import type { ColorProps } from '../../types/components';
+import { ButtonCustom } from '../ButtonCustom';
+import { ColorPickerCustom } from './ColorPickerCustom';
 
-export const Color = ({ value, onColorChange, onVisibilityChange, isVisible, ...rest }: ColorProps) => {
+export const Color = ({
+  value,
+  onColorChange,
+  onVisibilityChange,
+  isVisible,
+  ...rest
+}: ColorProps) => {
   const { styles } = useStyles(getColorStyles);
   const [pickerVisible, setPickerVisible] = useState(isVisible);
 
@@ -21,11 +27,15 @@ export const Color = ({ value, onColorChange, onVisibilityChange, isVisible, ...
           onVisibilityChange?.(!pickerVisible);
         }}
       >
-        {pickerVisible ? "Hide" : "Show"}
+        {pickerVisible ? 'Hide' : 'Show'}
       </ButtonCustom>
       {pickerVisible && (
         <View style={[styles.colorPickerContainer]}>
-          <ColorPickerCustom onColorChange={onColorChange} value={value} {...rest} />
+          <ColorPickerCustom
+            onColorChange={onColorChange}
+            value={value}
+            {...rest}
+          />
         </View>
       )}
     </>

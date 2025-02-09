@@ -1,4 +1,4 @@
-import { ComponentType, Key } from "react";
+import type { ComponentType, Key } from 'react';
 
 export type WizardKey = Key;
 

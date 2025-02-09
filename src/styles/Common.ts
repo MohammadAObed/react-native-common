@@ -1,29 +1,37 @@
-import { StyleSheet, ViewStyle } from "react-native";
-import { MD3Theme } from "react-native-paper";
-import { HIGHEST_ZINDEX, LARGE_FONT_SIZE, SECONDARY_MEDIUM_OPACITY } from "../constants";
+import { StyleSheet, type ViewStyle } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
+import {
+  HIGHEST_ZINDEX,
+  LARGE_FONT_SIZE,
+  SECONDARY_MEDIUM_OPACITY,
+} from '../constants';
 
-export const iconStyle: ViewStyle = { position: "absolute", bottom: 5, zIndex: HIGHEST_ZINDEX };
+export const iconStyle: ViewStyle = {
+  position: 'absolute',
+  bottom: 5,
+  zIndex: HIGHEST_ZINDEX,
+};
 
 export const commonStyles = StyleSheet.create({
   containerCenter: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   containerRowCenter: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   containerRowCenterHorizontal: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   positionRelative: {
-    position: "relative",
+    position: 'relative',
   },
   absoluteNavigationButton: {
     ...iconStyle,
-    alignSelf: "center",
+    alignSelf: 'center',
     paddingVertical: 12,
     paddingHorizontal: 12,
   },

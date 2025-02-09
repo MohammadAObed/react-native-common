@@ -1,10 +1,15 @@
 // import {useStyles} from "../../hooks";
-import { TouchableOpacity } from "react-native";
-import { Text } from "react-native-paper";
-import { useStyles } from "../hooks";
-import { commonStyles, getButtonCustomModeStyles, getButtonCustomModeTextStyles, getButtonCustomStyles } from "../styles";
-import { ButtonCustomProps } from "../types/components";
-import { isValidComponent } from "../utils";
+import { TouchableOpacity } from 'react-native';
+import { Text } from 'react-native-paper';
+import { useStyles } from '../hooks';
+import {
+  commonStyles,
+  getButtonCustomModeStyles,
+  getButtonCustomModeTextStyles,
+  getButtonCustomStyles,
+} from '../styles';
+import type { ButtonCustomProps } from '../types/components';
+import { isValidComponent } from '../utils';
 
 export const ButtonCustom = ({
   children,
@@ -13,7 +18,7 @@ export const ButtonCustom = ({
   disabled,
   withRadius,
   applyDisabledStyle,
-  mode = "bare",
+  mode = 'bare',
   ...rest
 }: ButtonCustomProps) => {
   const { styles } = useStyles(getButtonCustomStyles);
@@ -42,12 +47,20 @@ export const ButtonCustom = ({
   );
 };
 
-export const ButtonText = ({ children, textStyle, disabled, mode = "bare" }: ButtonCustomProps) => {
+export const ButtonText = ({
+  children,
+  textStyle,
+  disabled,
+  mode = 'bare',
+}: ButtonCustomProps) => {
   const { styles } = useStyles(getButtonCustomStyles);
   const { styles: modeTextStyles } = useStyles(getButtonCustomModeTextStyles);
 
   return (
-    <Text style={[styles.text, modeTextStyles[mode], textStyle]} disabled={disabled}>
+    <Text
+      style={[styles.text, modeTextStyles[mode], textStyle]}
+      disabled={disabled}
+    >
       {children}
     </Text>
   );

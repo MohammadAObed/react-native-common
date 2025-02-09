@@ -1,7 +1,6 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
+import { StyleSheet } from 'react-native';
 
-export const getColorPickerCustomStyles = (theme: MD3Theme) =>
+export const getColorPickerCustomStyles = () =>
   StyleSheet.create({
     sectionContainer: {
       // paddingHorizontal: 24,

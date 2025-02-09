@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { MD3Theme } from "react-native-paper";
+import { StyleSheet } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
 
 export const getPressableIconStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -10,6 +10,6 @@ export const getPressableIconStyles = (theme: MD3Theme) =>
       color: theme.colors.surfaceDisabled,
     },
     landscapeDevice: {
-      transform: [{ rotate: "-90deg" }],
+      transform: [{ rotate: '-90deg' }],
     },
   });

@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
-import { parseDecimalForTextInput, parseIntegerForTextInput } from "../../helpers";
-import { useInputHandlersProps } from "../../types/hooks";
+import { useEffect, useState } from 'react';
+import {
+  parseDecimalForTextInput,
+  parseIntegerForTextInput,
+} from '../../helpers';
+import type { useInputHandlersProps } from '../../types/hooks';
 
 export const useInputHandlers = ({
   value,
@@ -15,14 +18,23 @@ export const useInputHandlers = ({
   const [isFromInput, setIsFromInput] = useState(false);
 
   const handleOnChangeDecimal = (text: string, isFromTextInput = true) => {
-    let { cleanedText, value: decimalValue } = parseDecimalForTextInput({ text, min: minValue, max: maxValue, decimalPlaces });
+    let { cleanedText, value: decimalValue } = parseDecimalForTextInput({
+      text,
+      min: minValue,
+      max: maxValue,
+      decimalPlaces,
+    });
     setInputText(cleanedText);
     setIsFromInput(isFromTextInput);
     if (isFromTextInput) onChangeDecimal?.(decimalValue);
   };
 
   const handleOnChangeNumber = (text: string, isFromTextInput = true) => {
-    let { cleanedText, value: numberValue } = parseIntegerForTextInput({ text, min: minValue, max: maxValue });
+    let { cleanedText, value: numberValue } = parseIntegerForTextInput({
+      text,
+      min: minValue,
+      max: maxValue,
+    });
     setInputText(cleanedText);
     setIsFromInput(isFromTextInput);
     if (isFromTextInput) onChangeNumber?.(numberValue);
@@ -41,7 +53,7 @@ export const useInputHandlers = ({
     if (isFromInput) {
       setIsFromInput(false);
     } else {
-      const text = value?.toString() ?? "";
+      const text = value?.toString() ?? '';
       if (onChangeText) handleOnChangeText(text, false);
       else if (onChangeNumber) handleOnChangeNumber(text, false);
       else if (onChangeDecimal) handleOnChangeDecimal(text, false);
@@ -49,8 +61,14 @@ export const useInputHandlers = ({
   }, [value]);
 
   useEffect(() => {
-    if (onChangeText) setInputText(`${value ?? ""}`);
+    if (onChangeText) setInputText(`${value ?? ''}`);
   });
 
-  return { inputText, setInputText, handleOnChangeDecimal, handleOnChangeNumber, handleOnChangeText };
+  return {
+    inputText,
+    setInputText,
+    handleOnChangeDecimal,
+    handleOnChangeNumber,
+    handleOnChangeText,
+  };
 };
