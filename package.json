@@ -1,6 +1,6 @@
 {
   "name": "@mohammad_obed/react-native-common",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "a library that contains common react native and react and typescript code",
   "source": "src/index.tsx",
   "main": "lib/commonjs/index.js",
