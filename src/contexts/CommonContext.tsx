@@ -1,5 +1,6 @@
 import {
   createContext as createContextOrig,
+  type JSX,
   type ProviderExoticComponent,
   type ProviderProps,
   type ReactNode,
@@ -33,7 +34,7 @@ export function createContextCommon<T>(
     value,
     children,
   }: ContextProviderProps<T>): JSX.Element => {
-    const storeRef = useRef<ContextValue<T> | undefined>();
+    const storeRef = useRef<ContextValue<T> | undefined>(null);
     let store = storeRef.current;
 
     if (!store) {

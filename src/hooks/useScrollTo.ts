@@ -6,7 +6,7 @@ export const useScrollTo = () => {
   const scrollViewRef = useRef<ScrollView>(null);
   const scrollToRef = useRef<View>(null);
 
-  const scrollTo = (scrollToComponent?: React.RefObject<View>) => {
+  const scrollTo = (scrollToComponent?: React.RefObject<View | null>) => {
     if (!scrollToComponent) scrollToComponent = scrollToRef;
     if (scrollViewRef.current && scrollToComponent?.current) {
       scrollToComponent.current.measureLayout(
