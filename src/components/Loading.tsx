@@ -4,7 +4,7 @@ import { useStyles } from '../hooks';
 import { getLoadingStyles } from '../styles';
 import type { LoadingProps } from '../types/components';
 
-export const Loading = ({ loading }: LoadingProps) => {
+export const Loading = ({ loading = true }: LoadingProps) => {
   const { styles } = useStyles(getLoadingStyles);
 
   return (
