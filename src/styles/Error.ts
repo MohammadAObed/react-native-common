@@ -13,4 +13,16 @@ export const getErrorStyles = (theme: MD3Theme) =>
     buttonText: {
       fontWeight: '900',
     },
+    errorCode: {
+      position:'absolute',
+      bottom:15,
+      left:15,
+      alignSelf: 'center',
+    },
+    appVersion: {
+      position:'absolute',
+      bottom:15,
+      right:15,
+      alignSelf: 'center',
+    },
   });
