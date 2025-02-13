@@ -1,3 +1,7 @@
+# npm before publish
+
+npm run prepare
+
 # npm publish package public:
 
 npm publish --access public
@@ -9,6 +13,10 @@ npm unpublish \<package-name\> -f
 # install devdependency only
 
 npm i \<package-name\> --save-dev
+
+# install root workspace devdependency only
+
+npm i \<package-name\> --workspace-root --legacy-peer-deps --save-dev
 
 # upgrade dependencies
 

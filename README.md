@@ -10,15 +10,13 @@ npm install react-native-common
 
 ## Usage
 
-
 ```js
-import { multiply } from 'react-native-common';
+import { getRandomNumber } from '@mohammad_obed/react-native-common/src/utils';
 
 // ...
 
-const result = await multiply(3, 7);
+const result = await getRandomNumber(0, 10);
 ```
-
 
 ## Contributing
 
