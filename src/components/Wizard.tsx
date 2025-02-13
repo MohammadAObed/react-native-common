@@ -1,4 +1,4 @@
-import { /* React, */ useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useStyles } from '../hooks';
 import { getWizardCustomStyles } from '../styles';

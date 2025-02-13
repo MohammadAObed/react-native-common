@@ -1,3 +1,5 @@
+import { Text } from 'react-native-paper';
+import { Path, Svg, type SvgProps } from 'react-native-svg';
 import {
   HORIZONTAL_LINE_HEIGHT,
   SVG_SIZE,
@@ -5,9 +7,6 @@ import {
   SvgShape,
   VERTICAL_LINE_WIDTH,
 } from '../constants';
-// import React from "react";
-import { Text } from 'react-native-paper';
-import { Path, Svg, type SvgProps } from 'react-native-svg';
 import { useStyles } from '../hooks';
 import { getSvgCustomStyles } from '../styles';
 import type { SvgCustomProps } from '../types/components';

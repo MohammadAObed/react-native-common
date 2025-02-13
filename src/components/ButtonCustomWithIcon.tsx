@@ -1,4 +1,3 @@
-// import React from "react";
 import { ButtonCustom, ButtonText } from '../components';
 import { useStyles } from '../hooks';
 import {

@@ -1,4 +1,3 @@
-// import React from "react";
 import { ActivityIndicator, Modal, View } from 'react-native';
 import { useStyles } from '../hooks';
 import { getLoadingStyles } from '../styles';

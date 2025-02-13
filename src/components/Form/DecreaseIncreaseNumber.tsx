@@ -1,8 +1,7 @@
-import { getDecreaseIncreaseNumberStyles } from '../../styles';
-// import React from "react";
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useStyles } from '../../hooks';
+import { getDecreaseIncreaseNumberStyles } from '../../styles';
 import type { DecreaseIncreaseNumberProps } from '../../types/components';
 import { PressableIcon } from '../PressableIcon';
 import { NumberInput } from './NumberInput';

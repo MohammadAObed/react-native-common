@@ -1,4 +1,4 @@
-import { /* React, */ useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Modal, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { HideModes, ShadeLongPressTimeout } from '../constants';
@@ -13,6 +13,7 @@ import type {
 } from '../types/components';
 import { ButtonCustom } from './ButtonCustom';
 import { PressableIcon } from './PressableIcon';
+import Shadow from './Shadow';
 
 export const Popup = ({
   titleStyle,
@@ -132,13 +133,17 @@ const Container = ({
   const { styles } = useStyles(getPopupStyles);
   return (
     <View style={styles.invisibleContainer}>
+    <Shadow offset={[0,5]} borderRadius={10} opacity={0.12} blur={2}>
       <View style={[styles.contentContainer, style]}>
         {HideModes['Cancel'].includes(hideMode!) && (
           <CancelButton hideModal={hideModal} />
         )}
         {children}
       </View>
+    </Shadow>
+
     </View>
+    
   );
 };
 

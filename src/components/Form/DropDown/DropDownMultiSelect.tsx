@@ -1,3 +1,5 @@
+import { MultiSelect } from 'react-native-element-dropdown';
+import type { MultiSelectProps } from 'react-native-element-dropdown/lib/typescript/components/MultiSelect/model';
 import { useStyles } from '../../../hooks';
 import { DropDownBugHelper } from '../../../libs/Bugs';
 import { getDropDownCustomStyles } from '../../../styles';
@@ -6,9 +8,6 @@ import type {
   DropDownSingleAndMultiProps,
   DropDownValueField,
 } from '../../../types/components';
-// import React from "react";
-import { MultiSelect } from 'react-native-element-dropdown';
-import type { MultiSelectProps } from 'react-native-element-dropdown/lib/typescript/components/MultiSelect/model';
 import { DropDownBar } from './DropDownBar';
 import { DropDownIcon } from './DropDownIcon';
 import { DropDownItem } from './DropDownItem';

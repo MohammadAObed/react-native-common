@@ -3,5 +3,5 @@ import type { Props } from 'react-native-error-boundary/lib/ErrorBoundary/Fallba
 import { ErrorCustom } from '../../models';
 
 export type ExceptionProps = Omit<Props, 'error'> & PropsWithChildren & {
-    error: ErrorCustom
+    error: ErrorCustom | Error
 };

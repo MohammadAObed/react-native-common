@@ -1,5 +1,5 @@
-import { ErrorCode, ErrorCodeValues } from "../constants";
-import { ErrorCustomConstructorParam } from "../types/models";
+import { ErrorCode, type ErrorCodeValues } from "../constants";
+import type { ErrorCustomConstructorParam } from "../types/models";
 
 export class ErrorCustom<T extends string = ErrorCodeValues> extends Error {
   errorCode: T;

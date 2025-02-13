@@ -1,4 +1,3 @@
-// import React from "react";
 import ErrorBoundary from 'react-native-error-boundary';
 import type { ErrorBoundaryCustomProps } from '../types/components';
 import { Exception } from './Exception';

@@ -1,4 +1,3 @@
-// import React from "react";
 import type { NumberInputProps } from '../../types/components';
 import { TextInputCustom } from './TextInputCustom';
 

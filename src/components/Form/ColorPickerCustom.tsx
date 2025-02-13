@@ -1,10 +1,9 @@
-import { getColorPickerCustomStyles } from '../../styles';
-// import React from "react";
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { useStyles } from '../../hooks';
 import { ColorPickerBugHelper } from '../../libs/Bugs';
+import { getColorPickerCustomStyles } from '../../styles';
 import type { ColorPickerCustomProps } from '../../types/components';
 
 export const ColorPickerCustom = ({

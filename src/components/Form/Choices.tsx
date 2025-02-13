@@ -1,4 +1,4 @@
-import { /* React, */ cloneElement, isValidElement } from 'react';
+import { cloneElement, isValidElement } from 'react';
 import { View } from 'react-native';
 import { useStyles } from '../../hooks';
 import { getChoicesStyles } from '../../styles';

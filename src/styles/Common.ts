@@ -39,6 +39,14 @@ export const commonStyles = StyleSheet.create({
     fontSize: LARGE_FONT_SIZE,
   },
   disabledButton: { opacity: 0.5 },
+  absoluteBottomCentered: {
+    position: 'absolute',
+    bottom: 5,
+    zIndex: HIGHEST_ZINDEX,
+    alignSelf: 'center',
+    flexDirection:'row',
+    gap:5
+  },
 });
 
 export const getCommonShadowStyle = (theme: MD3Theme, elevation: number) =>

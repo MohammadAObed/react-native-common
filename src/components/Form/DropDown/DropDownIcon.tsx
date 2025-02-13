@@ -1,6 +1,5 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useStyles } from '../../../hooks';
-// import React from "react";
 import { getDropDownCustomStyles } from '../../../styles';
 import type { DropDownComponentsProps } from '../../../types/components';
 

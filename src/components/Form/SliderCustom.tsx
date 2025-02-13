@@ -1,5 +1,4 @@
 import Slider from '@react-native-community/slider';
-// import React from "react";
 import { View } from 'react-native';
 import { useStyles } from '../../hooks';
 import { getSliderCustomStyles } from '../../styles';

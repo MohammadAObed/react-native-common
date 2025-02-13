@@ -1,7 +1,6 @@
-import { useStyles } from '../../../hooks';
-// import React from "react";
 import { Dropdown } from 'react-native-element-dropdown';
 import type { DropdownProps } from 'react-native-element-dropdown/lib/typescript/components/Dropdown/model';
+import { useStyles } from '../../../hooks';
 import { getDropDownCustomStyles } from '../../../styles';
 import type {
   DropDownLabelField,

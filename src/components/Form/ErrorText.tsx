@@ -1,4 +1,4 @@
-import { /* React, */ useState } from 'react';
+import { useState } from 'react';
 import { Text, type TextProps } from 'react-native-paper';
 import { useStyles } from '../../hooks';
 import { getErrorTextStyles } from '../../styles';

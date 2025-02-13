@@ -1,4 +1,4 @@
-import { /* React, */ forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useStyles } from '../../hooks';

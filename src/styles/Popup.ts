@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { type MD3Theme } from 'react-native-paper';
 import { SECONDARY_MEDIUM_OPACITY } from '../constants';
-import { getCommonShadowStyle } from './Common';
 
 export const getPopupStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -29,7 +28,6 @@ export const getPopupStyles = (theme: MD3Theme) =>
       backgroundColor: theme.colors.background,
       borderRadius: 10,
       padding: 20,
-      ...getCommonShadowStyle(theme, 5).shadow,
     },
     cancelButton: {
       position: 'absolute',
