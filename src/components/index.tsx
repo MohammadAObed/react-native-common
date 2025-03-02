@@ -1,7 +1,6 @@
 export * from "./ButtonCustom";
 export * from "./ButtonCustomWithIcon";
 export * from "./Card/CardCustom";
-export * from "./Card/Cards";
 export * from "./Draggable";
 export * from "./ErrorBoundaryCustom";
 export * from "./Exception";
@@ -25,4 +24,3 @@ export * from "./ScrollContainer";
 export * from "./Shadow";
 export * from "./Static";
 export * from "./Wizard";
-

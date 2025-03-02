@@ -1,6 +1,5 @@
 export * from "./ButtonCustom";
 export * from "./Card/CardCustom";
-export * from "./Card/Cards";
 export * from "./Common";
 export * from "./Error";
 export * from "./FloatingContainer";
@@ -22,4 +21,3 @@ export * from "./ScrollContainer";
 export * from "./Shadow";
 export * from "./SvgCustom";
 export * from "./Wizard";
-

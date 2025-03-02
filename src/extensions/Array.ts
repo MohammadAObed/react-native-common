@@ -19,6 +19,8 @@ declare global {
     /** @param isDeranged - Makes sure no element stays at same place (less performant). */
     vShuffle(isDeranged?: boolean): T[];
   }
+
+  interface ReadonlyArray<T> extends Array<T> {}
 }
 
 Array.prototype.vGetDuplicates = function <T>(this: T[]): T[] {

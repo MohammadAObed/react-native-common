@@ -3,5 +3,6 @@ export * from "./useKeyboard";
 export * from "./useLayout";
 export * from "./useLoading";
 export * from "./useScrollTo";
+export * from "./useSQLiteContextCustom";
 export * from "./useStyle";
 export * from "./useTimeout";

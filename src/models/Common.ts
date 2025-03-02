@@ -1,6 +1,7 @@
-import { NEW_ID, NewIdsTracker } from '../constants';
-import type { Fields } from '../types/models';
-import { cloneDeep, getKeys } from '../utils';
+import { getNewestId } from "@mohammad_obed/react-native-common/src/helpers";
+import { NEW_ID, NewIdsTracker } from "../constants";
+import type { Fields } from "../types/models";
+import { cloneDeep, getKeys } from "../utils";
 
 //? functions must only be static
 export class Common {
@@ -14,19 +15,12 @@ export class Common {
     return new this();
   }
 
-  static update<Model>(
-    item: Common,
-    fields: Fields<Model>,
-    ..._args: any[]
-  ): any {
-    const fieldNames = getKeys(fields) as Extract<
-      keyof Fields<Model>,
-      string
-    >[];
+  static update<Model>(item: Common, fields: Fields<Model>, ..._args: any[]): any {
+    const fieldNames = getKeys(fields) as Extract<keyof Fields<Model>, string>[];
     for (let i = 0; i < fieldNames.length; i++) {
       let fieldName = fieldNames[i]!;
       let fieldValue = fields[fieldName];
-      Common.setNestedPropertyValue(item, fieldName.split('.'), fieldValue);
+      Common.setNestedPropertyValue(item, fieldName.split("."), fieldValue);
     }
     return { ...item };
   }
@@ -41,19 +35,12 @@ export class Common {
 
   static validate() {}
 
-  static setNestedPropertyValue(
-    item: any,
-    proptiesNames: string[],
-    value: unknown
-  ) {
+  static setNestedPropertyValue(item: any, proptiesNames: string[], value: unknown) {
     let currentObj: Record<string, unknown> = item;
     for (let i = 0; i < proptiesNames.length - 1; i++) {
       let propertyName = proptiesNames[i]!;
 
-      if (
-        !currentObj[propertyName] ||
-        typeof currentObj[propertyName] !== 'object'
-      ) {
+      if (!currentObj[propertyName] || typeof currentObj[propertyName] !== "object") {
         currentObj[propertyName] = {};
       }
 
@@ -65,10 +52,25 @@ export class Common {
     return this;
   }
 
+  static createDynamicClass(className: string) {
+    const dynamicClass = class extends Common {
+      constructor() {
+        super();
+      }
+    };
+
+    Object.defineProperty(dynamicClass, "name", { value: className });
+
+    return dynamicClass;
+  }
+
   private static getNewId(obj: Common): number {
-    const name = obj.constructor.name; //I heard when app is published (run build) the classes names changes due to minification (ex: Item → a, Game → b)
+    const name = obj.constructor.name; //TODO: Check I heard when app is published (run build) the classes names changes due to minification (ex: Item → a, Game → b)
     const tracker = NewIdsTracker.find((x) => x.className === name);
-    if (tracker) return --tracker.lastNewId;
+    if (tracker) {
+      tracker.lastNewId = getNewestId(tracker.lastNewId);
+      return tracker.lastNewId;
+    }
     NewIdsTracker.push({ className: name, lastNewId: NEW_ID });
     return NEW_ID;
   }

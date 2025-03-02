@@ -33,8 +33,25 @@ export const getValues: GetValues = (object) => {
 };
 
 export const getKeys: GetKeys = (object) => {
-  return Object.keys(object);
+  return Object.keys(object) as ReturnType<GetKeys>;
+};
+export const getEntries: GetEntries = (object) => {
+  return Object.entries(object) as ReturnType<GetEntries>;
+};
+
+export const fromEntries: FromEntries = (entries) => {
+  return Object.fromEntries(entries) as any;
+};
+
+export const isPrimitive = (value: unknown): value is string | number | boolean | bigint | symbol | null | undefined => {
+  return value === null || (typeof value !== "object" && typeof value !== "function");
 };
 
 type GetValues = <T>(o: { [s: string]: T } | ArrayLike<T>) => T[];
-type GetKeys = (o: object) => string[];
+type GetKeys = <T extends object>(o: T) => (keyof T)[];
+type GetEntries = <T extends object>(o: T) => [keyof T, T[keyof T]][];
+type FromEntries = <T extends readonly (readonly [PropertyKey, any])[]>(
+  entries: T
+) => {
+  [K in T[number] as K[0]]: K[1];
+};
