@@ -343,7 +343,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   private async _setDbVersion(DatabaseVersion: number) {
     await this.execAsync(`PRAGMA user_version = ${DatabaseVersion}`);
   }
-  private async _deleteDb() {
+  async _deleteDb() {
     await this._db.closeAsync();
     await deleteDatabaseAsync(DATABASE_FULL_NAME);
   }

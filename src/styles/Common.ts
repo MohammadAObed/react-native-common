@@ -1,37 +1,33 @@
-import { StyleSheet, type ViewStyle } from 'react-native';
-import { type MD3Theme } from 'react-native-paper';
-import {
-  HIGHEST_ZINDEX,
-  LARGE_FONT_SIZE,
-  SECONDARY_MEDIUM_OPACITY,
-} from '../constants';
+import { StyleSheet, type ViewStyle } from "react-native";
+import { type MD3Theme } from "react-native-paper";
+import { HIGHEST_ZINDEX, LARGE_FONT_SIZE, SECONDARY_MEDIUM_OPACITY } from "../constants";
 
 export const iconStyle: ViewStyle = {
-  position: 'absolute',
+  position: "absolute",
   bottom: 5,
   zIndex: HIGHEST_ZINDEX,
 };
 
 export const commonStyles = StyleSheet.create({
   containerCenter: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   containerRowCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   containerRowCenterHorizontal: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
   },
   positionRelative: {
-    position: 'relative',
+    position: "relative",
   },
   absoluteNavigationButton: {
     ...iconStyle,
-    alignSelf: 'center',
+    alignSelf: "center",
     paddingVertical: 12,
     paddingHorizontal: 12,
   },
@@ -40,12 +36,18 @@ export const commonStyles = StyleSheet.create({
   },
   disabledButton: { opacity: 0.5 },
   absoluteBottomCentered: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 5,
     zIndex: HIGHEST_ZINDEX,
-    alignSelf: 'center',
-    flexDirection:'row',
-    gap:5
+    alignSelf: "center",
+    flexDirection: "row",
+    gap: 5,
+  },
+  fitContainer: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

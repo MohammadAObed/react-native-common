@@ -1,13 +1,10 @@
-import type { Key } from 'react';
+import type { Key } from "react";
 
-export type OptionalChildren<Props> = Omit<Props, 'children'> & {
+export type OptionalChildren<Props> = Omit<Props, "children"> & {
   children?: React.ReactNode;
 };
 
-export type DisplayDataItemFrom<
-  DataType extends Key,
-  Label extends React.ReactNode | React.ReactNode = React.ReactNode,
-> = {
+export type DisplayDataItemFrom<DataType extends Key, Label extends React.ReactNode | React.ReactNode = React.ReactNode> = {
   value: DataType;
   label: Label;
   props?: Record<string, unknown>;
@@ -20,7 +17,7 @@ export type DynamicProps = Record<string, unknown> & {
 export type IsMultiProps<
   Value extends ValueProperty,
   AdditionalMultiProps extends Record<string, unknown> = {},
-  AdditionalSingleProps extends Record<string, unknown> = {},
+  AdditionalSingleProps extends Record<string, unknown> = {}
 > =
   | ({
       isMultiSelect: true;
@@ -44,3 +41,5 @@ type OnChangeMultiParam<Value extends ValueProperty> = {
 };
 
 export type ValueProperty = undefined | Key;
+
+export type OverlayMode = "full-screen" | "fit-container";

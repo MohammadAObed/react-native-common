@@ -17,7 +17,6 @@ export function SetPropertyMetaData(metaData: SetPropertyMetaDataParam) {
     if (!PropertyMetaDataDictionary[newMetaData.className]) PropertyMetaDataDictionary[newMetaData.className] = {};
     if (!PropertyMetaDataDictionary[newMetaData.className]![propertyKey])
       PropertyMetaDataDictionary[newMetaData.className]![propertyKey] = newMetaData;
-    console.log("🚀 ~ PropertyMetaDataDictionary[newMetaData.className]:", PropertyMetaDataDictionary[newMetaData.className]);
   };
 }
 
