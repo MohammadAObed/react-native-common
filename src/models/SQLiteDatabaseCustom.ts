@@ -15,7 +15,6 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   static async migrateDbIfNeeded(db: SQLiteDatabase, DatabaseVersion: number, handleDbVersion: HandleDbVersion) {
     const customDb = new SQLiteDatabaseCustom(db);
-    // await customDb._deleteDb();
     let { user_version: currentDbVersion } = await customDb._getDbVersion();
     await handleDbVersion(customDb, currentDbVersion);
     await customDb._setDbVersion(DatabaseVersion);

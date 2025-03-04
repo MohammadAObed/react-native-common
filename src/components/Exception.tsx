@@ -16,6 +16,11 @@ const SHOW_SEND_EMAIL = failCount >= 2;
 export const Exception = ({ children, mode, center, error, resetError }: ExceptionProps) => {
   const { styles } = useStyles(getErrorStyles);
   const errorCustom = error as ErrorCustom;
+
+  if (!children && !errorCustom.showToScreen && !errorCustom.showOnly) {
+    children = "Something went wrong...";
+  }
+
   return (
     <>
       {mode === "simple" && (

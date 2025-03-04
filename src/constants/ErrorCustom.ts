@@ -14,4 +14,4 @@ export const ErrorCode = {
 
 export const ErrorCodesNotShownToScreen: ErrorCodeValues[] = [ErrorCode.UNKOWN, ErrorCode.CUSTOM];
 
-export const DB_ERROR_MESSAGE = "Failed to load local resources";
+export const DB_ERROR_MESSAGE = "Failed to load resources...";
