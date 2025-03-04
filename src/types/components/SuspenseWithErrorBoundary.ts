@@ -1,7 +1,7 @@
-import { OverlayMode } from "@mohammad_obed/react-native-common/src/types/components/Common";
-import { ErrorBoundaryCustomProps } from "@mohammad_obed/react-native-common/src/types/components/ErrorBoundaryCustom";
-import { LoadingProps } from "@mohammad_obed/react-native-common/src/types/components/Loading";
 import { SuspenseProps } from "react";
+import type { OverlayMode } from "../components/Common";
+import type { ErrorBoundaryCustomProps } from "../components/ErrorBoundaryCustom";
+import type { LoadingProps } from "../components/Loading";
 
 export type SuspenseWithErrorBoundaryProps = SuspenseProps & {
   mode?: OverlayMode;
