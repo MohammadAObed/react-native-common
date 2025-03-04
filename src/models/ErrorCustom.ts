@@ -6,6 +6,7 @@ export class ErrorCustom<T extends string = ErrorCodeValues> extends Error {
   errorCode: T;
   showToScreen: boolean | undefined;
   showOnly: boolean | undefined;
+  originalError: Error | undefined;
 
   constructor(message: string, errorCode?: T, options?: ErrorCustomConstructorParam) {
     super(message);
@@ -13,5 +14,6 @@ export class ErrorCustom<T extends string = ErrorCodeValues> extends Error {
     this.errorCode = errorCode ?? (ErrorCode.CUSTOM as T);
     this.showToScreen = options?.showToScreen ?? !ErrorCodesNotShownToScreen.includes(this.errorCode as ErrorCodeValues);
     this.showOnly = options?.showOnly;
+    this.originalError = options?.originalError;
   }
 }
