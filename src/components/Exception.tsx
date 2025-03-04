@@ -10,32 +10,42 @@ import { ButtonCustom } from "./ButtonCustom";
 import { FitContainer } from "./FitContainer";
 import { SafeAreaViewCustom } from "./SafeAreaViewCustom";
 
-export const Exception = ({ children, mode, error, resetError }: ExceptionProps) => {
-  const errorCustom = error as ErrorCustom;
+let failCount = 0;
+const SHOW_SEND_EMAIL = failCount >= 2;
+
+export const Exception = ({ children, mode, center, error, resetError }: ExceptionProps) => {
   const { styles } = useStyles(getErrorStyles);
+  const errorCustom = error as ErrorCustom;
   return (
     <>
-      {mode === "fit-container" && (
-        <FitContainer>
-          {children && (isValidComponent(children) ? children : <Text>{children}</Text>)}
+      {mode === "simple" && (
+        <FitContainer center={center}>
+          {(errorCustom.showToScreen || errorCustom.showOnly) && <Text>{errorCustom.message}</Text>}
+          {!errorCustom.showOnly && children && (isValidComponent(children) ? children : <Text style={styles.simpleText}>{children}</Text>)}
           <ButtonCustom mode="text-shadow" onPress={resetError}>
             Try Again
           </ButtonCustom>
+          {SHOW_SEND_EMAIL && (
+            <ButtonCustom mode="text-shadow" onPress={resetError}>
+              Send Email
+            </ButtonCustom>
+          )}
         </FitContainer>
       )}
-      {mode === "full-screen" && (
+      {mode === "detailed" && (
         <SafeAreaViewCustom style={styles.container}>
-          <Text variant="displayMedium">Oops!</Text>
-          <Text variant="headlineLarge">{"There's an error"}</Text>
-          {errorCustom.showToScreen && <Text variant="bodyLarge">{errorCustom.message}</Text>}
-          {children && (isValidComponent(children) ? children : <Text variant="bodyLarge">{children}</Text>)}
+          {!errorCustom.showOnly && <Text variant="displayMedium">Oops!</Text>}
+          {!errorCustom.showOnly && <Text variant="headlineLarge">{"There's an error"}</Text>}
+          {(errorCustom.showToScreen || errorCustom.showOnly) && <Text variant="bodyLarge">{errorCustom.message}</Text>}
+          {!errorCustom.showOnly && children && (isValidComponent(children) ? children : <Text variant="bodyLarge">{children}</Text>)}
           <ButtonCustom textStyle={styles.buttonText} mode="button" withRadius onPress={resetError}>
             Try Again
           </ButtonCustom>
-          <Text selectable>
-            or send an email with the screenshot of this screen if this error still occurs to:{" "}
-            <Text style={styles.buttonText}>mohammadahmadobed@gmail.com</Text>
-          </Text>
+          {SHOW_SEND_EMAIL && (
+            <ButtonCustom textStyle={styles.buttonText} mode="button" withRadius onPress={resetError}>
+              Send Email
+            </ButtonCustom>
+          )}
           <Text style={styles.appVersion}>v {Application.nativeApplicationVersion}</Text>
           <Text style={styles.errorCode}>Error code: {errorCustom.errorCode ?? ErrorCode.UNKOWN}</Text>
         </SafeAreaViewCustom>

@@ -42,4 +42,4 @@ type OnChangeMultiParam<Value extends ValueProperty> = {
 
 export type ValueProperty = undefined | Key;
 
-export type OverlayMode = "full-screen" | "fit-container";
+export type OverlayMode = "detailed" | "simple";

@@ -7,4 +7,5 @@ export type ExceptionProps = Omit<Props, "error"> &
   PropsWithChildren & {
     error: ErrorCustom | Error;
     mode?: OverlayMode;
+    center?: boolean;
   };

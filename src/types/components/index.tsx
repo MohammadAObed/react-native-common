@@ -19,6 +19,6 @@ export * from "./Popup";
 export * from "./PressableIcon";
 export * from "./Shadow";
 export * from "./Static";
-export * from "./SuspenseCustom";
+export * from "./SuspenseWithErrorBoundary";
 export * from "./SvgCustom";
 export * from "./Wizard";

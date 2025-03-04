@@ -3,6 +3,7 @@ import type { ErrorCodeValues } from "../types/constants";
 export const ErrorCode = {
   UNKOWN: "0x00001",
   CUSTOM: "0x00002",
+  FETCH_ERROR: "0x00003",
   GET_DB_VERSION: "0x10000",
   LOAD_DB_ASSET: "0x10001",
   LOAD_DB_ASSET_LOCAL_URI: "0x10002",

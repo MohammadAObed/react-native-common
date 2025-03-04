@@ -44,10 +44,13 @@ export const commonStyles = StyleSheet.create({
     gap: 5,
   },
   fitContainer: {
-    flex: 1,
+    paddingVertical: 20,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+  },
+  centerContainerContent: {
+    flex: 1,
   },
 });
 

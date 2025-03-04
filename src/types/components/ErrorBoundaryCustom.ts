@@ -5,4 +5,5 @@ export type ErrorBoundaryCustomProps = Omit<ErrorBoundaryProps, "FallbackCompone
   message?: string;
   FallbackComponent?: ErrorBoundaryProps["FallbackComponent"];
   mode?: OverlayMode;
+  center?: boolean;
 };

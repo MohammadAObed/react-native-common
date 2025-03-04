@@ -6,16 +6,16 @@ import type { LoadingProps } from "../types/components";
 import { FitContainer } from "./FitContainer";
 import { Popup } from "./Popup";
 
-export const Loading = ({ loading = true, mode = "full-screen", ...rest }: LoadingProps) => {
+export const Loading = ({ loading = true, center, mode = "simple", ...rest }: LoadingProps) => {
   return (
     <>
-      {mode === "full-screen" && (
+      {mode === "detailed" && (
         <Popup visible={loading} mode="bare" hideMode="onCustom">
           <LoadingContent loading={loading} {...rest} />
         </Popup>
       )}
-      {mode === "fit-container" && (
-        <FitContainer>
+      {mode === "simple" && (
+        <FitContainer center={center}>
           <LoadingContent loading={loading} {...rest} />
         </FitContainer>
       )}

@@ -25,5 +25,5 @@ export * from "./SafeAreaViewCustom";
 export * from "./ScrollContainer";
 export * from "./Shadow";
 export * from "./Static";
-export * from "./SuspenseCustom";
+export * from "./SuspenseWithErrorBoundary";
 export * from "./Wizard";

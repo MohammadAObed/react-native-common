@@ -25,4 +25,7 @@ export const getErrorStyles = (theme: MD3Theme) =>
       right: 15,
       alignSelf: "center",
     },
+    simpleText: {
+      marginTop: 4,
+    },
   });

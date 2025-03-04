@@ -1,4 +1,4 @@
-
 export type ErrorCustomConstructorParam = {
-showToScreen?: boolean
+  showToScreen?: boolean;
+  showOnly?: boolean;
 };
