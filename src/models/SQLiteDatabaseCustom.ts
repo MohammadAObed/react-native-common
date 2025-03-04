@@ -3,7 +3,7 @@ import { deleteDatabaseAsync, SQLiteDatabase, SQLiteVariadicBindParams } from "e
 import { DATABASE_FULL_NAME, DB_ERROR_MESSAGE, ErrorCode, NEW_ID_FACTOR, NewIdsTracker } from "../constants";
 import { getNewestId, GetPropertyMetaData, GetPropertyMetaDataFkClassName } from "../helpers";
 import { Common, ErrorCustom } from "../models";
-import { PropertyMetaData } from "../types/constants";
+import type { PropertyMetaData } from "../types/constants";
 import { GetSqlFile, HandleDbVersion, NestedIds, SqliteForeignKey, SqliteMaster, SqliteTableColumnInfo, Transaction } from "../types/models";
 import { getEntries, getKeys, isPrimitive } from "../utils";
 

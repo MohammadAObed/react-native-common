@@ -1,4 +1,4 @@
-import { ErrorCodeValues } from "../types/constants";
+import type { ErrorCodeValues } from "../types/constants";
 
 export const ErrorCode = {
   UNKOWN: "0x00001",

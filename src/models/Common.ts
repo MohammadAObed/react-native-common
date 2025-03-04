@@ -1,5 +1,5 @@
-import { getNewestId } from "@mohammad_obed/react-native-common/src/helpers";
 import { NEW_ID, NewIdsTracker } from "../constants";
+import { getNewestId } from "../helpers";
 import type { Fields } from "../types/models";
 import { cloneDeep, getKeys } from "../utils";
 

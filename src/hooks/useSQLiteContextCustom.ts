@@ -1,6 +1,6 @@
-import { SQLiteDatabaseCustom } from "@mohammad_obed/react-native-common/src/models";
 import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
+import { SQLiteDatabaseCustom } from "../models";
 
 export const useSQLiteContextCustom = <ClassNames extends string = string>() => {
   const db = useSQLiteContext();

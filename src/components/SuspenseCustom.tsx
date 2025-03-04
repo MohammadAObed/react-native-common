@@ -1,7 +1,7 @@
-import { ErrorBoundaryCustom } from "@mohammad_obed/react-native-common/src/components/ErrorBoundaryCustom";
-import { Loading } from "@mohammad_obed/react-native-common/src/components/Loading";
 import { Suspense } from "react";
 import type { SuspenseCustomProps } from "../types/components";
+import { ErrorBoundaryCustom } from "./ErrorBoundaryCustom";
+import { Loading } from "./Loading";
 
 export const SuspenseCustom = ({ errorMessage, errorFallback, mode = "full-screen", ...rest }: SuspenseCustomProps) => {
   return (

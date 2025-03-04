@@ -1,5 +1,5 @@
-import { OverlayMode } from "@mohammad_obed/react-native-common/src/types/components/Common";
 import type { ErrorBoundaryProps } from "react-native-error-boundary";
+import { OverlayMode } from "../components/Common";
 
 export type ErrorBoundaryCustomProps = Omit<ErrorBoundaryProps, "FallbackComponent"> & {
   message?: string;

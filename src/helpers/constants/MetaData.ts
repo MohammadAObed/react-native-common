@@ -1,6 +1,6 @@
 import { PropertyMetaDataDictionary } from "../../constants";
 import { ErrorCustom } from "../../models";
-import { PropertyMetaData, SetPropertyMetaDataParam } from "../../types/constants";
+import type { PropertyMetaData, SetPropertyMetaDataParam } from "../../types/constants";
 
 export function SetPropertyMetaData(metaData: SetPropertyMetaDataParam) {
   return function (target: any, propertyKey: any) {

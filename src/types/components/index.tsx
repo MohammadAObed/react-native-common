@@ -5,6 +5,7 @@ export * from "./Common";
 export * from "./Draggable";
 export * from "./ErrorBoundaryCustom";
 export * from "./Exception";
+export * from "./FitContainer";
 export * from "./Form/Choices";
 export * from "./Form/Color";
 export * from "./Form/DecreaseIncreaseNumber";

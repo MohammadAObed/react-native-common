@@ -1,8 +1,9 @@
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator } from "react-native";
 import { Text } from "react-native-paper";
 import { useStyles } from "../hooks";
-import { commonStyles, getLoadingStyles } from "../styles";
+import { getLoadingStyles } from "../styles";
 import type { LoadingProps } from "../types/components";
+import { FitContainer } from "./FitContainer";
 import { Popup } from "./Popup";
 
 export const Loading = ({ loading = true, mode = "full-screen", ...rest }: LoadingProps) => {
@@ -14,9 +15,9 @@ export const Loading = ({ loading = true, mode = "full-screen", ...rest }: Loadi
         </Popup>
       )}
       {mode === "fit-container" && (
-        <View style={commonStyles.fitContainer}>
+        <FitContainer>
           <LoadingContent loading={loading} {...rest} />
-        </View>
+        </FitContainer>
       )}
     </>
   );

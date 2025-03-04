@@ -1,13 +1,13 @@
 import * as Application from "expo-application";
-import { View } from "react-native";
 import { Text } from "react-native-paper";
 import { ErrorCode } from "../constants";
 import { useStyles } from "../hooks";
 import type { ErrorCustom } from "../models";
-import { commonStyles, getErrorStyles } from "../styles";
+import { getErrorStyles } from "../styles";
 import type { ExceptionProps } from "../types/components";
 import { isValidComponent } from "../utils";
 import { ButtonCustom } from "./ButtonCustom";
+import { FitContainer } from "./FitContainer";
 import { SafeAreaViewCustom } from "./SafeAreaViewCustom";
 
 export const Exception = ({ children, mode, error, resetError }: ExceptionProps) => {
@@ -16,12 +16,12 @@ export const Exception = ({ children, mode, error, resetError }: ExceptionProps)
   return (
     <>
       {mode === "fit-container" && (
-        <View style={commonStyles.fitContainer}>
+        <FitContainer>
           {children && (isValidComponent(children) ? children : <Text>{children}</Text>)}
           <ButtonCustom mode="text-shadow" onPress={resetError}>
             Try Again
           </ButtonCustom>
-        </View>
+        </FitContainer>
       )}
       {mode === "full-screen" && (
         <SafeAreaViewCustom style={styles.container}>
