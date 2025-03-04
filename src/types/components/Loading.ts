@@ -1,4 +1,4 @@
-import { OverlayMode } from "./Common";
+import type { OverlayMode } from './Common';
 
 export type LoadingProps = {
   loading?: boolean;

@@ -47,7 +47,7 @@ export function createContextCommon<T>(
         },
         notify: () => listeners.forEach((listener) => listener()),
       };
-      storeRef.current = store;
+      (storeRef as any).current = store;
     }
 
     useEffect(() => {
