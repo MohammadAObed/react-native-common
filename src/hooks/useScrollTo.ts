@@ -1,6 +1,6 @@
-import { useRef } from 'react';
-import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { useRef } from "react";
+import { View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 export const useScrollTo = () => {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -9,12 +9,9 @@ export const useScrollTo = () => {
   const scrollTo = (scrollToComponent?: React.RefObject<View | null>) => {
     if (!scrollToComponent) scrollToComponent = scrollToRef;
     if (scrollViewRef.current && scrollToComponent?.current) {
-      scrollToComponent.current.measureLayout(
-        scrollViewRef.current.getInnerViewNode(),
-        (_x, y) => {
-          scrollViewRef.current?.scrollTo({ y: y + 20, animated: true });
-        }
-      );
+      scrollToComponent.current.measure((_x, y) => {
+        scrollViewRef.current?.scrollTo({ y: y + 30, animated: true });
+      });
     }
   };
 

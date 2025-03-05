@@ -1,9 +1,10 @@
-import Slider from '@react-native-community/slider';
-import { View } from 'react-native';
-import { useStyles } from '../../hooks';
-import { getSliderCustomStyles } from '../../styles';
-import type { SliderCustomProps } from '../../types/components';
-import { NumberInput } from './NumberInput';
+import Slider from "@react-native-community/slider";
+import { useState } from "react";
+import { View } from "react-native";
+import { useStyles } from "../../hooks";
+import { getSliderCustomStyles } from "../../styles";
+import type { SliderCustomProps } from "../../types/components";
+import { NumberInput } from "./NumberInput";
 
 export const SliderCustom = ({
   style,
@@ -17,6 +18,7 @@ export const SliderCustom = ({
   ...rest
 }: SliderCustomProps) => {
   const { styles } = useStyles(getSliderCustomStyles);
+  const [_value, _setValue] = useState(value);
 
   return (
     <View style={styles.container}>
@@ -27,7 +29,7 @@ export const SliderCustom = ({
         minimumTrackTintColor={styles.thumb.color}
         maximumTrackTintColor={styles.MaximumTrackThumb.color}
         thumbTintColor={styles.thumb.color}
-        value={value}
+        value={_value}
         onValueChange={onValueChange}
         {...rest}
       />
@@ -39,7 +41,7 @@ export const SliderCustom = ({
             minValue={minimumValue}
             maxValue={maximumValue}
             decimalPlaces={decimalPlaces}
-            value={value}
+            value={_value}
             onChangeValue={onValueChange}
           />
         </View>

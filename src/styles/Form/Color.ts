@@ -1,10 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { type MD3Theme } from 'react-native-paper';
-import {
-  SECONDARY_HIGH_OPACITY,
-  SECONDARY_LOW_OPACITY,
-  SMALL_FONT_SIZE,
-} from '../../constants';
+import { StyleSheet } from "react-native";
+import { type MD3Theme } from "react-native-paper";
+import { SECONDARY_HIGH_OPACITY, SECONDARY_LOW_OPACITY, SMALL_FONT_SIZE } from "../../constants";
 
 export const getColorStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -21,6 +17,7 @@ export const getColorStyles = (theme: MD3Theme) =>
     colorPickerContainer: {
       marginTop: -60,
       paddingBottom: 30,
+      marginLeft: "auto",
       // marginBottom: 45,
     },
   });
