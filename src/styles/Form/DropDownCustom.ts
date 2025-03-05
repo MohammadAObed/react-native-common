@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { type MD3Theme } from 'react-native-paper';
+import { StyleSheet } from "react-native";
+import { type MD3Theme } from "react-native-paper";
 import {
   DEFAULT_FONT_SIZE,
   FORM_LABEL_OPACITY,
@@ -8,13 +8,13 @@ import {
   SECONDARY_LOW_OPACITY,
   SECONDARY_MEDIUM_OPACITY,
   SMALL_FONT_SIZE,
-} from '../../constants';
+} from "../../constants";
 
 export const getDropDownCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     label: {
       color: `${theme.colors.secondary}${FORM_LABEL_OPACITY}`,
-      position: 'absolute',
+      position: "absolute",
       top: 5,
       zIndex: HIGHEST_ZINDEX,
       paddingHorizontal: 18,
@@ -64,9 +64,9 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
     item: {
       paddingHorizontal: 17,
       paddingVertical: 16,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
     },
     selectedItem: {
       backgroundColor: `${theme.colors.secondary}${SECONDARY_LOW_OPACITY}`,
@@ -77,12 +77,13 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
       marginTop: -20,
       maxHeight: 20,
       fontSize: DEFAULT_FONT_SIZE,
+      zIndex: -1,
     },
     disabledItem: {
       opacity: 0.5,
     },
     dropDownBarContainer: {
-      justifyContent: 'center',
+      justifyContent: "center",
       height: 55,
     },
     inputSearchCustom: {
@@ -90,7 +91,7 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
       fontSize: DEFAULT_FONT_SIZE,
     },
     selectAllCheckboxContainer: {
-      position: 'absolute',
+      position: "absolute",
       right: 14,
     },
   });
@@ -103,7 +104,6 @@ export const getDropDownCustomModeStyles = () =>
       paddingBottom: 0,
       paddingHorizontal: 0,
       borderBottomWidth: 0,
-      backgroundColor: 'transparent',
-      zIndex: -1, //this is for Build Label eye icon in ItemsEventsTab.tsx -> Build.tsx -> BuildLabel.tsx
+      backgroundColor: "transparent",
     },
   });
