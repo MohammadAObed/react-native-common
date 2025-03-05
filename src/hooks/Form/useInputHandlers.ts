@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
-import {
-  parseDecimalForTextInput,
-  parseIntegerForTextInput,
-} from '../../helpers';
-import type { useInputHandlersProps } from '../../types/hooks';
+import { useEffect, useState } from "react";
+import { parseDecimalForTextInput, parseIntegerForTextInput } from "../../helpers";
+import type { useInputHandlersProps } from "../../types/hooks";
 
 export const useInputHandlers = ({
   value,
@@ -14,7 +11,7 @@ export const useInputHandlers = ({
   onChangeNumber,
   onChangeDecimal,
 }: useInputHandlersProps) => {
-  const [inputText, setInputText] = useState<string>();
+  const [inputText, setInputText] = useState<string | undefined>(value?.toString());
   const [isFromInput, setIsFromInput] = useState(false);
 
   const handleOnChangeDecimal = (text: string, isFromTextInput = true) => {
@@ -53,16 +50,12 @@ export const useInputHandlers = ({
     if (isFromInput) {
       setIsFromInput(false);
     } else {
-      const text = value?.toString() ?? '';
+      const text = value?.toString() ?? "";
       if (onChangeText) handleOnChangeText(text, false);
       else if (onChangeNumber) handleOnChangeNumber(text, false);
       else if (onChangeDecimal) handleOnChangeDecimal(text, false);
     }
   }, [value]);
-
-  useEffect(() => {
-    if (onChangeText) setInputText(`${value ?? ''}`);
-  });
 
   return {
     inputText,
