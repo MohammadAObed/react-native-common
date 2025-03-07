@@ -5,8 +5,11 @@ export type PropertyMetaData = {
   isFK: boolean;
   fKClassName: any; //string
   columnNameInOtherTable: string;
+  columnNameOfParentInOtherTable: string;
   DbIgnore: boolean;
 };
+
+export type SetClassMetaDataParam = { className: string };
 
 export type SetPropertyMetaDataParam = { className: string } & Partial<Omit<PropertyMetaData, "isFKObject" | "isFKArray" | "fKClassName">> &
   ({ isFKObject: true; fKClassName: string } | { isFKObject?: false; fKClassName?: string }) &

@@ -1,3 +1,5 @@
+import { GetPropertiesMetaData } from "@mohammad_obed/react-native-common/src/helpers";
+
 export function cloneDeep(value: any): any {
   if (typeof value !== "object" || value === null) {
     // If value is not an object or is null, return the value itself
@@ -18,6 +20,34 @@ export function cloneDeep(value: any): any {
       if (typeof value[key] === "function") {
       } else {
         clonedObject[key] = cloneDeep(value[key]);
+      }
+    }
+  }
+  return clonedObject;
+}
+
+export function cloneDeepCommon(value: any, className: string, cb: (className: string) => number): any {
+  if (typeof value !== "object" || value === null) {
+    return value;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => cloneDeepCommon(item, className, cb));
+  }
+
+  const propsMetaData = GetPropertiesMetaData(className);
+
+  const clonedObject: Record<string, unknown> = Object.create(Object.getPrototypeOf(value));
+
+  for (let key in value) {
+    if (Object.prototype.hasOwnProperty.call(value, key)) {
+      if (typeof value[key] === "function") {
+      } else {
+        if (key === "Id") {
+          clonedObject[key] = cb(className);
+        } else {
+          clonedObject[key] = cloneDeepCommon(value[key], propsMetaData?.[key]?.fKClassName ?? className, cb);
+        }
       }
     }
   }
