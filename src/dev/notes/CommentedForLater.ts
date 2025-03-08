@@ -128,4 +128,32 @@ async add(tableName: ClassNames, record: Common, nestedIds: NestedIds<ClassNames
     const OldRecordWhereCondition = FKs.map((x) => `${x.from} = ${nestedIds[x.table as ClassNames]}`).join(" AND ");
     await this.runAsync(`DELETE FROM ${metaData.fKClassName} WHERE ${OldRecordWhereCondition}`);
   }
+
+?inside getAddOrUpdateQuery
+  for (const nestedEntry of nestedAsEntries) {
+        const propName = nestedEntry[0];
+        if (propsMetaData[propName].isFKArray && !Array.isArray(nestedEntry[1]))
+          throw new ErrorCustom(
+            `$nested property name: ${propName as string} with Id: ${record.Id} is not an array, but its meta data says it is`
+          );
+        const nestedTableName = propsMetaData[propName].fKClassName;
+        const propValue = Array.isArray(nestedEntry[1]) ? nestedEntry[1] : [nestedEntry[1]];
+        const columnNameInOtherTable = propsMetaData[propName].columnNameInOtherTable;
+        const { columnNames, columnValues, FKs } = await this._getHiddenFKColumns(nestedTableName, currentNestedIds, columnNameInOtherTable);
+        if (columnNameInOtherTable) {
+          const del = await this._getDeleteOthersQuery(nestedTableName, currentNestedIds, FKs);
+          if (del) query.push(del);
+          for (const _propValue of propValue) {
+            const columnNamesString = [...columnNames, columnNameInOtherTable].join(", ");
+            const columnValuesString = [...columnValues, _propValue].join(", ");
+            columnValues.push(_propValue);
+            query.push(`INSERT INTO ${nestedTableName} (${columnNamesString}) VALUES (${columnValuesString})`);
+          }
+          continue;
+        }
+        const deleteQuery = await this._getDeleteAbscentQuery(nestedTableName, currentNestedIds, FKs, dbEachTableIds);
+        if (deleteQuery) query.push(deleteQuery);
+        await this._getAddOrUpdateQuery(nestedTableName as ClassNames, propValue, dbEachTableIds, query, currentNestedIds);
+      }
+        
   */

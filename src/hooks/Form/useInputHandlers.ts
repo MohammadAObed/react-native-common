@@ -4,9 +4,10 @@ import type { useInputHandlersProps } from "../../types/hooks";
 
 export const useInputHandlers = ({
   value,
-  minValue = 0,
-  maxValue = Number.MAX_SAFE_INTEGER,
-  decimalPlaces = 2,
+  minValue,
+  maxValue,
+  decimalPlaces,
+  textForceUpdateCounter,
   onChangeText,
   onChangeNumber,
   onChangeDecimal,
@@ -56,6 +57,12 @@ export const useInputHandlers = ({
       else if (onChangeDecimal) handleOnChangeDecimal(text, false);
     }
   }, [value]);
+
+  useEffect(() => {
+    if (value !== inputText) {
+      setInputText(value?.toString());
+    }
+  }, [textForceUpdateCounter]);
 
   return {
     inputText,

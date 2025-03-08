@@ -129,7 +129,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
     const columnEntries = propsAsEntries
       .filter((x) => !propsMetaData[x[0]]?.isFKObject && !propsMetaData[x[0]]?.isFKArray)
       .map((x) => [x[0], this._handleValueToDb(x[1])]);
-    const columnsNames = columnEntries.map((x) => x[0]);
+    const columnsNames = columnEntries.map((x) => x[0] as string);
     const columnsValues = columnEntries.map((x) => x[1]);
     const nestedAsEntries = propsAsEntries.filter((x) => propsMetaData[x[0]]?.isFKObject || propsMetaData[x[0]]?.isFKArray);
     return { nestedAsEntries, columnEntries: columnEntries.map((x) => `${x[0]} = ${x[1]}`), columnsNames, columnsValues };
@@ -154,7 +154,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
     }
     return getEntries(eachTableIds);
   }
-  async addOrUpdate<T extends Common>(tableName: ClassNames, records: T[], currentNestedIds: NestedIds<ClassNames> = {}) {
+  async addOrUpdate<T extends Common>(tableName: ClassNames, records: T[], currentNestedIds: NestedIds<ClassNames> = {}, deleteAbsent = false) {
     await this.validateAsync();
     const eachTableIds = await this.getAllNestedRecords(tableName, records);
     const dbEachTableIds: Record<string, number[]> = {};
@@ -162,7 +162,8 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
       let dbRecords = await this.getAllAsync<T>(`SELECT Id FROM ${tableIds[0]} WHERE Id IN (${tableIds[1].join(", ")})`);
       dbEachTableIds[tableIds[0]] = dbRecords.map((x) => x.Id);
     }
-    let query = await this._getAddOrUpdateQuery(tableName, records, dbEachTableIds, [], currentNestedIds);
+    let query = await this._getAddOrUpdateQuery(tableName, records, dbEachTableIds, [], currentNestedIds, deleteAbsent);
+    query = query.vOrderByDescending((x) => x.toLowerCase().startsWith("delete "));
     await this.execAsync(query.join(";\n"));
   }
   async delete(tableName: ClassNames, Id: number) {
@@ -254,9 +255,19 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   private async _setDbVersion(DatabaseVersion: number) {
     await this.execAsync(`PRAGMA user_version = ${DatabaseVersion}`);
   }
-  private async _getHiddenFKColumns(tableName: ClassNames, currentNestedIds: NestedIds<ClassNames>, columnNameInOtherTable?: string) {
+  private async _getHiddenFKColumns(
+    tableName: ClassNames,
+    currentNestedIds: NestedIds<ClassNames>,
+    ignoreColumnNames: string[] = [],
+    isForDeleteQuery = false
+  ) {
     let FKs = await this.getForeignKeysAsync(tableName);
-    FKs = FKs.filter((x) => x.from !== columnNameInOtherTable && currentNestedIds[x.table as ClassNames]);
+    FKs = FKs.filter(
+      (x) =>
+        currentNestedIds[x.table as ClassNames] &&
+        !ignoreColumnNames.includes(x.from) &&
+        (!isForDeleteQuery || (x.from.endsWith("Id") && x.from.slice(0, x.from.length - 2) === x.table))
+    );
     const columnNames: string[] = [];
     const columnValues: number[] = [];
     for (const fk of FKs) {
@@ -291,7 +302,8 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
     nestedAsEntries: [keyof T, T[keyof T]][],
     dbEachTableIds: Record<string, number[]> = {},
     query: string[] = [],
-    currentNestedIds: NestedIds<ClassNames> = {}
+    currentNestedIds: NestedIds<ClassNames> = {},
+    deleteAbsent = false
   ) {
     const propsMetaData = GetPropertiesMetaData(tableName, true);
     for (const nestedEntry of nestedAsEntries) {
@@ -301,7 +313,12 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
       const nestedTableName = propsMetaData[propName].fKClassName;
       const propValue = Array.isArray(nestedEntry[1]) ? nestedEntry[1] : [nestedEntry[1]];
       const columnNameInOtherTable = propsMetaData[propName].columnNameInOtherTable;
-      const { columnNames, columnValues, FKs } = await this._getHiddenFKColumns(nestedTableName, currentNestedIds, columnNameInOtherTable);
+      const { columnNames, columnValues, FKs } = await this._getHiddenFKColumns(
+        nestedTableName,
+        currentNestedIds,
+        columnNameInOtherTable ? [columnNameInOtherTable] : [],
+        true
+      );
       if (columnNameInOtherTable) {
         const del = await this._getDeleteOthersQuery(nestedTableName, currentNestedIds, FKs);
         if (del) query.push(del);
@@ -312,9 +329,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
         }
         continue;
       }
-      const deleteQuery = await this._getDeleteAbscentQuery(nestedTableName, currentNestedIds, FKs, dbEachTableIds);
-      if (deleteQuery) query.push(deleteQuery);
-      await this._getAddOrUpdateQuery(nestedTableName as ClassNames, propValue, dbEachTableIds, query, currentNestedIds);
+      await this._getAddOrUpdateQuery(nestedTableName as ClassNames, propValue, dbEachTableIds, query, currentNestedIds, deleteAbsent);
     }
   }
   private async _getAddOrUpdateQuery<T extends Common>(
@@ -322,45 +337,31 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
     records: T[],
     dbEachTableIds: Record<string, number[]> = {},
     query: string[] = [],
-    currentNestedIds: NestedIds<ClassNames> = {}
+    currentNestedIds: NestedIds<ClassNames> = {},
+    deleteAbsent = false
   ) {
+    if (deleteAbsent) {
+      const { FKs } = await this._getHiddenFKColumns(tableName, currentNestedIds, [], true);
+      const deleteQuery = await this._getDeleteAbscentQuery(tableName, currentNestedIds, FKs, dbEachTableIds);
+      if (deleteQuery) query.push(deleteQuery);
+    }
+
     for (const record of records) {
       currentNestedIds[tableName] = record.Id;
       const { columnsNames, columnsValues, columnEntries, nestedAsEntries } = await this.getAddOrUpdateData(tableName, record);
       if (!dbEachTableIds[tableName as string]?.includes(record.Id)) {
-        const { columnNames: columnNamesFK, columnValues: columnValuesFK } = await this._getHiddenFKColumns(tableName, currentNestedIds);
+        const { columnNames: columnNamesFK, columnValues: columnValuesFK } = await this._getHiddenFKColumns(
+          tableName,
+          currentNestedIds,
+          columnsNames
+        );
         columnsNames.push(...columnNamesFK);
         columnsValues.push(...columnValuesFK);
         query.push(`INSERT INTO ${tableName} (${columnsNames.join(", ")}) VALUES (${columnsValues.join(", ")})`);
       } else {
         query.push(`UPDATE ${tableName} SET ${columnEntries.join(", ")} WHERE Id = ${record.Id}`);
       }
-      await this._handleNested(tableName, nestedAsEntries, dbEachTableIds, query, currentNestedIds);
-      // for (const nestedEntry of nestedAsEntries) {
-      //   const propName = nestedEntry[0];
-      //   if (propsMetaData[propName].isFKArray && !Array.isArray(nestedEntry[1]))
-      //     throw new ErrorCustom(
-      //       `$nested property name: ${propName as string} with Id: ${record.Id} is not an array, but its meta data says it is`
-      //     );
-      //   const nestedTableName = propsMetaData[propName].fKClassName;
-      //   const propValue = Array.isArray(nestedEntry[1]) ? nestedEntry[1] : [nestedEntry[1]];
-      //   const columnNameInOtherTable = propsMetaData[propName].columnNameInOtherTable;
-      //   const { columnNames, columnValues, FKs } = await this._getHiddenFKColumns(nestedTableName, currentNestedIds, columnNameInOtherTable);
-      //   if (columnNameInOtherTable) {
-      //     const del = await this._getDeleteOthersQuery(nestedTableName, currentNestedIds, FKs);
-      //     if (del) query.push(del);
-      //     for (const _propValue of propValue) {
-      //       const columnNamesString = [...columnNames, columnNameInOtherTable].join(", ");
-      //       const columnValuesString = [...columnValues, _propValue].join(", ");
-      //       columnValues.push(_propValue);
-      //       query.push(`INSERT INTO ${nestedTableName} (${columnNamesString}) VALUES (${columnValuesString})`);
-      //     }
-      //     continue;
-      //   }
-      //   const deleteQuery = await this._getDeleteAbscentQuery(nestedTableName, currentNestedIds, FKs, dbEachTableIds);
-      //   if (deleteQuery) query.push(deleteQuery);
-      //   await this._getAddOrUpdateQuery(nestedTableName as ClassNames, propValue, dbEachTableIds, query, currentNestedIds);
-      // }
+      await this._handleNested(tableName, nestedAsEntries, dbEachTableIds, query, currentNestedIds, deleteAbsent);
     }
     return query;
   }

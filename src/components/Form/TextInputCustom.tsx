@@ -1,3 +1,4 @@
+import { PaperBugHelper } from "@mohammad_obed/react-native-common/src/libs/Bugs";
 import { useState } from "react";
 import { Text, TextInput } from "react-native-paper";
 import { DEFAULT_DECIMAL_PLACES } from "../../constants";
@@ -20,6 +21,7 @@ export const TextInputCustom = ({
   minValue = 0,
   maxValue = Number.MAX_SAFE_INTEGER,
   decimalPlaces = DEFAULT_DECIMAL_PLACES,
+  textForceUpdateCounter = 0,
   onFocus,
   onBlur,
   onChangeText,
@@ -38,6 +40,7 @@ export const TextInputCustom = ({
     onChangeDecimal,
     onChangeNumber,
     onChangeText,
+    textForceUpdateCounter,
   });
 
   const themeDisabled = {
@@ -50,7 +53,7 @@ export const TextInputCustom = ({
   return (
     <TextInput
       style={[styles.input, modeCustom && modeStyles[modeCustom], style]}
-      textColor={textColor ?? styles.input.color}
+      textColor={PaperBugHelper.GetTextInputColor(inputText, placeholder, styles.placeholderColor.color, textColor, styles.input.color)}
       underlineColor={underlineColor ?? styles.underlineColor.color}
       activeUnderlineColor={styles.activeUnderlineColor.color}
       placeholderTextColor={styles.placeholderColor.color}
@@ -61,7 +64,7 @@ export const TextInputCustom = ({
         )
       }
       placeholder={placeholder}
-      value={inputText}
+      value={PaperBugHelper.GetTextInputValue(isActive, inputText, placeholder)}
       inputMode={inputMode}
       disabled={disabled}
       onFocus={(e) => {
