@@ -14,7 +14,13 @@ export function getContainerStyleFromChildren(children: any): ViewStyle {
 
 export function getContainerStyleFromChild(child: any): ViewStyle {
   return {
-    width: child.props?.width ?? child.props?.style?.width ?? (child.props?.style as any[])?.vMax?.((y) => y?.width),
+    width:
+      child.props?.width ??
+      child.props?.style?.width ??
+      (child.props?.style as any[])
+        ?.flat()
+        ?.vOrderBy((y) => y?.width !== undefined && y?.width !== null)
+        ?.vMax?.((y) => y?.width),
   };
 }
 
@@ -31,7 +37,12 @@ export function getStyleFromChildren(children: any): ViewStyle {
 export function getStyleFromChild(child: any): ViewStyle {
   return {
     marginHorizontal:
-      child.props?.marginHorizontal ?? child.props?.style?.marginHorizontal ?? (child.props?.style as any[])?.vMax?.((y) => y?.marginHorizontal),
+      child.props?.marginHorizontal ??
+      child.props?.style?.marginHorizontal ??
+      (child.props?.style as any[])
+        ?.flat()
+        ?.vOrderBy((y) => y?.marginHorizontal !== undefined && y?.marginHorizontal !== null)
+        ?.vMax?.((y) => y?.marginHorizontal),
   };
 }
 

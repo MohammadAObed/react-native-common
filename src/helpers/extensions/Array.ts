@@ -1,5 +1,5 @@
 export function handleMinMax<T, U>(isMin: boolean, array: T[], callback: (item: T) => U): U | undefined {
-  const filteredArray = array.filter(item => item !== undefined && item !== null);
+  const filteredArray = array.filter((item) => item !== undefined && item !== null);
   if (filteredArray.length === 0) return undefined;
   return filteredArray.map(callback).reduce((prev, curr) => ((isMin ? prev < curr : prev > curr) ? prev : curr));
 }
