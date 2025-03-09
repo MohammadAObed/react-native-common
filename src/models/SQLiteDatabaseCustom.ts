@@ -362,6 +362,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
         query.push(`UPDATE ${tableName} SET ${columnEntries.join(", ")} WHERE Id = ${record.Id}`);
       }
       await this._handleNested(tableName, nestedAsEntries, dbEachTableIds, query, currentNestedIds, deleteAbsent);
+      currentNestedIds[tableName] = undefined;
     }
     return query;
   }
