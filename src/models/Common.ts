@@ -1,7 +1,7 @@
-import { NEW_ID, NewIdsTracker } from "../constants";
-import { getNewestId } from "../helpers";
-import type { Fields } from "../types/models";
-import { cloneDeepCommon, getKeys } from "../utils";
+import { NEW_ID, NewIdsTracker } from '../constants';
+import { getNewestId } from '../helpers';
+import type { Fields } from '../types/models';
+import { cloneDeepCommon, getKeys } from '../utils';
 
 //? functions must only be static
 export class Common {
@@ -15,12 +15,19 @@ export class Common {
     return new this();
   }
 
-  static update<Model>(item: Common, fields: Fields<Model>, ..._args: any[]): any {
-    const fieldNames = getKeys(fields) as Extract<keyof Fields<Model>, string>[];
+  static update<Model>(
+    item: Common,
+    fields: Fields<Model>,
+    ..._args: any[]
+  ): any {
+    const fieldNames = getKeys(fields) as Extract<
+      keyof Fields<Model>,
+      string
+    >[];
     for (let i = 0; i < fieldNames.length; i++) {
       let fieldName = fieldNames[i]!;
       let fieldValue = fields[fieldName];
-      Common.setNestedPropertyValue(item, fieldName.split("."), fieldValue);
+      Common.setNestedPropertyValue(item, fieldName.split('.'), fieldValue);
     }
     return { ...item };
   }
@@ -28,22 +35,33 @@ export class Common {
   //...args needed for child classes
   static copy(item: Common, ..._args: unknown[]) {
     let newItemPartial: any = new (this as any)({});
-    let newItem = cloneDeepCommon(item, newItemPartial.constructor.name, (className) => {
-      const newId = Common._getNewId(className);
-      return newId;
-    });
+    let newItem = cloneDeepCommon(
+      item,
+      newItemPartial.constructor.name,
+      (className) => {
+        const newId = Common._getNewId(className);
+        return newId;
+      }
+    );
     newItem.Id = newItemPartial.Id;
     return newItem;
   }
 
   static validate() {}
 
-  static setNestedPropertyValue(item: any, proptiesNames: string[], value: unknown) {
+  static setNestedPropertyValue(
+    item: any,
+    proptiesNames: string[],
+    value: unknown
+  ) {
     let currentObj: Record<string, unknown> = item;
     for (let i = 0; i < proptiesNames.length - 1; i++) {
       let propertyName = proptiesNames[i]!;
 
-      if (!currentObj[propertyName] || typeof currentObj[propertyName] !== "object") {
+      if (
+        !currentObj[propertyName] ||
+        typeof currentObj[propertyName] !== 'object'
+      ) {
         currentObj[propertyName] = {};
       }
 
@@ -62,12 +80,12 @@ export class Common {
       }
     };
 
-    Object.defineProperty(dynamicClass, "name", { value: className });
+    Object.defineProperty(dynamicClass, 'name', { value: className });
 
     return dynamicClass;
   }
 
-  private static _getNewId(className: string): number {
+  static _getNewId(className: string): number {
     const tracker = NewIdsTracker.find((x) => x.className === className);
     if (tracker) {
       tracker.lastNewId = getNewestId(tracker.lastNewId);

@@ -1,11 +1,14 @@
-import { PaperBugHelper } from "@mohammad_obed/react-native-common/src/libs/Bugs";
-import { useState } from "react";
-import { Text, TextInput } from "react-native-paper";
-import { DEFAULT_DECIMAL_PLACES } from "../../constants";
-import { checkAllowedExactText } from "../../helpers";
-import { useInputHandlers, useStyles } from "../../hooks";
-import { getTextInputCustomModeStyles, getTextInputCustomStyles } from "../../styles";
-import type { TextInputCustomProps } from "../../types/components";
+import { useState } from 'react';
+import { Text, TextInput } from 'react-native-paper';
+import { DEFAULT_DECIMAL_PLACES } from '../../constants';
+import { checkAllowedExactText } from '../../helpers';
+import { useInputHandlers, useStyles } from '../../hooks';
+import { PaperBugHelper } from '../../libs/Bugs';
+import {
+  getTextInputCustomModeStyles,
+  getTextInputCustomStyles,
+} from '../../styles';
+import type { TextInputCustomProps } from '../../types/components';
 
 export const TextInputCustom = ({
   style,
@@ -32,7 +35,13 @@ export const TextInputCustom = ({
   const { styles, theme } = useStyles(getTextInputCustomStyles);
   const { styles: modeStyles } = useStyles(getTextInputCustomModeStyles);
   const [isActive, setIsActive] = useState(false);
-  const { inputText, setInputText, handleOnChangeDecimal, handleOnChangeNumber, handleOnChangeText } = useInputHandlers({
+  const {
+    inputText,
+    setInputText,
+    handleOnChangeDecimal,
+    handleOnChangeNumber,
+    handleOnChangeText,
+  } = useInputHandlers({
     value,
     decimalPlaces,
     minValue,
@@ -47,20 +56,35 @@ export const TextInputCustom = ({
     ...theme,
     colors: {
       ...theme.colors,
-      onSurfaceDisabled: modeCustom === "text" ? "transparent" : theme.colors.onSurfaceDisabled, //if input is disabled, then underline is always showing
+      onSurfaceDisabled:
+        modeCustom === 'text' ? 'transparent' : theme.colors.onSurfaceDisabled, //if input is disabled, then underline is always showing
     },
   };
   return (
     <TextInput
       style={[styles.input, modeCustom && modeStyles[modeCustom], style]}
-      textColor={PaperBugHelper.GetTextInputColor(inputText, placeholder, styles.placeholderColor.color, textColor, styles.input.color)}
+      textColor={PaperBugHelper.GetTextInputColor(
+        inputText,
+        placeholder,
+        styles.placeholderColor.color,
+        textColor,
+        styles.input.color
+      )}
       underlineColor={underlineColor ?? styles.underlineColor.color}
       activeUnderlineColor={styles.activeUnderlineColor.color}
       placeholderTextColor={styles.placeholderColor.color}
       theme={themeDisabled}
       label={
         label && (
-          <Text style={[styles.inputLabel, isActive && styles.activeInputLabel, { color: textColor ?? styles.input.color }]}>{label}</Text>
+          <Text
+            style={[
+              styles.inputLabel,
+              isActive && styles.activeInputLabel,
+              { color: textColor ?? styles.input.color },
+            ]}
+          >
+            {label}
+          </Text>
         )
       }
       placeholder={placeholder}
@@ -73,7 +97,11 @@ export const TextInputCustom = ({
       }}
       onBlur={(e) => {
         setIsActive(false);
-        if (checkAllowedExactText(inputMode ?? "") && (inputMode === "decimal" || inputMode === "numeric") && minValue !== undefined) {
+        if (
+          checkAllowedExactText(inputMode ?? '') &&
+          (inputMode === 'decimal' || inputMode === 'numeric') &&
+          minValue !== undefined
+        ) {
           setInputText(minValue.toString());
         }
         onBlur?.(e);
@@ -82,10 +110,10 @@ export const TextInputCustom = ({
         onChangeText
           ? handleOnChangeText(text)
           : onChangeNumber
-          ? handleOnChangeNumber(text)
-          : onChangeDecimal
-          ? handleOnChangeDecimal?.(text)
-          : null
+            ? handleOnChangeNumber(text)
+            : onChangeDecimal
+              ? handleOnChangeDecimal?.(text)
+              : null
       }
       {...rest}
     />
