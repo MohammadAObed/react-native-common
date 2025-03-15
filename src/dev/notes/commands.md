@@ -25,3 +25,7 @@ npx expo install expo@latest -- --save-dev
 npx expo install --fix
 
 npm i \<package-name\>@latest --save-dev
+
+# build apk (make sure you have in eas.json under build object: "androidpreview": { "android": { "buildType": "apk" } })
+
+eas build -p android --profile androidpreview

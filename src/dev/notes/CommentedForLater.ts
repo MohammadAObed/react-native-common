@@ -157,3 +157,19 @@ async add(tableName: ClassNames, record: Common, nestedIds: NestedIds<ClassNames
       }
         
   */
+
+
+/*
+    ? Common.ts
+public static createDynamicClass(className: string) {
+  const dynamicClass = class extends Common {
+    constructor() {
+      super();
+    }
+  };
+
+  Object.defineProperty(dynamicClass, 'name', { value: className });
+
+  return dynamicClass;
+}
+*/

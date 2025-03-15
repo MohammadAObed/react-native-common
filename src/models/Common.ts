@@ -6,14 +6,12 @@ import { cloneDeepCommon, getKeys } from '../utils';
 //? functions must only be static
 export class Common {
   public Id: number;
-  constructor() {
-    this.Id = Common._getNewId(this.constructor.name); //TODO: Check I heard when app is published (run build) the classes names changes due to minification (ex: Item → a, Game → b)
+  private _className?: string;
+  constructor(className: string) {
+    this.Id = Common._getNewId(className);
+    this._className = className;
   }
   // [key: string]: unknown;
-
-  static create(..._args: unknown[]) {
-    return new this();
-  }
 
   static update<Model>(
     item: Common,
@@ -34,10 +32,10 @@ export class Common {
 
   //...args needed for child classes
   static copy(item: Common, ..._args: unknown[]) {
-    let newItemPartial: any = new (this as any)({});
+    let newItemPartial: Common = new (this as any)({});
     let newItem = cloneDeepCommon(
       item,
-      newItemPartial.constructor.name,
+      newItemPartial._className!,
       (className) => {
         const newId = Common._getNewId(className);
         return newId;
@@ -71,18 +69,6 @@ export class Common {
     let lastPropertyName = proptiesNames.vLast()!;
     currentObj[lastPropertyName] = value; //currentObj is assigned by reference (as normally in javacript) to the deeply nested object inside the instance of "this", so modifying any value of its properties will result in modifying the nested object property value
     return this;
-  }
-
-  public static createDynamicClass(className: string) {
-    const dynamicClass = class extends Common {
-      constructor() {
-        super();
-      }
-    };
-
-    Object.defineProperty(dynamicClass, 'name', { value: className });
-
-    return dynamicClass;
   }
 
   static _getNewId(className: string): number {
