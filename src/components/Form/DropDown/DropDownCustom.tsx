@@ -1,23 +1,13 @@
-import { useState } from 'react';
-import { View } from 'react-native';
-import { Text } from 'react-native-paper';
-import { useStyles } from '../../../hooks';
-import {
-  getDropDownCustomModeStyles,
-  getDropDownCustomStyles,
-} from '../../../styles';
-import type {
-  DropDownCustomProps,
-  DropDownLabelField,
-  DropDownValueField,
-} from '../../../types/components';
-import { DropDownMultiSelect } from './DropDownMultiSelect';
-import { DropDownSingleSelect } from './DropDownSingleSelect';
+import { useState } from "react";
+import { View } from "react-native";
+import { Text } from "react-native-paper";
+import { useStyles } from "../../../hooks";
+import { getDropDownCustomModeStyles, getDropDownCustomStyles } from "../../../styles";
+import type { DropDownCustomProps, DropDownLabelField, DropDownValueField } from "../../../types/components";
+import { DropDownMultiSelect } from "./DropDownMultiSelect";
+import { DropDownSingleSelect } from "./DropDownSingleSelect";
 
-export const DropDownCustom = <
-  Model,
-  Value extends DropDownValueField = number,
->({
+export const DropDownCustom = <Model, Value extends DropDownValueField = number>({
   style,
   wrapperStyle,
   isMultiSelect,
@@ -27,12 +17,13 @@ export const DropDownCustom = <
   data,
   value,
   placeholder,
-  inputMode = 'normal',
-  seperator = ', ',
+  inputMode = "normal",
+  seperator = ", ",
   text,
   orderByValue,
   disabledValues,
   allowEmpty,
+  fullWidth,
   onChange,
   ...rest
 }: DropDownCustomProps<Model, Value>) => {
@@ -45,21 +36,15 @@ export const DropDownCustom = <
     orderedData = data.vOrderBy((x) => value.indexOf(x[valueField] as Value));
   }
 
-  const multiSelectValue = isMultiSelect
-    ? value?.map((x) => x?.toString() ?? '')
-    : [];
-  const singleSelectValue = !isMultiSelect ? value?.toString() : '';
+  const multiSelectValue = isMultiSelect ? value?.map((x) => x?.toString() ?? "") : [];
+  const singleSelectValue = !isMultiSelect ? value?.toString() : "";
 
   const onMultiChangeValue = (keys: string[]) => {
     if (!isMultiSelect) return;
     if (data.length === 0) return;
     const typeofDataKey = typeof data.vFirst()![valueField];
     let values = (
-      typeofDataKey === 'string'
-        ? keys
-        : typeofDataKey === 'bigint'
-          ? keys.map((x) => BigInt(x))
-          : keys.map((x) => parseInt(x))
+      typeofDataKey === "string" ? keys : typeofDataKey === "bigint" ? keys.map((x) => BigInt(x)) : keys.map((x) => parseInt(x))
     ) as Value[];
     if (disabledValues?.includes(values.vLast()!)) return;
     const deletedValue = value.find((val) => !values.includes(val));
@@ -83,13 +68,9 @@ export const DropDownCustom = <
 
   let selectedText = text;
   if (!text) {
-    selectedText = data.find((x) => x[valueField] == value)?.[labelField] as
-      | DropDownLabelField
-      | undefined;
+    selectedText = data.find((x) => x[valueField] == value)?.[labelField] as DropDownLabelField | undefined;
     if (isMultiSelect) {
-      let selectedItems = data.filter((x) =>
-        value?.includes(x[valueField] as Value)
-      );
+      let selectedItems = data.filter((x) => value?.includes(x[valueField] as Value));
       selectedText = selectedItems.map((x) => x[labelField]).join(seperator);
     }
     if (!selectedText) selectedText = placeholder;
@@ -107,28 +88,13 @@ export const DropDownCustom = <
     disabledValues,
   };
   return (
-    <View style={[styles.container, modeStyles[inputMode], wrapperStyle]}>
-      <Text style={[styles.label, isFocused && styles.focusedLabel]}>
-        {label}
-      </Text>
-      <Text style={[styles.placeholder, styles.dummyTextForDynamicWidth]}>
-        {selectedText}
-      </Text>
+    <View style={[styles.container, modeStyles[inputMode], fullWidth ? { alignSelf: "stretch" } : {}, wrapperStyle]}>
+      <Text style={[styles.label, isFocused && styles.focusedLabel]}>{label}</Text>
+      <Text style={[styles.placeholder, styles.dummyTextForDynamicWidth]}>{selectedText}</Text>
       {isMultiSelect ? (
-        <DropDownMultiSelect
-          value={multiSelectValue}
-          onChange={onMultiChangeValue}
-          seperator={seperator}
-          {...props}
-          {...rest}
-        />
+        <DropDownMultiSelect value={multiSelectValue} onChange={onMultiChangeValue} seperator={seperator} {...props} {...rest} />
       ) : (
-        <DropDownSingleSelect
-          value={singleSelectValue}
-          onChange={onSingleChangeValue}
-          {...props}
-          {...rest}
-        />
+        <DropDownSingleSelect value={singleSelectValue} onChange={onSingleChangeValue} {...props} {...rest} />
       )}
     </View>
   );

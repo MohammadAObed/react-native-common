@@ -6,10 +6,9 @@ export type CollapsibleListProps<T> = {
   data: T[];
   itemStyle?: CollapsibleProps["style"];
   maxHeight?: ScrollContainerProps["maxHeight"];
-  behavior?: "normal" | "collapse-others";
   collapseMode?: CollapsibleProps["mode"];
   renderChild?: (item: T) => ReactNode;
 } & (
-  | { renderItem?: never; titleKey: keyof T; subTitleKey: keyof T }
-  | { renderItem: (item: T) => ReactNode; titleKey?: never; subTitleKey?: never }
+  | { renderItem?: never; titleKey: keyof T; subTitleKey: keyof T; behavior?: "normal" | "collapse-others" }
+  | { renderItem: (item: T) => ReactNode; titleKey?: never; subTitleKey?: never; behavior?: "normal" }
 );
