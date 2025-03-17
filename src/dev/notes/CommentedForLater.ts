@@ -120,7 +120,7 @@ async add(tableName: ClassNames, record: Common, nestedIds: NestedIds<ClassNames
     const DynamicClass = Common.createDynamicClass(metaData.fKClassName);
     const finalItem = new DynamicClass() as any;
     finalItem[metaData.columnNameInOtherTable!] = value;
-    await this._deleteXTable(metaData, nestedIds); //TODO check this
+    await this._deleteXTable(metaData, nestedIds); // check this
     await this.addOrUpdate(metaData.fKClassName, finalItem, nestedIds);
   }
   private async _deleteXTable(metaData: PropertyMetaData, nestedIds: NestedIds<ClassNames>) {

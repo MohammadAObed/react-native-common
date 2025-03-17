@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import { View } from "react-native";
 import {
+  ClipboardIcon,
   DevicePhoneMobileIcon,
   EyeIcon,
   EyeSlashIcon,
@@ -72,6 +73,10 @@ export const PressableIcon = forwardRef(
         ) : name === "Flag" ? (
           <>
             <FlagIcon color={IconColor} size={size} />
+          </>
+        ) : name === "clipboard" ? (
+          <>
+            <ClipboardIcon color={IconColor} size={size} />
           </>
         ) : (
           ""

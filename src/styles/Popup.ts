@@ -32,7 +32,7 @@ export const getPopupStyles = (theme: MD3Theme) =>
     cancelButton: {
       position: "absolute",
       top: 0,
-      right: 5,
+      right: 10,
       color: theme.colors.secondary,
     },
     title: {},

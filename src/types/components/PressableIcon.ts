@@ -14,6 +14,7 @@ export type PressableIconProps = ButtonCustomProps & {
     | 'landscape-device'
     | 'star'
     | 'play'
+    | 'clipboard'
     | 'Flag';
   color?: string;
 };

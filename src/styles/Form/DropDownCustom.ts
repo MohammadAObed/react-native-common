@@ -28,6 +28,7 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
     },
     dropdownContainer: {
       minWidth: 120,
+      marginTop: -20
     },
     dropdown: {
       height: 55,

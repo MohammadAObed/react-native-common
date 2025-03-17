@@ -1,6 +1,8 @@
 export * from "./ButtonCustom";
 export * from "./ButtonCustomWithIcon";
 export * from "./Card/CardCustom";
+export * from "./Collapsible/Collapsible";
+export * from "./Collapsible/CollapsibleList";
 export * from "./Draggable";
 export * from "./ErrorBoundaryCustom";
 export * from "./Exception";
@@ -27,3 +29,4 @@ export * from "./Shadow";
 export * from "./Static";
 export * from "./SuspenseWithErrorBoundary";
 export * from "./Wizard";
+
