@@ -114,7 +114,7 @@ const Container = ({ children, style, hideMode, hideModal, mode }: ContainerProp
     <View style={styles.invisibleContainer}>
       {mode === "bare" && children}
       {mode === "normal" && (
-        <Shadow offset={[0, 5]} borderRadius={10} opacity={0.12} blur={2}>
+        <Shadow offset={[0, 5]} borderRadius={10} opacity={0.12} blur={[3, 1, 0.98]}>
           <View style={[styles.contentContainer, style]}>
             {HideModes["Cancel"].includes(hideMode!) && <CancelButton hideModal={hideModal} />}
             {children}

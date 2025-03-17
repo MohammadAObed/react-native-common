@@ -1,3 +1,5 @@
+import { GAUSSIAN, THRESHOLD } from "../constants";
+
 const MaxLoopIteration = 10000;
 /**
  * @param min - The minimum value (inclusive).
@@ -22,4 +24,12 @@ export function getRandomNumber(min: number, max: number, dontMatchNumbers: numb
     }
   }
   return randomNumber;
+}
+
+/**
+ * fast start, slow end. returns value approximatly from 1 to 0
+ */
+export function generateGaussianNumber(integer: number, threshold = THRESHOLD) {
+  const result = (1 / (Math.sqrt(2 * Math.PI) * integer)) * Math.exp(-(GAUSSIAN * GAUSSIAN) / (2 * integer * integer)) + threshold;
+  return result;
 }

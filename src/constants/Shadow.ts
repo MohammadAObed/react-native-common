@@ -1,0 +1,1 @@
+export const BLUR_NOT_SUPPORTED_OPACITY = 0.1;
