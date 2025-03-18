@@ -1,7 +1,7 @@
-import { GetPropertiesMetaData } from '../helpers';
+import { GetPropertiesMetaData } from "../helpers";
 
 export function cloneDeep(value: any): any {
-  if (typeof value !== 'object' || value === null) {
+  if (typeof value !== "object" || value === null) {
     // If value is not an object or is null, return the value itself
     return value;
   }
@@ -12,14 +12,12 @@ export function cloneDeep(value: any): any {
   }
 
   // If value is an object, clone its properties recursively
-  const clonedObject: Record<string, unknown> = Object.create(
-    Object.getPrototypeOf(value)
-  );
+  const clonedObject: Record<string, unknown> = Object.create(Object.getPrototypeOf(value));
 
   for (let key in value) {
     if (Object.prototype.hasOwnProperty.call(value, key)) {
       // Clone each property recursively
-      if (typeof value[key] === 'function') {
+      if (typeof value[key] === "function") {
       } else {
         clonedObject[key] = cloneDeep(value[key]);
       }
@@ -28,12 +26,8 @@ export function cloneDeep(value: any): any {
   return clonedObject;
 }
 
-export function cloneDeepCommon(
-  value: any,
-  className: string,
-  cb: (className: string) => number
-): any {
-  if (typeof value !== 'object' || value === null) {
+export function cloneDeepCommon(value: any, className: string, cb: (className: string) => number): any {
+  if (typeof value !== "object" || value === null) {
     return value;
   }
 
@@ -43,22 +37,16 @@ export function cloneDeepCommon(
 
   const propsMetaData = GetPropertiesMetaData(className);
 
-  const clonedObject: Record<string, unknown> = Object.create(
-    Object.getPrototypeOf(value)
-  );
+  const clonedObject: Record<string, unknown> = Object.create(Object.getPrototypeOf(value));
 
   for (let key in value) {
     if (Object.prototype.hasOwnProperty.call(value, key)) {
-      if (typeof value[key] === 'function') {
+      if (typeof value[key] === "function") {
       } else {
-        if (key === 'Id') {
+        if (key === "Id") {
           clonedObject[key] = cb(className);
         } else {
-          clonedObject[key] = cloneDeepCommon(
-            value[key],
-            propsMetaData?.[key]?.fKClassName ?? className,
-            cb
-          );
+          clonedObject[key] = cloneDeepCommon(value[key], propsMetaData?.[key]?.fKClassName ?? className, cb);
         }
       }
     }
@@ -66,10 +54,7 @@ export function cloneDeepCommon(
   return clonedObject;
 }
 
-export function getKey<T extends Record<string, unknown>>(
-  object: T,
-  value: unknown
-): keyof T | undefined {
+export function getKey<T extends Record<string, unknown>>(object: T, value: unknown): keyof T | undefined {
   return Object.keys(object).find((key) => object[key] === value);
 }
 
@@ -88,12 +73,8 @@ export const fromEntries: FromEntries = (entries) => {
   return Object.fromEntries(entries) as any;
 };
 
-export const isPrimitive = (
-  value: unknown
-): value is string | number | boolean | bigint | symbol | null | undefined => {
-  return (
-    value === null || (typeof value !== 'object' && typeof value !== 'function')
-  );
+export const isPrimitive = (value: unknown): value is string | number | boolean | bigint | symbol | null | undefined => {
+  return value === null || (typeof value !== "object" && typeof value !== "function");
 };
 
 type GetValues = <T>(o: { [s: string]: T } | ArrayLike<T>) => T[];

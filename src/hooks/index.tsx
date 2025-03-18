@@ -5,4 +5,5 @@ export * from "./useLoading";
 export * from "./useScrollTo";
 export * from "./useSQLiteContextCustom";
 export * from "./useStyle";
+export * from "./useSuspenseQueryCustom";
 export * from "./useTimeout";

@@ -1,4 +1,5 @@
 import { handleMinMax, handleOrderBy } from "../helpers";
+import { cloneDeep } from "../utils";
 
 export {};
 
@@ -18,6 +19,7 @@ declare global {
     vGetVerb(): string;
     /** @param isDeranged - Makes sure no element stays at same place (less performant). */
     vShuffle(isDeranged?: boolean): T[];
+    vCloneDeep(): T[];
   }
 
   interface ReadonlyArray<T> extends Array<T> {}
@@ -88,4 +90,8 @@ Array.prototype.vShuffle = function <T>(this: T[], isDeranged: boolean = true): 
     shuffledArray[i] = this[randomIndex]!;
   }
   return shuffledArray;
+};
+
+Array.prototype.vCloneDeep = function <T>(this: T[]) {
+  return this.map((x) => cloneDeep(x));
 };
