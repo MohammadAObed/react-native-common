@@ -1,21 +1,13 @@
-import { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import { useStyles } from '../hooks';
-import { getWizardCustomStyles } from '../styles';
-import type { WizardKey, WizardProps } from '../types/components';
-import { ButtonCustom } from './ButtonCustom';
+import { useEffect, useState } from "react";
+import { View } from "react-native";
+import { useStyles } from "../hooks";
+import { getWizardCustomStyles } from "../styles";
+import type { WizardKey, WizardProps } from "../types/components";
+import { ButtonCustom } from "./ButtonCustom";
 
-export const Wizard = <T extends WizardKey>({
-  steps,
-  currentStep: step,
-  showNavigationButtons = true,
-  onNext,
-  onPrev,
-}: WizardProps<T>) => {
+export const Wizard = <T extends WizardKey>({ steps, currentStep: step, showNavigationButtons = true, onNext, onPrev }: WizardProps<T>) => {
   const { styles } = useStyles(getWizardCustomStyles);
-  const [currentStep, setCurrentStep] = useState<T | undefined>(
-    step ?? steps[0]!.step
-  );
+  const [currentStep, setCurrentStep] = useState<T | undefined>(step ?? steps[0]!.step);
 
   const goToNextStep = () => {
     setCurrentStep((prev) => {
@@ -48,7 +40,7 @@ export const Wizard = <T extends WizardKey>({
       <View>{CurrentComponent && <CurrentComponent />}</View>
 
       {showNavigationButtons && (
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: "row" }}>
           <>
             <ButtonCustom
               style={styles.buttons}
@@ -63,9 +55,7 @@ export const Wizard = <T extends WizardKey>({
               style={styles.buttons}
               mode="button"
               onPress={goToNextStep}
-              disabled={
-                steps.findIndex((x) => x.step === currentStep) === steps.length
-              }
+              disabled={steps.findIndex((x) => x.step === currentStep) === steps.length}
               applyDisabledStyle
             >
               Next

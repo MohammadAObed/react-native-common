@@ -33,7 +33,7 @@ export const DropDownCustom = <Model, Value extends DropDownValueField = number>
 
   let orderedData = data;
   if (orderByValue && value) {
-    orderedData = data.vOrderBy((x) => value.indexOf(x[valueField] as Value));
+    orderedData = data.mOrderBy((x) => value.indexOf(x[valueField] as Value));
   }
 
   const multiSelectValue = isMultiSelect ? value?.map((x) => x?.toString() ?? "") : [];
@@ -42,13 +42,13 @@ export const DropDownCustom = <Model, Value extends DropDownValueField = number>
   const onMultiChangeValue = (keys: string[]) => {
     if (!isMultiSelect) return;
     if (data.length === 0) return;
-    const typeofDataKey = typeof data.vFirst()![valueField];
+    const typeofDataKey = typeof data[0]![valueField];
     let values = (
       typeofDataKey === "string" ? keys : typeofDataKey === "bigint" ? keys.map((x) => BigInt(x)) : keys.map((x) => parseInt(x))
     ) as Value[];
-    if (disabledValues?.includes(values.vLast()!)) return;
+    if (disabledValues?.includes(values.mLast()!)) return;
     const deletedValue = value.find((val) => !values.includes(val));
-    const newValue = deletedValue === undefined ? values.vLast() : undefined;
+    const newValue = deletedValue === undefined ? values.mLast() : undefined;
     onChange({ values, deletedValue, newValue });
   };
 

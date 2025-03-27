@@ -1,6 +1,6 @@
-import { DisplayDataItemFrom } from "@mohammad_obed/react-native-common/src/types/components";
 import { Key } from "react";
 import { NEW_ID, NEW_ID_FACTOR } from "../../constants";
+import { DisplayDataItemFrom } from "../../types/components";
 
 export function getNewestId(id?: number) {
   return (id ?? NEW_ID) + NEW_ID_FACTOR;

@@ -2,7 +2,7 @@ import * as FileSystem from "expo-file-system";
 import { deleteDatabaseAsync, SQLiteDatabase, type SQLiteVariadicBindParams } from "expo-sqlite";
 import { DATABASE_FULL_NAME, DB_ERROR_MESSAGE, ErrorCode, NEW_ID_FACTOR, NewIdsTracker } from "../constants";
 import { getNewestId, GetPropertiesMetaData } from "../helpers";
-import { Common, ErrorCustom } from "../models";
+import { Common, ErrorCommon } from "../models";
 import type {
   GetSqlFile,
   HandleDbVersion,
@@ -29,8 +29,8 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   async handleDbVersionCommon(currentDbVersion: number, getSqlFile: GetSqlFile) {
     const [sqlFile] = await getSqlFile(currentDbVersion);
-    if (!sqlFile) throw new ErrorCustom(DB_ERROR_MESSAGE, ErrorCode.LOAD_DB_ASSET);
-    if (!sqlFile.localUri) throw new ErrorCustom(DB_ERROR_MESSAGE, ErrorCode.LOAD_DB_ASSET_LOCAL_URI);
+    if (!sqlFile) throw new ErrorCommon(DB_ERROR_MESSAGE, ErrorCode.LOAD_DB_ASSET);
+    if (!sqlFile.localUri) throw new ErrorCommon(DB_ERROR_MESSAGE, ErrorCode.LOAD_DB_ASSET_LOCAL_URI);
     const sqlFileContent = await FileSystem.readAsStringAsync(sqlFile.localUri);
     await this.execAsync(`PRAGMA journal_mode = 'wal';`);
     // await this.execAsync("PRAGMA foreign_keys = ON");
@@ -46,11 +46,11 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   };
   getAllAsync = async <T>(source: string, ...params: SQLiteVariadicBindParams): Promise<T[]> => {
     const result = await this._handleGetAsync(async () => await this._db.getAllAsync<T>(source, ...params), source);
-    return result.vOrderByDescending((x: any) => x.Id);
+    return result.mOrderByDescending((x: any) => x.Id);
   };
   getAllSync = <T>(source: string, ...params: SQLiteVariadicBindParams): T[] => {
     const result = this._handleGetSync(() => this._db.getAllSync<T>(source, ...params), source);
-    return result.vOrderByDescending((x: any) => x.Id);
+    return result.mOrderByDescending((x: any) => x.Id);
   };
   execAsync = async (source: string) => await this._db.execAsync(source);
   execSync = (source: string) => this._db.execSync(source);
@@ -64,10 +64,10 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
       await task(customTran);
     });
   async validateAsync() {
-    if (!(await this.isInTransactionAsync())) throw new ErrorCustom("Failed to process resources", ErrorCode.NO_DB_TRANSACTION_FOUND);
+    if (!(await this.isInTransactionAsync())) throw new ErrorCommon("Failed to process resources", ErrorCode.NO_DB_TRANSACTION_FOUND);
   }
   validateSync() {
-    if (!this.isInTransactionSync()) throw new ErrorCustom("Failed to process resources", ErrorCode.NO_DB_TRANSACTION_FOUND);
+    if (!this.isInTransactionSync()) throw new ErrorCommon("Failed to process resources", ErrorCode.NO_DB_TRANSACTION_FOUND);
   }
   async getByIdAsync<T>(tableName: ClassNames, Id: number) {
     return await this.getFirstAsync<T>(`SELECT * FROM ${tableName} WHERE Id = ?`, Id);
@@ -91,16 +91,16 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
     const result = await this._db.getFirstAsync<SqliteMaster>(
       `SELECT sql FROM sqlite_master WHERE type='table' AND name COLLATE NOCASE = '${tableName}'`
     );
-    if (!result) throw new ErrorCustom(`no constraints found for table: ${tableName}`);
-    if (!result.sql) throw new ErrorCustom(`no sql constraint found for table: ${tableName}`);
+    if (!result) throw new ErrorCommon(`no constraints found for table: ${tableName}`);
+    if (!result.sql) throw new ErrorCommon(`no sql constraint found for table: ${tableName}`);
     return this._extractCheckConstraints(result.sql);
   }
   getTableConstraintsSync(tableName: ClassNames) {
     const result = this._db.getFirstSync<SqliteMaster>(
       `SELECT sql FROM sqlite_master WHERE type='table' AND name COLLATE NOCASE = '${tableName}'`
     );
-    if (!result) throw new ErrorCustom(`no constraints found for table: ${tableName}`);
-    if (!result.sql) throw new ErrorCustom(`no sql constraint found for table: ${tableName}`);
+    if (!result) throw new ErrorCommon(`no constraints found for table: ${tableName}`);
+    if (!result.sql) throw new ErrorCommon(`no sql constraint found for table: ${tableName}`);
     return this._extractCheckConstraints(result.sql);
   }
   async getBooleanTableConstraintsAsync(tableName: ClassNames) {
@@ -144,7 +144,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
         const propName = nestedEntry[0];
         if (propsMetaData[propName].columnNameInOtherTable) continue;
         if (propsMetaData[propName].isFKArray && !Array.isArray(nestedEntry[1]))
-          throw new ErrorCustom(
+          throw new ErrorCommon(
             `$nested property name: ${propName as string} with Id: ${record.Id} is not an array, but its meta data says it is`
           );
         const nestedTableName = propsMetaData[propName].fKClassName;
@@ -163,7 +163,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
       dbEachTableIds[tableIds[0]] = dbRecords.map((x) => x.Id);
     }
     let query = await this._getAddOrUpdateQuery(tableName, records, dbEachTableIds, [], currentNestedIds, deleteAbsent);
-    query = query.vOrderByDescending((x) => x.toLowerCase().startsWith("delete "));
+    query = query.mOrderByDescending((x) => x.toLowerCase().startsWith("delete "));
     await this.execAsync(query.join(";\n"));
   }
   async delete(tableName: ClassNames, Id: number) {
@@ -249,7 +249,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   private async _getDbVersion() {
     let result = await this.getFirstAsync<{ user_version: number }>("PRAGMA user_version");
-    if (!result) throw new ErrorCustom(DB_ERROR_MESSAGE, ErrorCode.GET_DB_VERSION);
+    if (!result) throw new ErrorCommon(DB_ERROR_MESSAGE, ErrorCode.GET_DB_VERSION);
     return result;
   }
   private async _setDbVersion(DatabaseVersion: number) {
@@ -309,7 +309,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
     for (const nestedEntry of nestedAsEntries) {
       const propName = nestedEntry[0];
       if (propsMetaData[propName].isFKArray && !Array.isArray(nestedEntry[1]))
-        throw new ErrorCustom(`$nested property name: ${propName as string} is not an array, but its meta data says it is`);
+        throw new ErrorCommon(`$nested property name: ${propName as string} is not an array, but its meta data says it is`);
       const nestedTableName = propsMetaData[propName].fKClassName;
       const propValue = Array.isArray(nestedEntry[1]) ? nestedEntry[1] : [nestedEntry[1]];
       const columnNameInOtherTable = propsMetaData[propName].columnNameInOtherTable;

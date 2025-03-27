@@ -1,11 +1,11 @@
-import type { PropsWithChildren } from 'react';
-import type { Props } from 'react-native-error-boundary/lib/ErrorBoundary/FallbackComponent';
-import { ErrorCustom } from '../../models';
-import type { OverlayMode } from '../components/Common';
+import type { PropsWithChildren } from "react";
+import type { Props } from "react-native-error-boundary/lib/ErrorBoundary/FallbackComponent";
+import { ErrorCommon } from "../../models";
+import type { OverlayMode } from "../components/Common";
 
-export type ExceptionProps = Omit<Props, 'error'> &
+export type ExceptionProps = Omit<Props, "error"> &
   PropsWithChildren & {
-    error: ErrorCustom | Error;
+    error: ErrorCommon | Error;
     mode?: OverlayMode;
     center?: boolean;
   };

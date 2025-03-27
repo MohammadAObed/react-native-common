@@ -1,4 +1,4 @@
-export type ErrorCustomConstructorParam = {
+export type ErrorCommonConstructorParam = {
   showToScreen?: boolean;
   showOnly?: boolean;
   originalError?: Error;

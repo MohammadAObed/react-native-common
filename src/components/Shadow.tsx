@@ -1,5 +1,5 @@
-import { BLUR_NOT_SUPPORTED_OPACITY } from "@mohammad_obed/react-native-common/src/constants";
 import { View, type ViewStyle } from "react-native";
+import { BLUR_NOT_SUPPORTED_OPACITY } from "../constants";
 import { getContainerStyleFromChildren, getStyleFromChildren, isBlurSupported } from "../helpers";
 import { useStyles } from "../hooks";
 import getShadowStyles from "../styles/Shadow";

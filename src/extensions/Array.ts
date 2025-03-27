@@ -7,29 +7,29 @@ type MinMax<T> = <U>(callback: (item: T) => U) => U | undefined;
 
 declare global {
   interface Array<T> {
-    vGetDuplicates(): T[];
-    vDistinct<U>(selector?: (item: T) => U): T[];
-    vIsStringArray(): boolean;
-    vMax: MinMax<T>;
-    vMin: MinMax<T>;
-    vOrderBy<U>(callback: (item: T) => U): T[];
-    vOrderByDescending<U>(callback: (item: T) => U): T[];
-    vLast(): T | undefined;
-    vFirst(): T | undefined;
-    vGetVerb(): string;
+    mGetDuplicates(): T[];
+    mDistinct<U>(selector?: (item: T) => U): T[];
+    mIsStringArray(): boolean;
+    mMax: MinMax<T>;
+    mMin: MinMax<T>;
+    mOrderBy<U>(callback: (item: T) => U): T[];
+    mOrderByDescending<U>(callback: (item: T) => U): T[];
+    mLast(): T | undefined;
+    mFirst(): T | undefined;
+    mGetVerb(): string;
     /** @param isDeranged - Makes sure no element stays at same place (less performant). */
-    vShuffle(isDeranged?: boolean): T[];
-    vCloneDeep(): T[];
+    mShuffle(isDeranged?: boolean): T[];
+    mCloneDeep(): T[];
   }
 
   interface ReadonlyArray<T> extends Array<T> {}
 }
 
-Array.prototype.vGetDuplicates = function <T>(this: T[]): T[] {
+Array.prototype.mGetDuplicates = function <T>(this: T[]): T[] {
   return this.filter((item, index) => this.indexOf(item) !== index);
 };
 
-Array.prototype.vDistinct = function <T, U>(this: T[], selector?: (item: T) => U): T[] {
+Array.prototype.mDistinct = function <T, U>(this: T[], selector?: (item: T) => U): T[] {
   if (!selector) {
     return [...new Set(this)];
   }
@@ -43,39 +43,39 @@ Array.prototype.vDistinct = function <T, U>(this: T[], selector?: (item: T) => U
   return Array.from(map.values());
 };
 
-Array.prototype.vIsStringArray = function <T>(this: T[]): boolean {
+Array.prototype.mIsStringArray = function <T>(this: T[]): boolean {
   return Array.isArray(this) && this.every((item) => typeof item === "string");
 };
 
-Array.prototype.vMax = function <T, U>(this: T[], callback: (item: T) => U): U | undefined {
+Array.prototype.mMax = function <T, U>(this: T[], callback: (item: T) => U): U | undefined {
   return handleMinMax(false, this, callback);
 };
 
-Array.prototype.vMin = function <T, U>(this: T[], callback: (item: T) => U): U | undefined {
+Array.prototype.mMin = function <T, U>(this: T[], callback: (item: T) => U): U | undefined {
   return handleMinMax(true, this, callback);
 };
 
-Array.prototype.vOrderBy = function <T, U>(this: T[], callback: (item: T) => U): T[] {
+Array.prototype.mOrderBy = function <T, U>(this: T[], callback: (item: T) => U): T[] {
   return handleOrderBy(false, this, callback);
 };
 
-Array.prototype.vOrderByDescending = function <T, U>(this: T[], callback: (item: T) => U): T[] {
+Array.prototype.mOrderByDescending = function <T, U>(this: T[], callback: (item: T) => U): T[] {
   return handleOrderBy(true, this, callback);
 };
 
-Array.prototype.vLast = function <T>(this: T[]): T | undefined {
+Array.prototype.mLast = function <T>(this: T[]): T | undefined {
   return this[this.length - 1];
 };
 
-Array.prototype.vFirst = function <T>(this: T[]): T | undefined {
+Array.prototype.mFirst = function <T>(this: T[]): T | undefined {
   return this[0];
 };
 
-Array.prototype.vGetVerb = function (): string {
+Array.prototype.mGetVerb = function (): string {
   return this.length > 1 ? "are" : "is";
 };
 
-Array.prototype.vShuffle = function <T>(this: T[], isDeranged: boolean = true): T[] {
+Array.prototype.mShuffle = function <T>(this: T[], isDeranged: boolean = true): T[] {
   if (!isDeranged) {
     return [...this].sort(() => Math.random() - 0.5);
   }
@@ -92,6 +92,6 @@ Array.prototype.vShuffle = function <T>(this: T[], isDeranged: boolean = true): 
   return shuffledArray;
 };
 
-Array.prototype.vCloneDeep = function <T>(this: T[]) {
+Array.prototype.mCloneDeep = function <T>(this: T[]) {
   return this.map((x) => cloneDeep(x));
 };

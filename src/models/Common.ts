@@ -48,7 +48,7 @@ export class Common {
       currentObj = currentObj[propertyName] as Record<string, unknown>; //"as this" won't be correct, because we go one level deep each iteration and assign currentObj to be the nested property value (object)
     }
 
-    let lastPropertyName = proptiesNames.vLast()!;
+    let lastPropertyName = proptiesNames.mLast()!;
     currentObj[lastPropertyName] = value; //currentObj is assigned by reference (as normally in javacript) to the deeply nested object inside the instance of "this", so modifying any value of its properties will result in modifying the nested object property value
     return this;
   }

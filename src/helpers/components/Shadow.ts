@@ -7,7 +7,7 @@ export function getContainerStyleFromChildren(children: any): ViewStyle {
   if (isValidElement(children)) {
     _containerStyle = getContainerStyleFromChild(children);
   } else if (Array.isArray(children)) {
-    _containerStyle.width = children.map((x: any) => getContainerStyleFromChild(x).width).vMax((x) => x);
+    _containerStyle.width = children.map((x: any) => getContainerStyleFromChild(x).width).mMax((x) => x);
   }
   return _containerStyle;
 }
@@ -19,8 +19,8 @@ export function getContainerStyleFromChild(child: any): ViewStyle {
       child.props?.style?.width ??
       (child.props?.style as any[])
         ?.flat()
-        ?.vOrderBy((y) => y?.width !== undefined && y?.width !== null)
-        ?.vMax?.((y) => y?.width),
+        ?.mOrderBy((y) => y?.width !== undefined && y?.width !== null)
+        ?.mMax?.((y) => y?.width),
   };
 }
 
@@ -29,7 +29,7 @@ export function getStyleFromChildren(children: any): ViewStyle {
   if (isValidElement(children)) {
     _containerStyle = getStyleFromChild(children);
   } else if (Array.isArray(children)) {
-    _containerStyle.marginHorizontal = children.map((x: any) => getStyleFromChild(x).marginHorizontal).vMax((x) => x);
+    _containerStyle.marginHorizontal = children.map((x: any) => getStyleFromChild(x).marginHorizontal).mMax((x) => x);
   }
   return _containerStyle;
 }
@@ -41,8 +41,8 @@ export function getStyleFromChild(child: any): ViewStyle {
       child.props?.style?.marginHorizontal ??
       (child.props?.style as any[])
         ?.flat()
-        ?.vOrderBy((y) => y?.marginHorizontal !== undefined && y?.marginHorizontal !== null)
-        ?.vMax?.((y) => y?.marginHorizontal),
+        ?.mOrderBy((y) => y?.marginHorizontal !== undefined && y?.marginHorizontal !== null)
+        ?.mMax?.((y) => y?.marginHorizontal),
   };
 }
 

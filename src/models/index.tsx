@@ -1,3 +1,3 @@
 export * from "./Common";
-export * from "./ErrorCustom";
+export * from "./ErrorCommon";
 export * from "./SQLiteDatabaseCustom";

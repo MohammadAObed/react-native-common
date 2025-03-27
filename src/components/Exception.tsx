@@ -2,7 +2,7 @@ import * as Application from "expo-application";
 import { Text } from "react-native-paper";
 import { ErrorCode } from "../constants";
 import { useStyles } from "../hooks";
-import type { ErrorCustom } from "../models";
+import type { ErrorCommon } from "../models";
 import { getErrorStyles } from "../styles";
 import type { ExceptionProps } from "../types/components";
 import { isValidComponent } from "../utils";
@@ -15,9 +15,9 @@ const SHOW_SEND_EMAIL = failCount >= 2;
 
 export const Exception = ({ children, mode, center, error, resetError }: ExceptionProps) => {
   const { styles } = useStyles(getErrorStyles);
-  const errorCustom = error as ErrorCustom;
+  const errorCommon = error as ErrorCommon;
 
-  if (!children && !errorCustom.showToScreen && !errorCustom.showOnly) {
+  if (!children && !errorCommon.showToScreen && !errorCommon.showOnly) {
     children = "Something went wrong...";
   }
 
@@ -25,8 +25,8 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
     <>
       {mode === "simple" && (
         <FitContainer center={center}>
-          {(errorCustom.showToScreen || errorCustom.showOnly) && <Text>{errorCustom.message}</Text>}
-          {!errorCustom.showOnly && children && (isValidComponent(children) ? children : <Text style={styles.simpleText}>{children}</Text>)}
+          {(errorCommon.showToScreen || errorCommon.showOnly) && <Text>{errorCommon.message}</Text>}
+          {!errorCommon.showOnly && children && (isValidComponent(children) ? children : <Text style={styles.simpleText}>{children}</Text>)}
           <ButtonCustom mode="text-shadow" onPress={resetError}>
             Try Again
           </ButtonCustom>
@@ -39,10 +39,10 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
       )}
       {mode === "detailed" && (
         <SafeAreaViewCustom style={styles.container}>
-          {!errorCustom.showOnly && <Text variant="displayMedium">Oops!</Text>}
-          {!errorCustom.showOnly && <Text variant="headlineLarge">{"There's an error"}</Text>}
-          {(errorCustom.showToScreen || errorCustom.showOnly) && <Text variant="bodyLarge">{errorCustom.message}</Text>}
-          {!errorCustom.showOnly && children && (isValidComponent(children) ? children : <Text variant="bodyLarge">{children}</Text>)}
+          {!errorCommon.showOnly && <Text variant="displayMedium">Oops!</Text>}
+          {!errorCommon.showOnly && <Text variant="headlineLarge">{"There's an error"}</Text>}
+          {(errorCommon.showToScreen || errorCommon.showOnly) && <Text variant="bodyLarge">{errorCommon.message}</Text>}
+          {!errorCommon.showOnly && children && (isValidComponent(children) ? children : <Text variant="bodyLarge">{children}</Text>)}
           <ButtonCustom textStyle={styles.buttonText} mode="button" withRadius onPress={resetError}>
             Try Again
           </ButtonCustom>
@@ -52,7 +52,7 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
             </ButtonCustom>
           )}
           <Text style={styles.appVersion}>v {Application.nativeApplicationVersion}</Text>
-          <Text style={styles.errorCode}>Error code: {errorCustom.errorCode ?? ErrorCode.UNKOWN}</Text>
+          <Text style={styles.errorCode}>Error code: {errorCommon.errorCode ?? ErrorCode.UNKOWN}</Text>
         </SafeAreaViewCustom>
       )}
     </>

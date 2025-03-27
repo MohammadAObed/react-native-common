@@ -1,5 +1,5 @@
 export * from "./Decimal";
-export * from "./ErrorCustom";
+export * from "./ErrorCommon";
 export * from "./MetaData";
 export * from "./Model";
 export * from "./Number";
