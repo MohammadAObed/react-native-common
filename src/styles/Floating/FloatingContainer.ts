@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
-import { type MD3Theme } from 'react-native-paper';
+import { StyleSheet } from "react-native";
+import { type MD3Theme } from "react-native-paper";
 
 export const getFloatingContainerStyles = (_theme: MD3Theme) =>
   StyleSheet.create({
     container: {
-      position: 'absolute',
-      backgroundColor: 'transparent',
+      position: "absolute",
+      backgroundColor: "transparent",
     },
   });
 
@@ -17,7 +17,7 @@ export const getFloatingContainerModeStyles = (_theme: MD3Theme) =>
       left: edgeMargin,
     },
     topCenter: {
-      alignSelf: 'center',
+      alignSelf: "center",
     },
     topRight: {
       right: edgeMargin,
@@ -28,22 +28,22 @@ export const getFloatingContainerModeStyles = (_theme: MD3Theme) =>
     },
     bottomCenter: {
       bottom: edgeMargin,
-      alignSelf: 'center',
+      alignSelf: "center",
     },
     bottomRight: {
       bottom: edgeMargin,
       right: edgeMargin,
     },
     middleLeft: {
-      top: '50%',
+      top: "50%",
       left: edgeMargin,
     },
     middleCenter: {
-      top: '50%',
-      alignSelf: 'center',
+      top: "50%",
+      alignSelf: "center",
     },
     middleRight: {
-      top: '50%',
+      top: "50%",
       right: edgeMargin,
     },
   });

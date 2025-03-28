@@ -8,6 +8,8 @@ export * from "./Draggable";
 export * from "./ErrorBoundaryCustom";
 export * from "./Exception";
 export * from "./FitContainer";
+export * from "./Floating/FloatingButtonGroup";
+export * from "./Floating/FloatingContainer";
 export * from "./Form/Choices";
 export * from "./Form/Color";
 export * from "./Form/DecreaseIncreaseNumber";
@@ -25,4 +27,3 @@ export * from "./Static";
 export * from "./SuspenseWithErrorBoundary";
 export * from "./SvgCustom";
 export * from "./Wizard";
-

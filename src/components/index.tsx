@@ -7,7 +7,8 @@ export * from "./Draggable";
 export * from "./ErrorBoundaryCustom";
 export * from "./Exception";
 export * from "./FitContainer";
-export * from "./FloatingContainer";
+export * from "./Floating/FloatingButtonGroup";
+export * from "./Floating/FloatingContainer";
 export * from "./Form/Choices";
 export * from "./Form/Color";
 export * from "./Form/ColorPickerCustom";
@@ -29,4 +30,3 @@ export * from "./Shadow";
 export * from "./Static";
 export * from "./SuspenseWithErrorBoundary";
 export * from "./Wizard";
-
