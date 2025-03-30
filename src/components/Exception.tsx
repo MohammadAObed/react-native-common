@@ -1,8 +1,7 @@
 import * as Application from "expo-application";
 import { Text } from "react-native-paper";
-import { ErrorCode } from "../constants";
 import { useStyles } from "../hooks";
-import type { ErrorCommon } from "../models";
+import { ErrorCommon } from "../models";
 import { getErrorStyles } from "../styles";
 import type { ExceptionProps } from "../types/components";
 import { isValidComponent } from "../utils";
@@ -52,7 +51,7 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
             </ButtonCustom>
           )}
           <Text style={styles.appVersion}>v {Application.nativeApplicationVersion}</Text>
-          <Text style={styles.errorCode}>Error code: {errorCommon.errorCode ?? ErrorCode.UNKOWN}</Text>
+          <Text style={styles.errorCode}>Error code: {errorCommon.errorCode ?? ErrorCommon.ErrorCode.UNKOWN}</Text>
         </SafeAreaViewCustom>
       )}
     </>

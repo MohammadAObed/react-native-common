@@ -1,6 +1,6 @@
 import * as FileSystem from "expo-file-system";
 import { deleteDatabaseAsync, SQLiteDatabase, type SQLiteVariadicBindParams } from "expo-sqlite";
-import { DATABASE_FULL_NAME, DB_ERROR_MESSAGE, ErrorCode, NEW_ID_FACTOR, NewIdsTracker } from "../constants";
+import { NEW_ID_FACTOR, NewIdsTracker } from "../constants";
 import { getNewestId, GetPropertiesMetaData } from "../helpers";
 import { Common, ErrorCommon } from "../models";
 import type {
@@ -20,6 +20,11 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   constructor(db: SQLiteDatabase) {
     this._db = db;
   }
+
+  static readonly INITIAL_DATABASE_VERSION = 1 as const;
+  static readonly DATABASE_NAME = "DB" as const;
+  static readonly DATABASE_FULL_NAME = `${SQLiteDatabaseCustom.DATABASE_NAME}.db` as const;
+
   static async migrateDbIfNeeded(db: SQLiteDatabase, DatabaseVersion: number, handleDbVersion: HandleDbVersion) {
     const customDb = new SQLiteDatabaseCustom(db);
     let { user_version: currentDbVersion } = await customDb._getDbVersion();
@@ -29,8 +34,8 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   async handleDbVersionCommon(currentDbVersion: number, getSqlFile: GetSqlFile) {
     const [sqlFile] = await getSqlFile(currentDbVersion);
-    if (!sqlFile) throw new ErrorCommon(DB_ERROR_MESSAGE, ErrorCode.LOAD_DB_ASSET);
-    if (!sqlFile.localUri) throw new ErrorCommon(DB_ERROR_MESSAGE, ErrorCode.LOAD_DB_ASSET_LOCAL_URI);
+    if (!sqlFile) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, ErrorCommon.ErrorCode.LOAD_DB_ASSET);
+    if (!sqlFile.localUri) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, ErrorCommon.ErrorCode.LOAD_DB_ASSET_LOCAL_URI);
     const sqlFileContent = await FileSystem.readAsStringAsync(sqlFile.localUri);
     await this.execAsync(`PRAGMA journal_mode = 'wal';`);
     // await this.execAsync("PRAGMA foreign_keys = ON");
@@ -64,10 +69,11 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
       await task(customTran);
     });
   async validateAsync() {
-    if (!(await this.isInTransactionAsync())) throw new ErrorCommon("Failed to process resources", ErrorCode.NO_DB_TRANSACTION_FOUND);
+    if (!(await this.isInTransactionAsync()))
+      throw new ErrorCommon("Failed to process resources", ErrorCommon.ErrorCode.NO_DB_TRANSACTION_FOUND);
   }
   validateSync() {
-    if (!this.isInTransactionSync()) throw new ErrorCommon("Failed to process resources", ErrorCode.NO_DB_TRANSACTION_FOUND);
+    if (!this.isInTransactionSync()) throw new ErrorCommon("Failed to process resources", ErrorCommon.ErrorCode.NO_DB_TRANSACTION_FOUND);
   }
   async getByIdAsync<T>(tableName: ClassNames, Id: number) {
     return await this.getFirstAsync<T>(`SELECT * FROM ${tableName} WHERE Id = ?`, Id);
@@ -249,7 +255,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   private async _getDbVersion() {
     let result = await this.getFirstAsync<{ user_version: number }>("PRAGMA user_version");
-    if (!result) throw new ErrorCommon(DB_ERROR_MESSAGE, ErrorCode.GET_DB_VERSION);
+    if (!result) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, ErrorCommon.ErrorCode.GET_DB_VERSION);
     return result;
   }
   private async _setDbVersion(DatabaseVersion: number) {
@@ -368,7 +374,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   async _deleteDb() {
     await this._db.closeAsync();
-    await deleteDatabaseAsync(DATABASE_FULL_NAME);
+    await deleteDatabaseAsync(SQLiteDatabaseCustom.DATABASE_FULL_NAME);
   }
 }
 export class TransactionCustom<ClassNamesValues extends string> extends SQLiteDatabaseCustom<ClassNamesValues> {
