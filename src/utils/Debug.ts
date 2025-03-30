@@ -2,7 +2,7 @@ import { ErrorCommon } from "../models";
 
 export function modifyConsoleLog() {
   const originalLog = console.log;
-  console.log = function (...args) {
+  console.log = function (...args: any[]) {
     if (typeof args[0] === "string" && args[0].includes("🚀")) {
       args[0] += " 🚀 ";
     }
