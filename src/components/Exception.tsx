@@ -15,6 +15,7 @@ const SHOW_SEND_EMAIL = failCount >= 2;
 export const Exception = ({ children, mode, center, error, resetError }: ExceptionProps) => {
   const { styles } = useStyles(getErrorStyles);
   const errorCommon: ErrorCommon = error as ErrorCommon;
+  errorCommon._handled = true;
   ErrorCommon.logError(errorCommon, "Exception.tsx");
   const errorMessage = ErrorCommon.getErrorMessage(error);
 

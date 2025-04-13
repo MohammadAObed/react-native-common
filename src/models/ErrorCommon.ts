@@ -64,8 +64,8 @@ export class ErrorCommon<T extends string = ErrorCodeValues> extends Error {
 
   static exceptionhandler = (error: ExceptionHandlerError, _isFatal: boolean) => {
     const stack = typeof error === "string" ? error : error.stack;
-    const isErrorHandledByErrorBoundary = stack?.includes("ErrorBoundaryCustom");
     ErrorCommon.logError(error, "exceptionhandler");
+    const isErrorHandledByErrorBoundary = (error instanceof ErrorCommon && error._handled) || stack?.includes("ErrorBoundaryCustom");
     if (isErrorHandledByErrorBoundary) return;
     ErrorCommon.showError(error);
   };
