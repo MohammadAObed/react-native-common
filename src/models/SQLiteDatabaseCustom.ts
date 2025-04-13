@@ -34,8 +34,8 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   async handleDbVersionCommon(currentDbVersion: number, getSqlFile: GetSqlFile) {
     const [sqlFile] = await getSqlFile(currentDbVersion);
-    if (!sqlFile) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, ErrorCommon.ErrorCode.LOAD_DB_ASSET);
-    if (!sqlFile.localUri) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, ErrorCommon.ErrorCode.LOAD_DB_ASSET_LOCAL_URI);
+    if (!sqlFile) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, "LOAD_DB_ASSET");
+    if (!sqlFile.localUri) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, "LOAD_DB_ASSET_LOCAL_URI");
     const sqlFileContent = await FileSystem.readAsStringAsync(sqlFile.localUri);
     await this.execAsync(`PRAGMA journal_mode = 'wal';`);
     // await this.execAsync("PRAGMA foreign_keys = ON");
@@ -69,11 +69,10 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
       await task(customTran);
     });
   async validateAsync() {
-    if (!(await this.isInTransactionAsync()))
-      throw new ErrorCommon("Failed to process resources", ErrorCommon.ErrorCode.NO_DB_TRANSACTION_FOUND);
+    if (!(await this.isInTransactionAsync())) throw new ErrorCommon("Failed to process resources", "NO_DB_TRANSACTION_FOUND");
   }
   validateSync() {
-    if (!this.isInTransactionSync()) throw new ErrorCommon("Failed to process resources", ErrorCommon.ErrorCode.NO_DB_TRANSACTION_FOUND);
+    if (!this.isInTransactionSync()) throw new ErrorCommon("Failed to process resources", "NO_DB_TRANSACTION_FOUND");
   }
   async getByIdAsync<T>(tableName: ClassNames, Id: number) {
     return await this.getFirstAsync<T>(`SELECT * FROM ${tableName} WHERE Id = ?`, Id);
@@ -255,7 +254,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   private async _getDbVersion() {
     let result = await this.getFirstAsync<{ user_version: number }>("PRAGMA user_version");
-    if (!result) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, ErrorCommon.ErrorCode.GET_DB_VERSION);
+    if (!result) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, "GET_DB_VERSION");
     return result;
   }
   private async _setDbVersion(DatabaseVersion: number) {

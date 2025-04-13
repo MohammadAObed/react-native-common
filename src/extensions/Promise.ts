@@ -11,12 +11,7 @@ declare global {
 const originalThen = Promise.prototype.then;
 Promise.prototype.then = function (onFulfilled: any, onRejected: any) {
   return originalThen.call(this, onFulfilled, (err: unknown) => {
-    if (err instanceof ErrorCommon) {
-      if (!err._handled) {
-        err._handled = true;
-        ErrorCommon.exceptionhandler(err, false);
-      }
-    }
+    if (err instanceof ErrorCommon) ErrorCommon.exceptionhandler(err, false);
     if (onRejected) return onRejected(err);
     throw err;
   });

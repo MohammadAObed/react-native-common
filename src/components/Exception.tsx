@@ -22,7 +22,7 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
   return (
     <>
       {mode === "simple" && (
-        <FitContainer>
+        <FitContainer center={center}>
           <Text selectable>{errorMessage}</Text>
           {errorCommon.showMode !== "show-only" &&
             children &&
