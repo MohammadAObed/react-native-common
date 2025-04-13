@@ -2,11 +2,14 @@ export {};
 
 declare global {
   interface String {
+    mCapitalizeSentences(): string;
     mReverse(): string;
     mIncludes(text: string, trim?: boolean, lowerCase?: boolean): boolean;
   }
 }
-
+String.prototype.mCapitalizeSentences = function (this: string): string {
+  return this.replace(/(^\s*\w|[.]\s*\w|[\r\n]+\s*\w)/g, (match) => match.toUpperCase());
+};
 String.prototype.mReverse = function (this: String): string {
   return this.split("").reverse().join("");
 };

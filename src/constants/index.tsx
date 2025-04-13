@@ -4,6 +4,7 @@ export * from "./Model";
 export * from "./Number";
 export * from "./Paths";
 export * from "./Popup";
+export * from "./Query";
 export * from "./Shadow";
 export * from "./Style";
 export * from "./SvgShape";

@@ -14,18 +14,18 @@ const SHOW_SEND_EMAIL = failCount >= 2;
 
 export const Exception = ({ children, mode, center, error, resetError }: ExceptionProps) => {
   const { styles } = useStyles(getErrorStyles);
-  const errorCommon = error as ErrorCommon;
-
-  if (!children && !errorCommon.showToScreen && !errorCommon.showOnly) {
-    children = "Something went wrong...";
-  }
+  const errorCommon: ErrorCommon = error as ErrorCommon;
+  ErrorCommon.logError(errorCommon, "Exception.tsx");
+  const errorMessage = ErrorCommon.getErrorMessage(error);
 
   return (
     <>
       {mode === "simple" && (
-        <FitContainer center={center}>
-          {(errorCommon.showToScreen || errorCommon.showOnly) && <Text>{errorCommon.message}</Text>}
-          {!errorCommon.showOnly && children && (isValidComponent(children) ? children : <Text style={styles.simpleText}>{children}</Text>)}
+        <FitContainer>
+          <Text selectable>{errorMessage}</Text>
+          {errorCommon.showMode !== "show-only" &&
+            children &&
+            (isValidComponent(children) ? children : <Text style={styles.simpleText}>{children}</Text>)}
           <ButtonCustom mode="text-shadow" onPress={resetError}>
             Try Again
           </ButtonCustom>
@@ -38,10 +38,12 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
       )}
       {mode === "detailed" && (
         <SafeAreaViewCustom style={styles.container}>
-          {!errorCommon.showOnly && <Text variant="displayMedium">Oops!</Text>}
-          {!errorCommon.showOnly && <Text variant="headlineLarge">{"There's an error"}</Text>}
-          {(errorCommon.showToScreen || errorCommon.showOnly) && <Text variant="bodyLarge">{errorCommon.message}</Text>}
-          {!errorCommon.showOnly && children && (isValidComponent(children) ? children : <Text variant="bodyLarge">{children}</Text>)}
+          {errorCommon.showMode !== "show-only" && <Text variant="displayMedium">Oops!</Text>}
+          {errorCommon.showMode !== "show-only" && <Text variant="headlineLarge">{"There's an error"}</Text>}
+          {<Text variant="bodyLarge">{errorMessage}</Text>}
+          {errorCommon.showMode !== "show-only" &&
+            children &&
+            (isValidComponent(children) ? children : <Text variant="bodyLarge">{children}</Text>)}
           <ButtonCustom textStyle={styles.buttonText} mode="button" withRadius onPress={resetError}>
             Try Again
           </ButtonCustom>
