@@ -26,7 +26,13 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
           <Text selectable>{errorMessage}</Text>
           {errorCommon.showMode !== "show-only" &&
             children &&
-            (isValidComponent(children) ? children : <Text style={styles.simpleText}>{children}</Text>)}
+            (isValidComponent(children) ? (
+              children
+            ) : (
+              <Text style={styles.simpleText} selectable>
+                {children}
+              </Text>
+            ))}
           <ButtonCustom mode="text-shadow" onPress={resetError}>
             Try Again
           </ButtonCustom>

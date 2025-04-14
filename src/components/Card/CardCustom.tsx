@@ -12,7 +12,7 @@ const CardCustom = forwardRef(({ children, style, title, description, ...rest }:
 
   return (
     <Shadow offset={[0, 15]} opacity={0.2} borderRadius={15} blur={[4, 0.97, 0.8]}>
-      <ButtonCustom ref={ref} onPress={rest.onPress} style={[styles.container, style]} {...rest}>
+      <ButtonCustom ref={ref} style={[styles.container, style]} {...rest}>
         {title && (
           <Text style={styles.title} variant="titleLarge">
             {title}
