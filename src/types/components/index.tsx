@@ -26,4 +26,5 @@ export * from "./Shadow";
 export * from "./Static";
 export * from "./SuspenseWithErrorBoundary";
 export * from "./SvgCustom";
+export * from "./ToastCommon";
 export * from "./Wizard";

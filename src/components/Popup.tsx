@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Modal, View } from "react-native";
 import { Text } from "react-native-paper";
+import { ToastManager } from "../components";
 import { HideModes, ShadeLongPressTimeout } from "../constants";
 import { useStyles, useTimeout } from "../hooks";
 import { getPopupStyles } from "../styles";
@@ -73,6 +74,7 @@ export const Popup = ({
             )}
           </Container>
         )}
+        <ToastManager />
       </Modal>
     </>
   );

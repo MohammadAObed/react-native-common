@@ -34,8 +34,8 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   async handleDbVersionCommon(currentDbVersion: number, getSqlFile: GetSqlFile) {
     const [sqlFile] = await getSqlFile(currentDbVersion);
-    if (!sqlFile) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, "LOAD_DB_ASSET");
-    if (!sqlFile.localUri) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, "LOAD_DB_ASSET_LOCAL_URI");
+    if (!sqlFile) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, ErrorCommon.DB_ERROR_DESTINATION, "LOAD_DB_ASSET");
+    if (!sqlFile.localUri) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, ErrorCommon.DB_ERROR_DESTINATION, "LOAD_DB_ASSET_LOCAL_URI");
     const sqlFileContent = await FileSystem.readAsStringAsync(sqlFile.localUri);
     await this.execAsync(`PRAGMA journal_mode = 'wal';`);
     // await this.execAsync("PRAGMA foreign_keys = ON");
@@ -69,10 +69,11 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
       await task(customTran);
     });
   async validateAsync() {
-    if (!(await this.isInTransactionAsync())) throw new ErrorCommon("Failed to process resources", "NO_DB_TRANSACTION_FOUND");
+    if (!(await this.isInTransactionAsync()))
+      throw new ErrorCommon("Failed to process...", ErrorCommon.DB_ERROR_DESTINATION, "NO_DB_TRANSACTION_FOUND");
   }
   validateSync() {
-    if (!this.isInTransactionSync()) throw new ErrorCommon("Failed to process resources", "NO_DB_TRANSACTION_FOUND");
+    if (!this.isInTransactionSync()) throw new ErrorCommon("Failed to process...", ErrorCommon.DB_ERROR_DESTINATION, "NO_DB_TRANSACTION_FOUND");
   }
   async getByIdAsync<T>(tableName: ClassNames, Id: number) {
     return await this.getFirstAsync<T>(`SELECT * FROM ${tableName} WHERE Id = ?`, Id);
@@ -150,7 +151,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
         if (propsMetaData[propName].columnNameInOtherTable) continue;
         if (propsMetaData[propName].isFKArray && !Array.isArray(nestedEntry[1]))
           throw new ErrorCommon(
-            `$nested property name: ${propName as string} with Id: ${record.Id} is not an array, but its meta data says it is`
+            `nested property name: ${propName?.toString()} with Id: ${record.Id} is not an array, but its meta data says it is`
           );
         const nestedTableName = propsMetaData[propName].fKClassName;
         const value = !Array.isArray(nestedEntry[1]) ? [nestedEntry[1]] : nestedEntry[1];
@@ -254,7 +255,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
   }
   private async _getDbVersion() {
     let result = await this.getFirstAsync<{ user_version: number }>("PRAGMA user_version");
-    if (!result) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, "GET_DB_VERSION");
+    if (!result) throw new ErrorCommon(ErrorCommon.DB_ERROR_MESSAGE, ErrorCommon.DB_ERROR_DESTINATION, "GET_DB_VERSION");
     return result;
   }
   private async _setDbVersion(DatabaseVersion: number) {
@@ -314,7 +315,7 @@ export class SQLiteDatabaseCustom<ClassNames extends string = string> {
     for (const nestedEntry of nestedAsEntries) {
       const propName = nestedEntry[0];
       if (propsMetaData[propName].isFKArray && !Array.isArray(nestedEntry[1]))
-        throw new ErrorCommon(`$nested property name: ${propName as string} is not an array, but its meta data says it is`);
+        throw new ErrorCommon(`Nested property name: ${propName as string} is not an array, but its meta data says it is`);
       const nestedTableName = propsMetaData[propName].fKClassName;
       const propValue = Array.isArray(nestedEntry[1]) ? nestedEntry[1] : [nestedEntry[1]];
       const columnNameInOtherTable = propsMetaData[propName].columnNameInOtherTable;

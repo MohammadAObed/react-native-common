@@ -24,7 +24,7 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
       {mode === "simple" && (
         <FitContainer center={center}>
           <Text selectable>{errorMessage}</Text>
-          {errorCommon.showMode !== "show-only" &&
+          {errorCommon.destination !== "boundary-alone" &&
             children &&
             (isValidComponent(children) ? (
               children
@@ -45,10 +45,10 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
       )}
       {mode === "detailed" && (
         <SafeAreaViewCustom style={styles.container}>
-          {errorCommon.showMode !== "show-only" && <Text variant="displayMedium">Oops!</Text>}
-          {errorCommon.showMode !== "show-only" && <Text variant="headlineLarge">{"There's an error"}</Text>}
+          {errorCommon.destination !== "boundary-alone" && <Text variant="displayMedium">Oops!</Text>}
+          {errorCommon.destination !== "boundary-alone" && <Text variant="headlineLarge">{"There's an error"}</Text>}
           {<Text variant="bodyLarge">{errorMessage}</Text>}
-          {errorCommon.showMode !== "show-only" &&
+          {errorCommon.destination !== "boundary-alone" &&
             children &&
             (isValidComponent(children) ? children : <Text variant="bodyLarge">{children}</Text>)}
           <ButtonCustom textStyle={styles.buttonText} mode="button" withRadius onPress={resetError}>
