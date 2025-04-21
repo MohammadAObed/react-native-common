@@ -1,18 +1,17 @@
-import { Alert } from "react-native";
 import { showToast } from "../helpers/components/ToastCommon";
 import type { ErrorCodeValues } from "../types/constants";
-import type { Destination, ErrorCommonConstructorParam, ExceptionHandlerError, ShowErrorMode, ShowErrorTitle } from "../types/models";
+import type { Destination, ErrorCommonConstructorParam, ErrorType, ExceptionHandlerError, ShowErrorMode } from "../types/models";
 
 export class ErrorCommon<T extends string = ErrorCodeValues> extends Error {
   errorCode: T;
   destination: Destination;
-  title: ShowErrorTitle;
+  type: ErrorType;
   constructor(message: string, destination?: Destination, errorCode?: T, options?: ErrorCommonConstructorParam) {
     super(message);
     this.name = "ErrorCommon";
     this.errorCode = errorCode ?? (ErrorCommon.ErrorCode.CUSTOM as T);
     this.destination = destination ?? "none";
-    this.title = options?.title ?? "🚨 Error";
+    this.type = options?.type ?? "error";
   }
 
   static readonly ALLOW_IN_DEV_MODE = __DEV__;
@@ -39,7 +38,7 @@ export class ErrorCommon<T extends string = ErrorCodeValues> extends Error {
   static copy = (error: ErrorCommon): ErrorCommon => {
     const errorCopy = new ErrorCommon(error.message, error.destination, error.errorCode, {
       cause: error.cause,
-      title: error.title,
+      type: error.type,
     });
     errorCopy.stack = error.stack;
     errorCopy.name = error.name;
@@ -55,7 +54,7 @@ export class ErrorCommon<T extends string = ErrorCodeValues> extends Error {
       message: error.message,
       stack: error.stack,
       cause: error.cause,
-      title: error.title,
+      type: error.type,
       _handled: error._handled,
     };
   };
@@ -66,8 +65,8 @@ export class ErrorCommon<T extends string = ErrorCodeValues> extends Error {
     if (isErrorHandledByErrorBoundary) return;
     ErrorCommon.logError(error, "exceptionhandler");
     if (error instanceof ErrorCommon) {
-      if (error.destination !== "Toast" && error.destination !== "Alert") return;
-      ErrorCommon.showError(ErrorCommon.getErrorMessage(error), error.title, error.destination);
+      if (error.destination !== "toast" && error.destination !== "alert") return;
+      ErrorCommon.showError(ErrorCommon.getErrorMessage(error), error.type, error.destination);
     } else {
       ErrorCommon.showError(ErrorCommon.getErrorMessage(error));
     }
@@ -76,17 +75,17 @@ export class ErrorCommon<T extends string = ErrorCodeValues> extends Error {
 
   static exceptionhandlerNative = (exceptionMsg: string) => {
     if (__DEV__) console.log("🚀 ~ ErrorCommon ~ exceptionMsg: ", exceptionMsg);
-    ErrorCommon.showError("The app has crashed ☹️", "🚨 Error", "Alert");
+    ErrorCommon.showError("The app has crashed ☹️", "error", "alert");
   };
 
-  static showError(errorMessage: string, title: ShowErrorTitle = "🚨 Error", mode: ShowErrorMode = "Toast"): void {
-    const fullMessage = `${title}\n ${errorMessage}`;
+  static showError(errorMessage: string, type: ErrorType = "error", mode: ShowErrorMode = "toast"): void {
+    const fullMessage = `${errorMessage}`;
     switch (mode) {
-      case "Alert":
-        Alert.alert(title, errorMessage);
+      case "alert":
+        showToast({ text1: fullMessage, type, autoHide: false });
         break;
-      case "Toast":
-        showToast({ text1: fullMessage, type: "error" });
+      case "toast":
+        showToast({ text1: fullMessage, type });
         break;
       default:
         break;
@@ -99,7 +98,7 @@ export class ErrorCommon<T extends string = ErrorCodeValues> extends Error {
   }
 
   static shouldUseErrorMessage(error: ExceptionHandlerError) {
-    const destination: Destination[] = ["Toast", "Alert", "boundary", "boundary-alone"];
+    const destination: Destination[] = ["toast", "alert", "boundary", "boundary-alone"];
     return error instanceof ErrorCommon && destination.includes(error.destination);
   }
 

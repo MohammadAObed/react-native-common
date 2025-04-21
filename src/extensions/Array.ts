@@ -4,6 +4,7 @@ import { cloneDeep } from "../utils";
 export {};
 
 type MinMax<T> = <U>(callback: (item: T) => U) => U | undefined;
+type Sum<T> = (callback: (item: T) => number) => number | undefined;
 
 declare global {
   interface Array<T> {
@@ -20,6 +21,7 @@ declare global {
     /** @param isDeranged - Makes sure no element stays at same place (less performant). */
     mShuffle(isDeranged?: boolean): T[];
     mCloneDeep(): T[];
+    mSum: Sum<T>;
   }
 
   interface ReadonlyArray<T> extends Array<T> {}
@@ -94,4 +96,10 @@ Array.prototype.mShuffle = function <T>(this: T[], isDeranged: boolean = true): 
 
 Array.prototype.mCloneDeep = function <T>(this: T[]) {
   return this.map((x) => cloneDeep(x));
+};
+
+Array.prototype.mSum = function <T, U>(this: T[], callback: (item: T) => number): number | undefined {
+  const filteredArray = this.filter((item) => item !== undefined && item !== null);
+  if (filteredArray.length === 0) return undefined;
+  return filteredArray.map(callback).reduce((prev, curr) => prev + curr);
 };

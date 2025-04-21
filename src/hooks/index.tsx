@@ -6,4 +6,5 @@ export * from "./useScrollTo";
 export * from "./useSQLiteContextCustom";
 export * from "./useStyle";
 export * from "./useSuspenseQueryCustom";
+export * from "./useThemeCommon";
 export * from "./useTimeout";
