@@ -1,6 +1,6 @@
 import { StyleSheet, type ViewStyle } from "react-native";
 import { type MD3Theme } from "react-native-paper";
-import { HIGHEST_ZINDEX, LARGE_FONT_SIZE, SECONDARY_MEDIUM_OPACITY } from "../constants";
+import { HIGHEST_ZINDEX, LARGE_FONT_SIZE } from "../constants";
 
 export const iconStyle: ViewStyle = {
   position: "absolute",
@@ -58,7 +58,7 @@ export const getCommonShadowStyle = (theme: MD3Theme, elevation: number) =>
   StyleSheet.create({
     shadow: {
       elevation, // Android
-      shadowColor: `${theme.colors.secondary}${SECONDARY_MEDIUM_OPACITY}`,
+      shadowColor: theme.colors.shadow,
       shadowOpacity: 0.3,
       shadowRadius: elevation * 0.5,
       shadowOffset: {

@@ -1,14 +1,11 @@
-import { Dropdown } from 'react-native-element-dropdown';
-import type { DropdownProps } from 'react-native-element-dropdown/lib/typescript/components/Dropdown/model';
-import { useStyles } from '../../../hooks';
-import { getDropDownCustomStyles } from '../../../styles';
-import type {
-  DropDownLabelField,
-  DropDownSingleAndMultiProps,
-  DropDownValueField,
-} from '../../../types/components';
-import { DropDownIcon } from './DropDownIcon';
-import { DropDownItem } from './DropDownItem';
+import { DropDownBar } from "@mohammad_obed/react-native-common/src/components/Form/DropDown/DropDownBar";
+import { Dropdown } from "react-native-element-dropdown";
+import type { DropdownProps } from "react-native-element-dropdown/lib/typescript/components/Dropdown/model";
+import { useStyles } from "../../../hooks";
+import { getDropDownCustomStyles } from "../../../styles";
+import type { DropDownLabelField, DropDownSingleAndMultiProps, DropDownValueField } from "../../../types/components";
+import { DropDownIcon } from "./DropDownIcon";
+import { DropDownItem } from "./DropDownItem";
 
 export const DropDownSingleSelect = <Model,>({
   style,
@@ -21,6 +18,7 @@ export const DropDownSingleSelect = <Model,>({
   text,
   disabledValues,
   isFocused,
+  search,
   focus,
   unfocus,
   onChange,
@@ -29,16 +27,12 @@ export const DropDownSingleSelect = <Model,>({
 }: DropdownProps<Model> & DropDownSingleAndMultiProps<Model>) => {
   const { styles } = useStyles(getDropDownCustomStyles);
 
-  const isValueString =
-    value != undefined && value != null && typeof value === 'string';
-  const isValueModel =
-    value != undefined && value != null && typeof value !== 'string';
+  const isValueString = value != undefined && value != null && typeof value === "string";
+  const isValueModel = value != undefined && value != null && typeof value !== "string";
 
   const renderItem = (item: Model) => {
     const itemKey = item[valueField] as DropDownValueField;
-    const isFocused = isValueString
-      ? itemKey == value
-      : isValueModel && itemKey == value[valueField]; //"==" instead of "===" because item[valueField] might be for example: 2 and not "2"
+    const isFocused = isValueString ? itemKey == value : isValueModel && itemKey == value[valueField]; //"==" instead of "===" because item[valueField] might be for example: 2 and not "2"
     const props = renderItemProps?.(item, isFocused);
     return (
       <DropDownItem
@@ -46,8 +40,8 @@ export const DropDownSingleSelect = <Model,>({
         labelField={labelField}
         iconName={iconName}
         isFocused={isFocused}
-        {...props}
         disabled={disabledValues?.includes(itemKey)}
+        {...props}
       />
     );
   };
@@ -55,31 +49,25 @@ export const DropDownSingleSelect = <Model,>({
   let inputText: string | null =
     text ??
     (value
-      ? (data.find((x) =>
-          isValueString
-            ? x[valueField] == value
-            : isValueModel && x[valueField] == value[valueField]
-        )?.[labelField] as DropDownLabelField) //"==" instead of "===" because x[valueField] might be for example: 2 and not "2"
+      ? (data.find((x) => (isValueString ? x[valueField] == value : isValueModel && x[valueField] == value[valueField]))?.[
+          labelField
+        ] as DropDownLabelField) //"==" instead of "===" because x[valueField] might be for example: 2 and not "2"
       : null);
-  if (inputText === '') inputText = null;
+  if (inputText === "") inputText = null;
 
   return (
     <Dropdown
       style={[styles.dropdown, style]}
-      placeholderStyle={[
-        styles.placeholder,
-        !isFocused && inputText ? styles.text : undefined,
-      ]}
+      placeholderStyle={[styles.placeholder, !isFocused && inputText ? styles.text : undefined]}
       selectedTextStyle={styles.selectedText}
-      inputSearchStyle={styles.inputSearch}
+      itemContainerStyle={styles.itemContainer}
       value={value}
       data={data}
       valueField={valueField}
       labelField={labelField}
       containerStyle={styles.dropdownContainer}
-      placeholder={
-        !isFocused ? (inputText ?? placeholder ?? '') : (inputText ?? '...')
-      }
+      placeholder={!isFocused ? inputText ?? placeholder ?? "" : inputText ?? "..."}
+      search={true}
       searchPlaceholder="Search..."
       onFocus={() => focus()}
       onBlur={() => unfocus()}
@@ -87,10 +75,19 @@ export const DropDownSingleSelect = <Model,>({
         onChange(item);
         unfocus();
       }}
-      renderLeftIcon={() => (
-        <DropDownIcon iconName={iconName} isFocused={isFocused} />
-      )}
+      renderLeftIcon={() => <DropDownIcon iconName={iconName} isFocused={isFocused} />}
       renderItem={renderItem}
+      renderInputSearch={(onSearch) => (
+        <DropDownBar
+          showSelectAllCheckBox={false}
+          data={data}
+          valueField={valueField}
+          labelField={labelField}
+          search={search}
+          searchPlaceholder="Search..."
+          onSearch={onSearch}
+        />
+      )}
       {...rest}
     />
   );

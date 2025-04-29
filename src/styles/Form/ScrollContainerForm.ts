@@ -4,7 +4,7 @@ import { type MD3Theme } from "react-native-paper";
 export const getScrollContainerFormStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     container: {
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.surface,
     },
     contentContainer: {
       rowGap: 12,

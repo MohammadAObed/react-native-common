@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
-import { SECONDARY_MEDIUM_OPACITY } from "../../constants";
 
 export const getFloatingButtonGroupStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -23,6 +22,6 @@ export const getFloatingButtonGroupStyles = (theme: MD3Theme) =>
     actionLabelStyle: {
       width: "100%",
     },
-    iconColor: { color: theme.colors.background },
-    rippleColor: { color: `${theme.colors.background}${SECONDARY_MEDIUM_OPACITY}` },
+    iconColor: { color: theme.colors.surface },
+    rippleColor: { color: theme.colors.onSurfaceVariant },
   });

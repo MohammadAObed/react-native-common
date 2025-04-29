@@ -59,8 +59,9 @@ export type DropDownBarProps<T> = {
   valueField: keyof T;
   labelField: keyof T;
   searchPlaceholder?: string;
-  showSelectAllCheckBox?: DropDownMultiProps["showSelectAllCheckBox"];
   search?: boolean;
   onSearch: (text: string) => void;
-  onChange: (value: string[]) => void;
-};
+} & (
+  | { showSelectAllCheckBox: true; onSeletAllCheckBoxChange: (value: string[]) => void }
+  | { showSelectAllCheckBox?: false; onSeletAllCheckBoxChange?: undefined }
+);

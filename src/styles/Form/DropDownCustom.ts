@@ -1,66 +1,55 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
-import {
-  DEFAULT_FONT_SIZE,
-  FORM_LABEL_OPACITY,
-  HIGHEST_ZINDEX,
-  SECONDARY_HIGH_OPACITY,
-  SECONDARY_LOW_OPACITY,
-  SECONDARY_MEDIUM_OPACITY,
-  SMALL_FONT_SIZE,
-} from "../../constants";
+import { DEFAULT_FONT_SIZE, HIGHEST_ZINDEX, SMALL_FONT_SIZE } from "../../constants";
 
 export const getDropDownCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     label: {
-      color: `${theme.colors.secondary}${FORM_LABEL_OPACITY}`,
       position: "absolute",
       top: 5,
       zIndex: HIGHEST_ZINDEX,
       paddingHorizontal: 18,
       fontSize: SMALL_FONT_SIZE,
+      color: theme.colors.onSurfaceVariant,
     },
     focusedLabel: {
       color: theme.colors.primary,
     },
     container: {
-      backgroundColor: `${theme.colors.secondary}${SECONDARY_LOW_OPACITY}`,
+      backgroundColor: theme.colors.elevation.level2,
     },
     dropdownContainer: {
       minWidth: 120,
-      marginTop: -20
+      marginTop: -20,
     },
     dropdown: {
       height: 55,
       paddingTop: 15,
-      borderColor: `${theme.colors.secondary}${SECONDARY_MEDIUM_OPACITY}`,
+      borderColor: theme.colors.outline,
       borderBottomWidth: 0.5,
       paddingHorizontal: 8,
     },
     placeholder: {
-      color: `${theme.colors.secondary}${SECONDARY_HIGH_OPACITY}`,
+      color: theme.colors.onSurfaceVariant,
       fontSize: DEFAULT_FONT_SIZE,
       marginRight: -7,
     },
     text: {
       fontSize: DEFAULT_FONT_SIZE,
+      color: theme.colors.onSurface,
     },
     selectedText: {
       color: theme.colors.primary,
     },
-    inputSearch: {
-      height: 40,
-      fontSize: DEFAULT_FONT_SIZE,
-    },
     icon: {
       marginRight: 5,
-      color: theme.colors.secondary,
+      color: theme.colors.onSurfaceVariant,
     },
     selectedIcon: {
       color: theme.colors.primary,
     },
     itemContainer: {
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.surface,
     },
     item: {
       paddingHorizontal: 17,
@@ -70,7 +59,7 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
       alignItems: "center",
     },
     selectedItem: {
-      backgroundColor: `${theme.colors.secondary}${SECONDARY_LOW_OPACITY}`,
+      backgroundColor: theme.colors.elevation.level2,
     },
     dummyTextForDynamicWidth: {
       paddingHorizontal: 16,
@@ -86,10 +75,12 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
     dropDownBarContainer: {
       justifyContent: "center",
       height: 55,
+      backgroundColor: theme.colors.surface,
     },
     inputSearchCustom: {
       height: 55,
       fontSize: DEFAULT_FONT_SIZE,
+      color: theme.colors.onSurfaceVariant,
     },
     selectAllCheckboxContainer: {
       position: "absolute",

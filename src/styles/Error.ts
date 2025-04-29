@@ -4,7 +4,6 @@ import { type MD3Theme } from "react-native-paper";
 export const getErrorStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     container: {
-      backgroundColor: theme.colors.background,
       flex: 1,
       justifyContent: "center",
       rowGap: 15,

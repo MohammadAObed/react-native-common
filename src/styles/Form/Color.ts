@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
-import { SECONDARY_HIGH_OPACITY, SECONDARY_LOW_OPACITY, SMALL_FONT_SIZE } from "../../constants";
+import { SMALL_FONT_SIZE } from "../../constants";
 
 export const getColorStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -8,10 +8,9 @@ export const getColorStyles = (theme: MD3Theme) =>
       zIndex: 2,
       width: 50,
       minHeight: 25,
-      borderColor: `${theme.colors.secondary}${SECONDARY_LOW_OPACITY}`,
     },
     colorIndicatorText: {
-      color: `${theme.colors.secondary}${SECONDARY_HIGH_OPACITY}`,
+      color: theme.colors.onSurface,
       fontSize: SMALL_FONT_SIZE,
     },
     colorPickerContainer: {

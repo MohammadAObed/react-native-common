@@ -21,7 +21,7 @@ export const DropDownMultiSelect = <Model,>({
   disabledValues,
   isFocused,
   search,
-  showSelectAllCheckBox,
+  showSelectAllCheckBox = true,
   focus,
   unfocus,
   onChange,
@@ -58,6 +58,7 @@ export const DropDownMultiSelect = <Model,>({
       selectedTextStyle={styles.selectedText}
       itemContainerStyle={styles.itemContainer}
       containerStyle={styles.dropdownContainer}
+      iconColor={!isFocused ? styles.icon.color : styles.selectedIcon.color}
       data={data}
       value={value}
       valueField={valueField}
@@ -79,10 +80,10 @@ export const DropDownMultiSelect = <Model,>({
       renderInputSearch={(onSearch) => (
         <DropDownBar
           data={data}
-          onChange={onChange}
+          showSelectAllCheckBox={showSelectAllCheckBox as any}
+          onSeletAllCheckBoxChange={showSelectAllCheckBox ? onChange : undefined}
           valueField={valueField}
           labelField={labelField}
-          showSelectAllCheckBox={showSelectAllCheckBox}
           search={search}
           searchPlaceholder="Search..."
           onSearch={onSearch}

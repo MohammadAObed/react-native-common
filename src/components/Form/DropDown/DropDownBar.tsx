@@ -11,9 +11,9 @@ export const DropDownBar = <T,>({
   data,
   valueField,
   labelField,
-  showSelectAllCheckBox = true,
+  showSelectAllCheckBox,
   search,
-  onChange,
+  onSeletAllCheckBoxChange,
   onSearch,
 }: DropDownBarProps<T>) => {
   const { styles } = useStyles(getDropDownCustomStyles);
@@ -32,7 +32,7 @@ export const DropDownBar = <T,>({
       if (status === "checked") {
         selectedValues = data.filter((x) => !text || x[labelField]!.toString().mIncludes(text)).map((x) => x[valueField]!.toString());
       }
-      onChange(selectedValues);
+      onSeletAllCheckBoxChange?.(selectedValues);
       return status;
     });
   };

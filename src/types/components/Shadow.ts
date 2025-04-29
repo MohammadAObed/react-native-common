@@ -6,4 +6,5 @@ export type ShadowProps = ViewProps & {
   borderRadius?: number;
   blur?: [value: number, fallbackScaleX: number, fallbackScaleY: number];
   containerStyle?: ViewStyle;
+  scale?: number | [scaleX: number, scaleY: number];
 };

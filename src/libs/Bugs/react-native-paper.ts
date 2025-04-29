@@ -1,7 +1,9 @@
 export class PaperBugHelper {
+  /** when using placeholder prop, the placeholder text does not show unless you you type something then remove it */
   static GetTextInputValue = (isActive: boolean, inputText: string | undefined, placeholder: string | undefined) => {
-    return isActive ? inputText : inputText ? inputText : placeholder; //when using placeholder prop, the placeholder text does not show unless you you type something then remove it
+    return isActive ? inputText : inputText ? inputText : placeholder;
   };
+  /** When using placeholder prop, the placeholder text does not show unless you you type something then remove it */
   static GetTextInputColor = (
     inputText: string | undefined,
     placeholder: string | undefined,
@@ -9,6 +11,6 @@ export class PaperBugHelper {
     textColor: string | undefined,
     styleColor: string
   ) => {
-    return !inputText && placeholder ? placeholderColor : textColor ?? styleColor; //when using placeholder prop, the placeholder text does not show unless you you type something then remove it
+    return !inputText && placeholder ? placeholderColor : textColor ?? styleColor;
   };
 }

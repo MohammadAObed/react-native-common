@@ -5,7 +5,7 @@ export const getToastCommonStyles = (theme: ThemeCommon) =>
   StyleSheet.create({
     container: {
       position: "relative",
-      backgroundColor: theme.colors.secondary,
+      backgroundColor: theme.colors.onSurface,
       borderRadius: 8,
       paddingVertical: 14,
       marginHorizontal: 10,
@@ -16,7 +16,7 @@ export const getToastCommonStyles = (theme: ThemeCommon) =>
       gap: 5,
     },
     text: {
-      color: theme.colors.background,
+      color: theme.colors.surface,
       flex: 0.9,
       lineHeight: 20,
     },
@@ -43,6 +43,6 @@ export const getToastCommonStyles = (theme: ThemeCommon) =>
       marginTop: 1,
     },
     closeBtnText: {
-      color: theme.colors.primary,
+      color: theme.colors.surface,
     },
   });

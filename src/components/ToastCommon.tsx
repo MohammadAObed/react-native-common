@@ -59,7 +59,7 @@ export const ToastCommon = ({ text1, text2, type, isVisible, props: { visibility
           {text2 ? <Text>{` ${text2}`}</Text> : null}
         </Text>
         {autoHide === false && (
-          <ButtonCustom textStyle={styles.closeBtnText} onPress={() => hide()}>
+          <ButtonCustom mode="text-shadow" textStyle={styles.closeBtnText} onPress={() => hide()}>
             CLOSE
           </ButtonCustom>
         )}

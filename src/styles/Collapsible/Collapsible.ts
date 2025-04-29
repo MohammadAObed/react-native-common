@@ -4,7 +4,7 @@ import { type MD3Theme } from "react-native-paper";
 export const getCollapsibleStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     icon: {
-      color: theme.colors.secondary,
+      color: theme.colors.onSurface,
     },
     container: {
       width: "100%",

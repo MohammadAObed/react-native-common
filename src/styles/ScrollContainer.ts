@@ -1,14 +1,14 @@
-import { StyleSheet } from 'react-native';
-import { type MD3Theme } from 'react-native-paper';
+import { StyleSheet } from "react-native";
+import { type MD3Theme } from "react-native-paper";
 
 export const getScrollContainerStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     container: {
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.surface,
     },
     contentContainer: {
       rowGap: 12,
       paddingVertical: 10,
-      minHeight: '100%',
+      minHeight: "100%",
     },
   });

@@ -13,7 +13,7 @@ const getShadowStyles = (theme: MD3Theme) =>
       left: 0,
       right: 0, // Instead of width: '100%'
       bottom: 0,
-      backgroundColor: theme.colors.secondary,
+      backgroundColor: theme.colors.shadow,
       // elevation: 10, // For Android shadow visibility
     },
   });
