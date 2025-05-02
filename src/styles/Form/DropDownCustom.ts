@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
 import { HIGHEST_ZINDEX } from "../../constants";
+import { getRoundnessStyle } from "../../styles";
 
 export const getDropDownCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -15,6 +16,7 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
       color: theme.colors.primary,
     },
     container: {
+      ...getRoundnessStyle(theme).Dropdown,
       backgroundColor: theme.colors.elevation.level2,
     },
     dropdownContainer: {

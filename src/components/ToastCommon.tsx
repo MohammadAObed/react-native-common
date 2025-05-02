@@ -46,7 +46,7 @@ export const ToastCommon = ({ text1, text2, type, isVisible, props: { visibility
   }, [Id]);
 
   return (
-    <Shadow offset={[3, 3]} borderRadius={styles.container.borderRadius} opacity={0.5} blur={[3, 0.1, 0.1]}>
+    <Shadow offset={[3, 3]} opacity={0.5} blur={[3, 0.1, 0.1]}>
       <ButtonCustom onPress={onPress} activeOpacity={0.8} style={styles.container}>
         <ToastIcon type={type} />
         <Text

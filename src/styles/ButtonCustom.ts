@@ -1,14 +1,18 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
+import { getRoundnessStyle } from "../styles";
 // TODO brainstorm better style structure
 
 export const getButtonCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     button: {
+      ...getRoundnessStyle(theme).button,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
       gap: 5,
+      paddingHorizontal: 16,
+      paddingVertical: 9,
     },
     withRadius: {
       borderRadius: 20,
@@ -18,19 +22,11 @@ export const getButtonCustomStyles = (theme: MD3Theme) =>
 
 export const getButtonCustomModeStyles = (theme: MD3Theme) =>
   StyleSheet.create({
-    bare: {},
-    text: {
-      paddingHorizontal: 7,
-      paddingVertical: 9,
-    },
-    ["text-shadow"]: {
-      paddingHorizontal: 7,
-      paddingVertical: 9,
-    },
+    bare: { paddingHorizontal: 0, paddingVertical: 0 },
+    text: {},
+    ["text-shadow"]: {},
     button: {
       backgroundColor: theme.colors.primary,
-      paddingHorizontal: 7,
-      paddingVertical: 9,
     },
   });
 

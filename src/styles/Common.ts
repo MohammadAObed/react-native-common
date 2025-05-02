@@ -45,16 +45,13 @@ export const commonStyles = StyleSheet.create({
   },
 });
 
-export const getCommonShadowStyle = (theme: MD3Theme, elevation: number) =>
+export const getRoundnessStyle = (theme: MD3Theme) =>
   StyleSheet.create({
-    shadow: {
-      elevation, // Android
-      shadowColor: theme.colors.shadow,
-      shadowOpacity: 0.3,
-      shadowRadius: elevation * 0.5,
-      shadowOffset: {
-        width: 0,
-        height: elevation / 2,
-      },
-    },
+    button: { borderRadius: theme.roundness * 5 },
+    Dropdown: { borderTopLeftRadius: theme.roundness * 1.5, borderTopRightRadius: theme.roundness * 1.5 },
+    Card: { borderRadius: theme.roundness * 1.5 },
+    Choices: { borderRadius: theme.roundness * 5 * 1.6 },
+    TextInput: { borderTopLeftRadius: theme.roundness * 1.5, borderTopRightRadius: theme.roundness * 1.5 },
+    Popup: { borderRadius: theme.roundness * 1.5 },
+    Toast: { borderRadius: theme.roundness * 1.5 },
   });

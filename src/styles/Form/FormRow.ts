@@ -10,7 +10,7 @@ export const getFormRowStyles = (theme: MD3Theme) =>
       paddingVertical: 8.5,
       paddingHorizontal: 15,
       flexWrap: "wrap",
-      columnGap: 8,
+      gap: 8,
     },
     label: {
       color: theme.colors.onSurfaceVariant,

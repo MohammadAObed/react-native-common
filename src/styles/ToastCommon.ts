@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
+import { getRoundnessStyle } from "../styles/Common";
 import { ThemeCommon } from "../types/theme";
 
 export const getToastCommonStyles = (theme: ThemeCommon) =>
   StyleSheet.create({
     container: {
+      ...getRoundnessStyle(theme).Toast,
       position: "relative",
       backgroundColor: theme.colors.onSurface,
-      borderRadius: 8,
       paddingVertical: 14,
       marginHorizontal: 10,
       marginBottom: 30,

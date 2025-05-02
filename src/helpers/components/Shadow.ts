@@ -4,7 +4,15 @@ import { ShadowChild, ShadowChildren, ShadowStyle } from "../../types/helpers";
 import { fromEntries } from "../../utils";
 
 const containerStyleKeys: (keyof ShadowStyle)[] = ["width", "height"];
-const styleKeys: (keyof ShadowStyle)[] = ["marginHorizontal", "marginVertical", "marginBottom", "marginTop", "marginLeft", "marginRight"];
+const styleKeys: (keyof ShadowStyle)[] = [
+  "borderRadius",
+  "marginHorizontal",
+  "marginVertical",
+  "marginBottom",
+  "marginTop",
+  "marginLeft",
+  "marginRight",
+];
 
 export function isBlurSupported() {
   return Device.osName === "Android" && parseInt(Device.osVersion ?? "0", 10) >= 12;

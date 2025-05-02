@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
 import { HIGHEST_ZINDEX } from "../constants";
+import { getRoundnessStyle } from "../styles/Common";
 
 export const getPopupStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -23,10 +24,10 @@ export const getPopupStyles = (theme: MD3Theme) =>
       height: "100%",
     },
     contentContainer: {
+      ...getRoundnessStyle(theme).Popup,
       width: "102%",
       gap: 15,
       backgroundColor: theme.colors.surface,
-      borderRadius: 10,
       paddingHorizontal: 20,
       paddingVertical: 25,
     },

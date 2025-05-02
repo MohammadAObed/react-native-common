@@ -59,7 +59,6 @@ export const Choices = <Model extends DynamicProps, Value extends ChoiceValueFie
             key={itemValue}
             style={[styles.option, style]}
             mode={isSelected ? "button" : "text"}
-            withRadius
             disabled={disabledValues?.includes(itemValue)}
             onPress={() => onChangeValue(itemValue)}
             icons={isSelected ? icons : undefined}

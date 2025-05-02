@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
+import { getRoundnessStyle } from "../../styles";
 
 export const getChoicesStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -11,6 +12,7 @@ export const getChoicesStyles = (theme: MD3Theme) =>
       flexWrap: "wrap",
     },
     option: {
+      ...getRoundnessStyle(theme).Choices,
       paddingVertical: 9,
     },
     containerWithClearButton: {

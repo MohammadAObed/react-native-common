@@ -58,14 +58,15 @@ export const DropDownSingleSelect = <Model,>({
   return (
     <Dropdown
       style={[styles.dropdown, style]}
+      containerStyle={styles.dropdownContainer}
       placeholderStyle={[styles.placeholder, !isFocused && inputText ? styles.text : undefined]}
       selectedTextStyle={styles.selectedText}
       itemContainerStyle={styles.itemContainer}
+      iconColor={!isFocused ? styles.icon.color : styles.selectedIcon.color}
       value={value}
       data={data}
       valueField={valueField}
       labelField={labelField}
-      containerStyle={styles.dropdownContainer}
       placeholder={!isFocused ? inputText ?? placeholder ?? "" : inputText ?? "..."}
       search={true}
       searchPlaceholder="Search..."

@@ -1,8 +1,8 @@
-import { PaperBugHelper } from "@mohammad_obed/react-native-common/src/libs/Bugs";
 import { Text, TextInput } from "react-native-paper";
 import { DEFAULT_DECIMAL_PLACES } from "../../constants";
 import { checkAllowedExactText } from "../../helpers";
 import { useInputHandlers, useStyles } from "../../hooks";
+import { PaperBugHelper } from "../../libs/Bugs";
 import { getTextInputCustomModeStyles, getTextInputCustomStyles } from "../../styles";
 import type { TextInputCustomProps } from "../../types/components";
 

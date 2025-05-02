@@ -36,7 +36,6 @@ const Shadow = ({
           { transform },
           {
             opacity: blurSupported ? opacity : BLUR_NOT_SUPPORTED_OPACITY,
-            borderRadius,
             filter: blurSupported ? [{ blur: blur[0] }] : [],
           },
           style,

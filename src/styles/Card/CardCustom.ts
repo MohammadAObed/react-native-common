@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
+import { getRoundnessStyle } from "../../styles/Common";
 
 export const getCardCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     container: {
+      ...getRoundnessStyle(theme).Card,
       backgroundColor: theme.colors.elevation.level1,
       height: 73,
-      borderRadius: 13,
       alignItems: "flex-start",
       paddingHorizontal: 12,
       marginHorizontal: 12,

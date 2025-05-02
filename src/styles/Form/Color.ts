@@ -5,8 +5,6 @@ export const getColorStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     colorIndicator: {
       zIndex: 2,
-      width: 50,
-      minHeight: 25,
     },
     colorIndicatorText: {
       color: theme.colors.onSurface,

@@ -1,9 +1,11 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
+import { getRoundnessStyle } from "../../styles";
 
 export const getTextInputCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     input: {
+      ...getRoundnessStyle(theme).TextInput,
       backgroundColor: "transparent",
       borderColor: theme.colors.outline,
     },

@@ -1,5 +1,5 @@
-import { TPaperBugHelper } from "@mohammad_obed/react-native-common/src/libs/Bugs";
 import type { TextInputProps, TextProps } from "react-native-paper";
+import { TPaperBugHelper } from "../../../libs/Bugs";
 
 export type TextInputCustomProps = Omit<TextInputProps, "value" | "ref" | TPaperBugHelper["TextInputCustomPropsOmit"]> & {
   modeCustom?: "text" | "form";

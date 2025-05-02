@@ -1,6 +1,6 @@
-import { TextInputCustomProps } from "@mohammad_obed/react-native-common/src/types/components";
 import { StyleProp, StyleSheet, TextStyle } from "react-native";
 import { MD3Theme } from "react-native-paper";
+import { TextInputCustomProps } from "../../types/components";
 
 export class PaperBugHelper {
   /** If input is disabled, then underline is always showing */
