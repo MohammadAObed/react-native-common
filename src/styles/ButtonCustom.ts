@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
-import { DEFAULT_FONT_SIZE } from "../constants";
 // TODO brainstorm better style structure
 
 export const getButtonCustomStyles = (theme: MD3Theme) =>
@@ -15,7 +14,6 @@ export const getButtonCustomStyles = (theme: MD3Theme) =>
       borderRadius: 20,
       borderColor: theme.colors.outline,
     },
-    text: { fontSize: DEFAULT_FONT_SIZE },
   });
 
 export const getButtonCustomModeStyles = (theme: MD3Theme) =>

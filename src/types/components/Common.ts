@@ -1,4 +1,9 @@
 import type { Key } from "react";
+import { RegisteredStyle, StyleProp } from "react-native";
+
+export type StylePropWithout<T, K extends keyof T> = StyleProp<
+  Omit<T, K> | Omit<T, K>[] | RegisteredStyle<Omit<T, K>> | Array<Omit<T, K> | RegisteredStyle<Omit<T, K>>> | null | undefined
+>;
 
 export type OptionalChildren<Props> = Omit<Props, "children"> & {
   children?: React.ReactNode;

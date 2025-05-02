@@ -21,7 +21,7 @@ import type { PressableIconProps } from "../types/components";
 import { ButtonCustom } from "./ButtonCustom";
 
 export const PressableIcon = forwardRef(
-  ({ children, style, name, disabled, color, size = 35, iconMode = "circle", ...rest }: PressableIconProps, ref: React.ForwardedRef<View>) => {
+  ({ children, style, name, disabled, color, size, iconMode = "circle", ...rest }: PressableIconProps, ref: React.ForwardedRef<View>) => {
     const { styles } = useStyles(getPressableIconStyles);
 
     const IconColor = color ?? (disabled ? styles.disabledIcon.color : styles.icon.color);

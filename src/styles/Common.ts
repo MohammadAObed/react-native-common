@@ -1,6 +1,6 @@
 import { StyleSheet, type ViewStyle } from "react-native";
 import { type MD3Theme } from "react-native-paper";
-import { HIGHEST_ZINDEX, LARGE_FONT_SIZE } from "../constants";
+import { HIGHEST_ZINDEX } from "../constants";
 
 export const iconStyle: ViewStyle = {
   position: "absolute",
@@ -24,15 +24,6 @@ export const commonStyles = StyleSheet.create({
   },
   positionRelative: {
     position: "relative",
-  },
-  absoluteNavigationButton: {
-    ...iconStyle,
-    alignSelf: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 12,
-  },
-  absoluteNavigationButtonText: {
-    fontSize: LARGE_FONT_SIZE,
   },
   disabledButton: { opacity: 0.5 },
   absoluteBottomCentered: {

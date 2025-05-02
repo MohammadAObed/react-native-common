@@ -90,7 +90,9 @@ export const DropDownCustom = <Model, Value extends DropDownValueField = number>
   return (
     <View style={[styles.container, modeStyles[inputMode], fullWidth ? { alignSelf: "stretch" } : {}, wrapperStyle]}>
       <Text style={[styles.label, isFocused && styles.focusedLabel]}>{label}</Text>
-      <Text style={[styles.placeholder, styles.dummyTextForDynamicWidth]}>{selectedText}</Text>
+      <Text variant="bodyMedium" style={[styles.placeholder, styles.dummyTextForDynamicWidth]}>
+        {selectedText}
+      </Text>
       {isMultiSelect ? (
         <DropDownMultiSelect value={multiSelectValue} onChange={onMultiChangeValue} seperator={seperator} {...props} {...rest} />
       ) : (

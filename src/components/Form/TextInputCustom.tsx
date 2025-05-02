@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { PaperBugHelper } from "@mohammad_obed/react-native-common/src/libs/Bugs";
 import { Text, TextInput } from "react-native-paper";
 import { DEFAULT_DECIMAL_PLACES } from "../../constants";
 import { checkAllowedExactText } from "../../helpers";
 import { useInputHandlers, useStyles } from "../../hooks";
-import { PaperBugHelper } from "../../libs/Bugs";
 import { getTextInputCustomModeStyles, getTextInputCustomStyles } from "../../styles";
 import type { TextInputCustomProps } from "../../types/components";
 
 export const TextInputCustom = ({
   style,
+  contentStyle,
   underlineStyle,
   underlineColor,
   textColor,
@@ -22,6 +22,7 @@ export const TextInputCustom = ({
   maxValue = Number.MAX_SAFE_INTEGER,
   decimalPlaces = DEFAULT_DECIMAL_PLACES,
   textForceUpdateCounter = 0,
+  variant,
   onFocus,
   onBlur,
   onChangeText,
@@ -31,7 +32,6 @@ export const TextInputCustom = ({
 }: TextInputCustomProps) => {
   const { styles, theme } = useStyles(getTextInputCustomStyles);
   const { styles: modeStyles } = useStyles(getTextInputCustomModeStyles);
-  const [isActive, setIsActive] = useState(false);
   const { inputText, setInputText, handleOnChangeDecimal, handleOnChangeNumber, handleOnChangeText } = useInputHandlers({
     value,
     decimalPlaces,
@@ -42,36 +42,25 @@ export const TextInputCustom = ({
     onChangeText,
     textForceUpdateCounter,
   });
-
-  const themeDisabled = {
-    ...theme,
-    colors: {
-      ...theme.colors,
-      onSurfaceDisabled: modeCustom === "text" ? "transparent" : theme.colors.onSurfaceDisabled, //if input is disabled, then underline is always showing
-    },
-  };
+  const contentStyleFixed = PaperBugHelper.GetTextInputContentStyle(inputText, placeholder, style, contentStyle);
   return (
     <TextInput
+      theme={PaperBugHelper.GetTextInputDisabledTheme(theme, modeCustom)}
       style={[styles.input, modeCustom && modeStyles[modeCustom], style]}
-      textColor={PaperBugHelper.GetTextInputColor(inputText, placeholder, styles.placeholderColor.color, textColor, styles.input.color)}
+      contentStyle={[contentStyleFixed, variant && { ...theme.fonts[variant] }]}
+      textAlign={contentStyleFixed.textAlign as any}
+      textColor={textColor}
       underlineColor={underlineColor ?? styles.underlineColor.color}
       placeholderTextColor={styles.placeholderColor.color}
-      theme={themeDisabled}
-      label={
-        label && (
-          <Text style={[styles.inputLabel, { color: textColor ?? isActive ? styles.activeInputLabel.color : styles.input.color }]}>{label}</Text>
-        )
-      }
+      label={label && <Text style={styles.label}>{label}</Text>}
       placeholder={placeholder}
-      value={PaperBugHelper.GetTextInputValue(isActive, inputText, placeholder)}
+      value={inputText}
       inputMode={inputMode}
       disabled={disabled}
       onFocus={(e) => {
-        setIsActive(true);
         onFocus?.(e);
       }}
       onBlur={(e) => {
-        setIsActive(false);
         if (checkAllowedExactText(inputMode ?? "") && (inputMode === "decimal" || inputMode === "numeric") && minValue !== undefined) {
           setInputText(minValue.toString());
         }

@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
-import { DEFAULT_FONT_SIZE } from "../../constants";
 
 export const getFormRowStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -15,12 +14,10 @@ export const getFormRowStyles = (theme: MD3Theme) =>
     },
     label: {
       color: theme.colors.onSurfaceVariant,
-      fontSize: DEFAULT_FONT_SIZE,
       justifyContent: "center",
       alignItems: "center",
       flexDirection: "row",
       gap: 5,
-      // backgroundColor: "red",
     },
   });
 

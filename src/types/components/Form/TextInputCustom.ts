@@ -1,8 +1,10 @@
-import type { TextInputProps } from "react-native-paper";
+import { TPaperBugHelper } from "@mohammad_obed/react-native-common/src/libs/Bugs";
+import type { TextInputProps, TextProps } from "react-native-paper";
 
-export type TextInputCustomProps = Omit<TextInputProps, "value" | "ref"> & {
+export type TextInputCustomProps = Omit<TextInputProps, "value" | "ref" | TPaperBugHelper["TextInputCustomPropsOmit"]> & {
   modeCustom?: "text" | "form";
   textForceUpdateCounter?: number;
+  variant?: TextProps<string>["variant"];
 } & (
     | {
         inputMode?: Extract<TextInputProps["inputMode"], "numeric">;

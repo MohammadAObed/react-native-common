@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
-import { DEFAULT_FONT_SIZE, HIGHEST_ZINDEX, SMALL_FONT_SIZE } from "../../constants";
+import { HIGHEST_ZINDEX } from "../../constants";
 
 export const getDropDownCustomStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -9,7 +9,6 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
       top: 5,
       zIndex: HIGHEST_ZINDEX,
       paddingHorizontal: 18,
-      fontSize: SMALL_FONT_SIZE,
       color: theme.colors.onSurfaceVariant,
     },
     focusedLabel: {
@@ -30,12 +29,12 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
       paddingHorizontal: 8,
     },
     placeholder: {
-      color: theme.colors.onSurfaceVariant,
-      fontSize: DEFAULT_FONT_SIZE,
+      ...theme.fonts.bodyMedium,
+      color: theme.colors.onSurface,
       marginRight: -7,
     },
     text: {
-      fontSize: DEFAULT_FONT_SIZE,
+      ...theme.fonts.bodyMedium,
       color: theme.colors.onSurface,
     },
     selectedText: {
@@ -66,7 +65,6 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
       opacity: 0,
       marginTop: -20,
       maxHeight: 20,
-      fontSize: DEFAULT_FONT_SIZE,
       zIndex: -1,
     },
     disabledItem: {
@@ -79,8 +77,6 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
     },
     inputSearchCustom: {
       height: 55,
-      fontSize: DEFAULT_FONT_SIZE,
-      color: theme.colors.onSurfaceVariant,
     },
     selectAllCheckboxContainer: {
       position: "absolute",

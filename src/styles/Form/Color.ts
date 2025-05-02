@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
-import { SMALL_FONT_SIZE } from "../../constants";
 
 export const getColorStyles = (theme: MD3Theme) =>
   StyleSheet.create({
@@ -11,7 +10,6 @@ export const getColorStyles = (theme: MD3Theme) =>
     },
     colorIndicatorText: {
       color: theme.colors.onSurface,
-      fontSize: SMALL_FONT_SIZE,
     },
     colorPickerContainer: {
       marginTop: -60,

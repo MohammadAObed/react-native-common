@@ -1,6 +1,6 @@
-import { HIGHEST_ZINDEX } from "@mohammad_obed/react-native-common/src/constants";
 import { StyleSheet } from "react-native";
 import { type MD3Theme } from "react-native-paper";
+import { HIGHEST_ZINDEX } from "../constants";
 
 export const getPopupStyles = (theme: MD3Theme) =>
   StyleSheet.create({

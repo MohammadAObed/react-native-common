@@ -1,9 +1,9 @@
-import { DropDownBar } from "@mohammad_obed/react-native-common/src/components/Form/DropDown/DropDownBar";
 import { Dropdown } from "react-native-element-dropdown";
 import type { DropdownProps } from "react-native-element-dropdown/lib/typescript/components/Dropdown/model";
 import { useStyles } from "../../../hooks";
 import { getDropDownCustomStyles } from "../../../styles";
 import type { DropDownLabelField, DropDownSingleAndMultiProps, DropDownValueField } from "../../../types/components";
+import { DropDownBar } from "./DropDownBar";
 import { DropDownIcon } from "./DropDownIcon";
 import { DropDownItem } from "./DropDownItem";
 

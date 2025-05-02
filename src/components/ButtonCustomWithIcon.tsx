@@ -1,12 +1,11 @@
 import { ButtonCustom, ButtonText } from "../components";
 import { useStyles } from "../hooks";
-import { getButtonCustomModeTextStyles, getButtonCustomStyles } from "../styles";
+import { getButtonCustomModeTextStyles } from "../styles";
 import type { ButtonCustomWithIconProps } from "../types/components";
 import { isValidComponent } from "../utils";
 import { PressableIcon } from "./PressableIcon";
 
 export const ButtonCustomWithIcon = ({ textStyle, children, disabled, mode = "bare", icons, onPress, ...rest }: ButtonCustomWithIconProps) => {
-  const { styles } = useStyles(getButtonCustomStyles);
   const { styles: modeTextStyles } = useStyles(getButtonCustomModeTextStyles);
   return (
     <ButtonCustom mode={mode} disabled={disabled} onPress={onPress} {...rest}>
@@ -24,7 +23,7 @@ export const ButtonCustomWithIcon = ({ textStyle, children, disabled, mode = "ba
             name={icon.name}
             iconMode={icon.mode ?? "bare"}
             onPress={icon.onPress ?? onPress}
-            size={icon.size ?? styles.text.fontSize * 1.8}
+            size={icon.size}
             color={modeTextStyles[mode].color}
             style={icon.style}
           />
