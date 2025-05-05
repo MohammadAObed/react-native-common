@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Modal, TouchableOpacity, View } from "react-native";
+import { Modal, Pressable, View, ViewProps } from "react-native";
 import { Text } from "react-native-paper";
 import { ToastManager } from "../components";
 import { HideModes, ShadeLongPressTimeout } from "../constants";
@@ -52,7 +52,7 @@ export const Popup = ({
   return (
     <>
       <Modal transparent statusBarTranslucent visible={modalVisible} animationType={animationType} {...rest}>
-        <Shade hideModal={hideModal} showContent={() => setContentVisible(() => true)} />
+        <Shade style={{ opacity: contentVisible ? 1 : 0 }} hideModal={hideModal} showContent={() => setContentVisible(() => true)} />
         {contentVisible && (
           <Container
             mode={mode}
@@ -80,7 +80,7 @@ export const Popup = ({
   );
 };
 
-const Shade = ({ hideModal, showContent }: ShadeProps) => {
+const Shade = ({ style, hideModal, showContent, ...rest }: ShadeProps & ViewProps) => {
   const { styles } = useStyles(getPopupStyles);
   const { createTimeout, removeTimeout } = useTimeout();
   const shouldHideRef = useRef(false);
@@ -91,8 +91,8 @@ const Shade = ({ hideModal, showContent }: ShadeProps) => {
   };
 
   return (
-    <TouchableOpacity
-      style={[styles.shade]}
+    <Pressable
+      style={[styles.shade, style]}
       onPressIn={() => {
         shouldHideRef.current = true;
         hideModal("Out", true);
@@ -106,6 +106,7 @@ const Shade = ({ hideModal, showContent }: ShadeProps) => {
         showContent();
         removeTimeout();
       }}
+      {...rest}
     />
   );
 };

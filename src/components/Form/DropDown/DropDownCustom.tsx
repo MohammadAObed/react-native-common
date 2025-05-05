@@ -68,7 +68,7 @@ export const DropDownCustom = <Model, Value extends DropDownValueField = number>
 
   let selectedText = text;
   if (!text) {
-    selectedText = data.find((x) => x[valueField] == value)?.[labelField] as DropDownLabelField | undefined;
+    selectedText = data.find((x) => x[valueField] === value)?.[labelField] as DropDownLabelField | undefined;
     if (isMultiSelect) {
       let selectedItems = data.filter((x) => value?.includes(x[valueField] as Value));
       selectedText = selectedItems.map((x) => x[labelField]).join(seperator);

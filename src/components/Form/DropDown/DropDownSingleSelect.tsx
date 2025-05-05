@@ -27,8 +27,8 @@ export const DropDownSingleSelect = <Model,>({
 }: DropdownProps<Model> & DropDownSingleAndMultiProps<Model>) => {
   const { styles } = useStyles(getDropDownCustomStyles);
 
-  const isValueString = value != undefined && value != null && typeof value === "string";
-  const isValueModel = value != undefined && value != null && typeof value !== "string";
+  const isValueString = typeof value === "string";
+  const isValueModel = value !== undefined && value !== null && typeof value !== "string";
 
   const renderItem = (item: Model) => {
     const itemKey = item[valueField] as DropDownValueField;
