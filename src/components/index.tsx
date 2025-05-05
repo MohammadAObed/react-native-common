@@ -24,6 +24,8 @@ export * from "./HOC/withSuspense";
 export * from "./Loading";
 export * from "./Popup";
 export * from "./PressableIcon";
+export * from "./Router/Stack";
+export * from "./Router/Tabs";
 export * from "./SafeAreaViewCustom";
 export * from "./ScrollContainer";
 export * from "./Shadow";

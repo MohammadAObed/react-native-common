@@ -54,6 +54,34 @@ export function cloneDeepCommon(value: any, className: string, cb: (className: s
   return clonedObject;
 }
 
+export function mergeDeepPreferTarget<T extends object>(target: T, source: Partial<T> | undefined): T {
+  if (!source) return { ...target };
+
+  const result: any = Array.isArray(target) ? [...target] : { ...target };
+  for (const key in source) {
+    const targetHasKey = key in target;
+
+    const targetVal = target[key];
+    const sourceVal = source[key];
+
+    if (
+      targetHasKey &&
+      targetVal !== null &&
+      typeof targetVal === "object" &&
+      !Array.isArray(targetVal) &&
+      sourceVal !== null &&
+      typeof sourceVal === "object" &&
+      !Array.isArray(sourceVal)
+    ) {
+      result[key] = mergeDeepPreferTarget(targetVal, sourceVal);
+    } else if (!targetHasKey) {
+      result[key] = sourceVal;
+    } // else: target has value → keep it
+  }
+
+  return result;
+}
+
 export function getKey<T extends Record<string, unknown>>(object: T, value: unknown): keyof T | undefined {
   return Object.keys(object).find((key) => object[key] === value);
 }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Modal, View } from "react-native";
+import { Modal, TouchableOpacity, View } from "react-native";
 import { Text } from "react-native-paper";
 import { ToastManager } from "../components";
 import { HideModes, ShadeLongPressTimeout } from "../constants";
@@ -91,7 +91,7 @@ const Shade = ({ hideModal, showContent }: ShadeProps) => {
   };
 
   return (
-    <ButtonCustom
+    <TouchableOpacity
       style={[styles.shade]}
       onPressIn={() => {
         shouldHideRef.current = true;
