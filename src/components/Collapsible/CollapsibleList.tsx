@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { View } from "react-native";
-import { useStyles } from "../../hooks";
-import { getCollapsibleListStyles } from "../../styles";
-import { CollapsibleListProps } from "../../types/components";
-import { Collapsible } from "../Collapsible/Collapsible";
-import { ScrollContainer } from "../ScrollContainer";
+import { useState } from 'react';
+import { View } from 'react-native';
+import { useStyles } from '../../hooks';
+import { getCollapsibleListStyles } from '../../styles';
+import type { CollapsibleListProps } from '../../types/components';
+import { Collapsible } from '../Collapsible/Collapsible';
+import { ScrollContainer } from '../ScrollContainer';
 
 export const CollapsibleList = <T,>({
   data,
@@ -12,7 +12,7 @@ export const CollapsibleList = <T,>({
   maxHeight,
   titleKey,
   subTitleKey,
-  behavior = "multi-expand",
+  behavior = 'multi-expand',
   renderItem,
   renderChild,
 }: CollapsibleListProps<T>) => {
@@ -28,8 +28,14 @@ export const CollapsibleList = <T,>({
           ) : (
             <Collapsible
               style={itemStyle}
-              onToggle={() => setExpandedIndex((prev) => (prev === index ? undefined : index))}
-              isExpanded={behavior === "single-expand" ? index === expandedIndex : undefined}
+              onToggle={() =>
+                setExpandedIndex((prev) => (prev === index ? undefined : index))
+              }
+              isExpanded={
+                behavior === 'single-expand'
+                  ? index === expandedIndex
+                  : undefined
+              }
               title={item[titleKey] as string}
               subTitle={item[subTitleKey] as string}
             >

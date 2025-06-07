@@ -1,5 +1,5 @@
-import { ScrollViewProps, ViewStyle } from 'react-native';
+import type { ScrollViewProps, ViewStyle } from 'react-native';
 
 export type ScrollContainerProps = ScrollViewProps & {
-  maxHeight?: ViewStyle['maxHeight']
+  maxHeight?: ViewStyle['maxHeight'];
 };

@@ -1,14 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import { Modal, Pressable, View, ViewProps } from "react-native";
-import { Text } from "react-native-paper";
-import { ToastManager } from "../components";
-import { HideModes, ShadeLongPressTimeout } from "../constants";
-import { useStyles, useTimeout } from "../hooks";
-import { getPopupStyles } from "../styles";
-import type { CancelButtonProps, ContainerProps, PopupPressType, PopupProps, ShadeProps } from "../types/components";
-import { ButtonCustom } from "./ButtonCustom";
-import { PressableIcon } from "./PressableIcon";
-import Shadow from "./Shadow";
+import { useEffect, useRef, useState } from 'react';
+import { Modal, Pressable, View, type ViewProps } from 'react-native';
+import { Text } from 'react-native-paper';
+import { ToastManager } from '../components';
+import { HideModes, ShadeLongPressTimeout } from '../constants';
+import { useStyles, useTimeout } from '../hooks';
+import { getPopupStyles } from '../styles';
+import type {
+  CancelButtonProps,
+  ContainerProps,
+  PopupPressType,
+  PopupProps,
+  ShadeProps,
+} from '../types/components';
+import { ButtonCustom } from './ButtonCustom';
+import { PressableIcon } from './PressableIcon';
+import Shadow from './Shadow';
 
 export const Popup = ({
   titleStyle,
@@ -20,11 +26,11 @@ export const Popup = ({
   text,
   buttonText,
   centerContent,
-  hideMode = "on-any-click",
+  hideMode = 'on-any-click',
   onHide,
   onButtonClick,
-  mode = "dialog",
-  animationType = "fade",
+  mode = 'dialog',
+  animationType = 'fade',
   ...rest
 }: PopupProps) => {
   const { styles } = useStyles(getPopupStyles);
@@ -32,7 +38,7 @@ export const Popup = ({
   const [contentVisible, setContentVisible] = useState(true);
 
   const hideModal = (pressType: PopupPressType, isLongPress = false) => {
-    if (isLongPress && pressType === "Out") setContentVisible(false);
+    if (isLongPress && pressType === 'Out') setContentVisible(false);
     if (!isLongPress && HideModes[pressType]?.includes(hideMode)) {
       onHide?.();
       setModalVisible(false);
@@ -40,7 +46,7 @@ export const Popup = ({
   };
 
   const onButtonPress = () => {
-    hideModal("Button");
+    hideModal('Button');
     onButtonClick?.();
   };
 
@@ -51,24 +57,44 @@ export const Popup = ({
 
   return (
     <>
-      <Modal transparent statusBarTranslucent visible={modalVisible} animationType={animationType} {...rest}>
-        <Shade style={{ opacity: contentVisible ? 1 : 0 }} hideModal={hideModal} showContent={() => setContentVisible(() => true)} />
+      <Modal
+        transparent
+        statusBarTranslucent
+        visible={modalVisible}
+        animationType={animationType}
+        {...rest}
+      >
+        <Shade
+          style={{ opacity: contentVisible ? 1 : 0 }}
+          hideModal={hideModal}
+          showContent={() => setContentVisible(() => true)}
+        />
         {contentVisible && (
           <Container
             mode={mode}
             hideMode={hideMode}
             hideModal={hideModal}
-            style={[centerContent ? styles.centeredContainer : {}, containerStyle]}
+            style={[
+              centerContent ? styles.centeredContainer : {},
+              containerStyle,
+            ]}
           >
             {title && (
-              <Text variant="headlineLarge" style={[title && children ? styles.title : {}, titleStyle]}>
+              <Text
+                variant="headlineLarge"
+                style={[title && children ? styles.title : {}, titleStyle]}
+              >
                 {title}
               </Text>
             )}
             {children}
             {text && <Text>{text}</Text>}
             {buttonText && (
-              <ButtonCustom mode="contained" style={[styles.Button, buttonStyle]} onPress={onButtonPress}>
+              <ButtonCustom
+                mode="contained"
+                style={[styles.Button, buttonStyle]}
+                onPress={onButtonPress}
+              >
                 {buttonText}
               </ButtonCustom>
             )}
@@ -80,7 +106,12 @@ export const Popup = ({
   );
 };
 
-const Shade = ({ style, hideModal, showContent, ...rest }: ShadeProps & ViewProps) => {
+const Shade = ({
+  style,
+  hideModal,
+  showContent,
+  ...rest
+}: ShadeProps & ViewProps) => {
   const { styles } = useStyles(getPopupStyles);
   const { createTimeout, removeTimeout } = useTimeout();
   const shouldHideRef = useRef(false);
@@ -95,12 +126,12 @@ const Shade = ({ style, hideModal, showContent, ...rest }: ShadeProps & ViewProp
       style={[styles.shade, style]}
       onPressIn={() => {
         shouldHideRef.current = true;
-        hideModal("Out", true);
+        hideModal('Out', true);
         handlePress();
       }}
       onPressOut={() => {
         if (shouldHideRef.current === true) {
-          hideModal("Out");
+          hideModal('Out');
         }
         shouldHideRef.current = false;
         showContent();
@@ -111,15 +142,28 @@ const Shade = ({ style, hideModal, showContent, ...rest }: ShadeProps & ViewProp
   );
 };
 
-const Container = ({ children, style, hideMode, hideModal, mode }: ContainerProps) => {
+const Container = ({
+  children,
+  style,
+  hideMode,
+  hideModal,
+  mode,
+}: ContainerProps) => {
   const { styles } = useStyles(getPopupStyles);
   return (
     <View style={styles.invisibleContainer}>
-      {mode === "plain" && children}
-      {mode === "dialog" && (
-        <Shadow offset={[0, 5]} borderRadius={10} opacity={0.12} blur={[3, 1, 0.98]}>
+      {mode === 'plain' && children}
+      {mode === 'dialog' && (
+        <Shadow
+          offset={[0, 5]}
+          borderRadius={10}
+          opacity={0.12}
+          blur={[3, 1, 0.98]}
+        >
           <View style={[styles.contentContainer, style]}>
-            {HideModes["Cancel"].includes(hideMode!) && <CancelButton hideModal={hideModal} />}
+            {HideModes['Cancel'].includes(hideMode!) && (
+              <CancelButton hideModal={hideModal} />
+            )}
             {children}
           </View>
         </Shadow>
@@ -136,7 +180,7 @@ const CancelButton = ({ hideModal }: CancelButtonProps) => {
       style={styles.cancelButton}
       size={styles.cancelButton.fontSize}
       name="xmark"
-      onPress={() => hideModal("Cancel")}
+      onPress={() => hideModal('Cancel')}
     />
   );
 };

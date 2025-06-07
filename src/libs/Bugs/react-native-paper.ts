@@ -1,15 +1,21 @@
-import { StyleProp, StyleSheet, TextStyle } from "react-native";
-import { MD3Theme } from "react-native-paper";
-import { TextInputCustomProps } from "../../types/components";
+import { type StyleProp, StyleSheet, type TextStyle } from 'react-native';
+import type { MD3Theme } from 'react-native-paper';
+import type { TextInputCustomProps } from '../../types/components';
 
 export class PaperBugHelper {
   /** If input is disabled, then underline is always showing */
-  static GetTextInputDisabledTheme = (theme: MD3Theme, modeCustom: TextInputCustomProps["modeCustom"]) => {
+  static GetTextInputDisabledTheme = (
+    theme: MD3Theme,
+    modeCustom: TextInputCustomProps['modeCustom']
+  ) => {
     return {
       ...theme,
       colors: {
         ...theme.colors,
-        onSurfaceDisabled: modeCustom === "text" ? "transparent" : theme.colors.onSurfaceDisabled,
+        onSurfaceDisabled:
+          modeCustom === 'text'
+            ? 'transparent'
+            : theme.colors.onSurfaceDisabled,
       },
     };
   };
@@ -26,7 +32,14 @@ export class PaperBugHelper {
     const textAlign = flattenContentStyle?.textAlign ?? flattenStyle?.textAlign;
     let TextAlignStyle: TextStyle = {
       textAlign,
-      alignSelf: textAlign === "left" ? "flex-start" : textAlign === "right" ? "flex-end" : textAlign === "center" ? "center" : undefined,
+      alignSelf:
+        textAlign === 'left'
+          ? 'flex-start'
+          : textAlign === 'right'
+            ? 'flex-end'
+            : textAlign === 'center'
+              ? 'center'
+              : undefined,
     };
     if (!inputText && placeholder) {
       TextAlignStyle.textAlign = undefined;
@@ -36,5 +49,5 @@ export class PaperBugHelper {
 }
 /** When input is disabled and textAlign in style property or content style property is configured to be right or center then the placeholder does not appear when toggling the disable value  */
 export type TPaperBugHelper = {
-  TextInputCustomPropsOmit: "textAlign";
+  TextInputCustomPropsOmit: 'textAlign';
 };

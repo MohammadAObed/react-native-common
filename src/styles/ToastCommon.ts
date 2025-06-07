@@ -1,19 +1,19 @@
-import { StyleSheet } from "react-native";
-import { getRoundnessStyle } from "../styles/Common";
-import { ThemeCommon } from "../types/theme";
+import { StyleSheet } from 'react-native';
+import { getRoundnessStyle } from '../styles/Common';
+import type { ThemeCommon } from '../types/theme';
 
 export const getToastCommonStyles = (theme: ThemeCommon) =>
   StyleSheet.create({
     container: {
       ...getRoundnessStyle(theme).Toast,
-      position: "relative",
+      position: 'relative',
       backgroundColor: theme.colors.onSurface,
       paddingVertical: 14,
       marginHorizontal: 10,
       marginBottom: 30,
-      width: "95%",
-      flexDirection: "row",
-      alignItems: "center",
+      width: '95%',
+      flexDirection: 'row',
+      alignItems: 'center',
       gap: 5,
     },
     text: {
@@ -22,7 +22,7 @@ export const getToastCommonStyles = (theme: ThemeCommon) =>
       lineHeight: 20,
     },
     bold: {
-      fontWeight: "bold",
+      fontWeight: 'bold',
     },
     errorIconColor: {
       color: theme.colors.error,
@@ -40,7 +40,7 @@ export const getToastCommonStyles = (theme: ThemeCommon) =>
       color: theme.colors.validation,
     },
     icon: {
-      alignSelf: "center",
+      alignSelf: 'center',
       marginTop: 1,
       fontSize: theme.fonts.titleLarge.fontSize - 2,
     },

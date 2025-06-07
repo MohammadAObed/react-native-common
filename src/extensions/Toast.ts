@@ -1,5 +1,5 @@
-import Toast, { ToastShowParams } from "react-native-toast-message";
-import { ToastQueue } from "../constants";
+import Toast, { type ToastShowParams } from 'react-native-toast-message';
+import { ToastQueue } from '../constants';
 
 export {}; // To ensure the file is treated as a module
 

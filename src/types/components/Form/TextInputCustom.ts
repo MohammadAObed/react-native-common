@@ -1,13 +1,16 @@
-import type { TextInputProps, TextProps } from "react-native-paper";
-import { TPaperBugHelper } from "../../../libs/Bugs";
+import type { TextInputProps, TextProps } from 'react-native-paper';
+import type { TPaperBugHelper } from '../../../libs/Bugs';
 
-export type TextInputCustomProps = Omit<TextInputProps, "value" | "ref" | TPaperBugHelper["TextInputCustomPropsOmit"]> & {
-  modeCustom?: "text" | "form";
+export type TextInputCustomProps = Omit<
+  TextInputProps,
+  'value' | 'ref' | TPaperBugHelper['TextInputCustomPropsOmit']
+> & {
+  modeCustom?: 'text' | 'form';
   textForceUpdateCounter?: number;
-  variant?: TextProps<string>["variant"];
+  variant?: TextProps<string>['variant'];
 } & (
     | {
-        inputMode?: Extract<TextInputProps["inputMode"], "numeric">;
+        inputMode?: Extract<TextInputProps['inputMode'], 'numeric'>;
         value?: number;
         minValue?: number;
         maxValue?: number;
@@ -16,7 +19,7 @@ export type TextInputCustomProps = Omit<TextInputProps, "value" | "ref" | TPaper
         decimalPlaces?: undefined;
       }
     | {
-        inputMode?: Extract<TextInputProps["inputMode"], "decimal">;
+        inputMode?: Extract<TextInputProps['inputMode'], 'decimal'>;
         value?: number;
         minValue?: number;
         maxValue?: number;
@@ -25,7 +28,7 @@ export type TextInputCustomProps = Omit<TextInputProps, "value" | "ref" | TPaper
         decimalPlaces?: number;
       }
     | {
-        inputMode?: TextInputProps["inputMode"];
+        inputMode?: TextInputProps['inputMode'];
         value?: string;
         onChangeNumber?: undefined;
         onChangeDecimal?: undefined;

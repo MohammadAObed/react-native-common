@@ -1,5 +1,5 @@
-import { handleMinMax, handleOrderBy } from "../helpers";
-import { cloneDeep } from "../utils";
+import { handleMinMax, handleOrderBy } from '../helpers';
+import { cloneDeep } from '../utils';
 
 export {};
 
@@ -31,7 +31,10 @@ Array.prototype.mGetDuplicates = function <T>(this: T[]): T[] {
   return this.filter((item, index) => this.indexOf(item) !== index);
 };
 
-Array.prototype.mDistinct = function <T, U>(this: T[], selector?: (item: T) => U): T[] {
+Array.prototype.mDistinct = function <T, U>(
+  this: T[],
+  selector?: (item: T) => U
+): T[] {
   if (!selector) {
     return [...new Set(this)];
   }
@@ -46,22 +49,34 @@ Array.prototype.mDistinct = function <T, U>(this: T[], selector?: (item: T) => U
 };
 
 Array.prototype.mIsStringArray = function <T>(this: T[]): boolean {
-  return Array.isArray(this) && this.every((item) => typeof item === "string");
+  return Array.isArray(this) && this.every((item) => typeof item === 'string');
 };
 
-Array.prototype.mMax = function <T, U>(this: T[], callback: (item: T) => U): U | undefined {
+Array.prototype.mMax = function <T, U>(
+  this: T[],
+  callback: (item: T) => U
+): U | undefined {
   return handleMinMax(false, this, callback);
 };
 
-Array.prototype.mMin = function <T, U>(this: T[], callback: (item: T) => U): U | undefined {
+Array.prototype.mMin = function <T, U>(
+  this: T[],
+  callback: (item: T) => U
+): U | undefined {
   return handleMinMax(true, this, callback);
 };
 
-Array.prototype.mOrderBy = function <T, U>(this: T[], callback: (item: T) => U): T[] {
+Array.prototype.mOrderBy = function <T, U>(
+  this: T[],
+  callback: (item: T) => U
+): T[] {
   return handleOrderBy(false, this, callback);
 };
 
-Array.prototype.mOrderByDescending = function <T, U>(this: T[], callback: (item: T) => U): T[] {
+Array.prototype.mOrderByDescending = function <T, U>(
+  this: T[],
+  callback: (item: T) => U
+): T[] {
   return handleOrderBy(true, this, callback);
 };
 
@@ -74,10 +89,13 @@ Array.prototype.mFirst = function <T>(this: T[]): T | undefined {
 };
 
 Array.prototype.mGetVerb = function (): string {
-  return this.length > 1 ? "are" : "is";
+  return this.length > 1 ? 'are' : 'is';
 };
 
-Array.prototype.mShuffle = function <T>(this: T[], isDeranged: boolean = true): T[] {
+Array.prototype.mShuffle = function <T>(
+  this: T[],
+  isDeranged: boolean = true
+): T[] {
   if (!isDeranged) {
     return [...this].sort(() => Math.random() - 0.5);
   }
@@ -98,8 +116,13 @@ Array.prototype.mCloneDeep = function <T>(this: T[]) {
   return this.map((x) => cloneDeep(x));
 };
 
-Array.prototype.mSum = function <T, U>(this: T[], callback: (item: T) => number): number | undefined {
-  const filteredArray = this.filter((item) => item !== undefined && item !== null);
+Array.prototype.mSum = function <T, _U>(
+  this: T[],
+  callback: (item: T) => number
+): number | undefined {
+  const filteredArray = this.filter(
+    (item) => item !== undefined && item !== null
+  );
   if (filteredArray.length === 0) return undefined;
   return filteredArray.map(callback).reduce((prev, curr) => prev + curr);
 };

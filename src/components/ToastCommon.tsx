@@ -1,22 +1,35 @@
 // components/CustomToast.tsx
-import { useEffect, useState } from "react";
-import { Text } from "react-native";
+import { useEffect, useState } from 'react';
+import { Text } from 'react-native';
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
   ExclamationTriangleIcon,
   InformationCircleIcon,
   PencilSquareIcon,
-} from "react-native-heroicons/solid";
-import Toast from "react-native-toast-message";
-import { ButtonCustom } from "../components/ButtonCustom";
-import Shadow from "../components/Shadow";
-import { ToastDefaultPosition, ToastHideDelay, ToastManagerConfig, ToastQueue, ToastVisibilityTime } from "../constants";
-import { useStyles, useTimeout } from "../hooks";
-import { getToastCommonStyles } from "../styles/ToastCommon";
-import { ToastCommonProps, ToastIconProps } from "../types/components";
+} from 'react-native-heroicons/solid';
+import Toast from 'react-native-toast-message';
+import { ButtonCustom } from '../components/ButtonCustom';
+import Shadow from '../components/Shadow';
+import {
+  ToastDefaultPosition,
+  ToastHideDelay,
+  ToastManagerConfig,
+  ToastQueue,
+  ToastVisibilityTime,
+} from '../constants';
+import { useStyles, useTimeout } from '../hooks';
+import { getToastCommonStyles } from '../styles/ToastCommon';
+import type { ToastCommonProps, ToastIconProps } from '../types/components';
 
-export const ToastCommon = ({ text1, text2, type, isVisible, props: { visibilityTime, Id, autoHide }, hide }: ToastCommonProps) => {
+export const ToastCommon = ({
+  text1,
+  text2,
+  type,
+  isVisible,
+  props: { visibilityTime, Id, autoHide },
+  hide,
+}: ToastCommonProps) => {
   const { styles } = useStyles(getToastCommonStyles);
   const [expanded, setExpanded] = useState(false);
   const [shouldHide, setShouldHide] = useState(false);
@@ -39,15 +52,19 @@ export const ToastCommon = ({ text1, text2, type, isVisible, props: { visibility
   };
   useEffect(() => {
     if (!Id || notManualHide) return;
-    if (expanded) setExpanded((prev) => false);
-    if (shouldHide) setShouldHide((prev) => false);
+    if (expanded) setExpanded((_prev) => false);
+    if (shouldHide) setShouldHide((_prev) => false);
     createHideTimeout();
     return () => removeTimeout();
   }, [Id]);
 
   return (
     <Shadow offset={[3, 3]} opacity={0.5} blur={[3, 0.1, 0.1]}>
-      <ButtonCustom onPress={onPress} activeOpacity={0.8} style={styles.container}>
+      <ButtonCustom
+        onPress={onPress}
+        activeOpacity={0.8}
+        style={styles.container}
+      >
         <ToastIcon type={type} />
         <Text
           style={styles.text}
@@ -59,7 +76,11 @@ export const ToastCommon = ({ text1, text2, type, isVisible, props: { visibility
           {text2 ? <Text>{` ${text2}`}</Text> : null}
         </Text>
         {autoHide === false && (
-          <ButtonCustom mode="text-shadow" textStyle={styles.closeBtnText} onPress={() => hide()}>
+          <ButtonCustom
+            mode="text-shadow"
+            textStyle={styles.closeBtnText}
+            onPress={() => hide()}
+          >
             CLOSE
           </ButtonCustom>
         )}
@@ -72,16 +93,46 @@ export const ToastIcon = ({ type }: ToastIconProps) => {
   const { styles } = useStyles(getToastCommonStyles);
   const iconSize = styles.icon.fontSize;
   switch (type) {
-    case "success":
-      return <CheckCircleIcon size={iconSize} color={styles.successIconColor.color} style={styles.icon} />;
-    case "error":
-      return <ExclamationCircleIcon size={iconSize} color={styles.errorIconColor.color} style={styles.icon} />;
-    case "info":
-      return <InformationCircleIcon size={iconSize} color={styles.infoIconColor.color} style={styles.icon} />;
-    case "warning":
-      return <ExclamationTriangleIcon size={iconSize} color={styles.warningIconColor.color} style={styles.icon} />;
-    case "validation":
-      return <PencilSquareIcon size={iconSize} color={styles.validationIconColor.color} style={styles.icon} />;
+    case 'success':
+      return (
+        <CheckCircleIcon
+          size={iconSize}
+          color={styles.successIconColor.color}
+          style={styles.icon}
+        />
+      );
+    case 'error':
+      return (
+        <ExclamationCircleIcon
+          size={iconSize}
+          color={styles.errorIconColor.color}
+          style={styles.icon}
+        />
+      );
+    case 'info':
+      return (
+        <InformationCircleIcon
+          size={iconSize}
+          color={styles.infoIconColor.color}
+          style={styles.icon}
+        />
+      );
+    case 'warning':
+      return (
+        <ExclamationTriangleIcon
+          size={iconSize}
+          color={styles.warningIconColor.color}
+          style={styles.icon}
+        />
+      );
+    case 'validation':
+      return (
+        <PencilSquareIcon
+          size={iconSize}
+          color={styles.validationIconColor.color}
+          style={styles.icon}
+        />
+      );
     default:
       return <></>;
   }

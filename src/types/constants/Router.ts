@@ -1,5 +1,5 @@
-import { Stack, Tabs } from "expo-router";
-import { Params } from "../../types/models";
+import { Stack, Tabs } from 'expo-router';
+import type { Params } from '../../types/models';
 
 export type RouterPropsParam = {
   StackProps: Params<typeof Stack>;

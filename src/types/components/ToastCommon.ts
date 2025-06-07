@@ -1,5 +1,5 @@
-import { ToastConfigParams, ToastType } from "react-native-toast-message";
-import { ErrorType } from "../../types/models";
+import type { ToastConfigParams, ToastType } from 'react-native-toast-message';
+import type { ErrorType } from '../../types/models';
 
 export type ToastCommonProps = Omit<
   ToastConfigParams<{
@@ -7,8 +7,8 @@ export type ToastCommonProps = Omit<
     visibilityTime: number;
     autoHide?: boolean;
   }>,
-  "type"
+  'type'
 > & {
   type: ToastType | ErrorType;
 };
-export type ToastIconProps = Pick<ToastCommonProps, "type">;
+export type ToastIconProps = Pick<ToastCommonProps, 'type'>;
