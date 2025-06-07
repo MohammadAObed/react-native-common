@@ -20,10 +20,10 @@ export const Popup = ({
   text,
   buttonText,
   centerContent,
-  hideMode = "onAnyClick",
+  hideMode = "on-any-click",
   onHide,
   onButtonClick,
-  mode = "normal",
+  mode = "dialog",
   animationType = "fade",
   ...rest
 }: PopupProps) => {
@@ -68,7 +68,7 @@ export const Popup = ({
             {children}
             {text && <Text>{text}</Text>}
             {buttonText && (
-              <ButtonCustom mode="button" style={[styles.Button, buttonStyle]} onPress={onButtonPress}>
+              <ButtonCustom mode="contained" style={[styles.Button, buttonStyle]} onPress={onButtonPress}>
                 {buttonText}
               </ButtonCustom>
             )}
@@ -115,8 +115,8 @@ const Container = ({ children, style, hideMode, hideModal, mode }: ContainerProp
   const { styles } = useStyles(getPopupStyles);
   return (
     <View style={styles.invisibleContainer}>
-      {mode === "bare" && children}
-      {mode === "normal" && (
+      {mode === "plain" && children}
+      {mode === "dialog" && (
         <Shadow offset={[0, 5]} borderRadius={10} opacity={0.12} blur={[3, 1, 0.98]}>
           <View style={[styles.contentContainer, style]}>
             {HideModes["Cancel"].includes(hideMode!) && <CancelButton hideModal={hideModal} />}
@@ -131,6 +131,12 @@ const Container = ({ children, style, hideMode, hideModal, mode }: ContainerProp
 const CancelButton = ({ hideModal }: CancelButtonProps) => {
   const { styles } = useStyles(getPopupStyles);
   return (
-    <PressableIcon color={styles.cancelButton.color} style={styles.cancelButton} size={35} name="xmark" onPress={() => hideModal("Cancel")} />
+    <PressableIcon
+      color={styles.cancelButton.color}
+      style={styles.cancelButton}
+      size={styles.cancelButton.fontSize}
+      name="xmark"
+      onPress={() => hideModal("Cancel")}
+    />
   );
 };

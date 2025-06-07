@@ -37,7 +37,7 @@ export const SliderCustom = ({
         <View style={styles.numberInputContainer}>
           <NumberInput
             contentStyle={styles.numberInput}
-            inputMode={inputMode}
+            inputMode={inputMode as any}
             minValue={minimumValue}
             maxValue={maximumValue}
             decimalPlaces={decimalPlaces}

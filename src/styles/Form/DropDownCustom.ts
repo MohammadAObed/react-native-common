@@ -45,6 +45,7 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
     icon: {
       marginRight: 5,
       color: theme.colors.onSurfaceVariant,
+      fontSize: theme.fonts.bodyLarge.fontSize + 2,
     },
     selectedIcon: {
       color: theme.colors.primary,
@@ -86,10 +87,10 @@ export const getDropDownCustomStyles = (theme: MD3Theme) =>
     },
   });
 
-export const getDropDownCustomModeStyles = () =>
+export const getDropDownCustomVariantStyles = () =>
   StyleSheet.create({
-    normal: {},
-    bare: {
+    filled: {},
+    plain: {
       paddingTop: 0,
       paddingBottom: 0,
       paddingHorizontal: 0,

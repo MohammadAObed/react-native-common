@@ -70,7 +70,7 @@ export const ToastCommon = ({ text1, text2, type, isVisible, props: { visibility
 
 export const ToastIcon = ({ type }: ToastIconProps) => {
   const { styles } = useStyles(getToastCommonStyles);
-  const iconSize = 20;
+  const iconSize = styles.icon.fontSize;
   switch (type) {
     case "success":
       return <CheckCircleIcon size={iconSize} color={styles.successIconColor.color} style={styles.icon} />;

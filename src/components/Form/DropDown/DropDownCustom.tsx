@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View } from "react-native";
 import { Text } from "react-native-paper";
 import { useStyles } from "../../../hooks";
-import { getDropDownCustomModeStyles, getDropDownCustomStyles } from "../../../styles";
+import { getDropDownCustomStyles, getDropDownCustomVariantStyles } from "../../../styles";
 import type { DropDownCustomProps, DropDownLabelField, DropDownValueField } from "../../../types/components";
 import { DropDownMultiSelect } from "./DropDownMultiSelect";
 import { DropDownSingleSelect } from "./DropDownSingleSelect";
@@ -17,7 +17,7 @@ export const DropDownCustom = <Model, Value extends DropDownValueField = number>
   data,
   value,
   placeholder,
-  inputMode = "normal",
+  variant = "plain",
   seperator = ", ",
   text,
   orderByValue,
@@ -28,7 +28,7 @@ export const DropDownCustom = <Model, Value extends DropDownValueField = number>
   ...rest
 }: DropDownCustomProps<Model, Value>) => {
   const { styles } = useStyles(getDropDownCustomStyles);
-  const { styles: modeStyles } = useStyles(getDropDownCustomModeStyles);
+  const { styles: variantStyles } = useStyles(getDropDownCustomVariantStyles);
   const [isFocused, setIsFocused] = useState(false);
 
   let orderedData = data;
@@ -76,7 +76,7 @@ export const DropDownCustom = <Model, Value extends DropDownValueField = number>
     if (!selectedText) selectedText = placeholder;
   }
   const props = {
-    style: [modeStyles[inputMode], style],
+    style: [variantStyles[variant], style],
     data: orderedData,
     isFocused,
     focus,
@@ -88,7 +88,7 @@ export const DropDownCustom = <Model, Value extends DropDownValueField = number>
     disabledValues,
   };
   return (
-    <View style={[styles.container, modeStyles[inputMode], fullWidth ? { alignSelf: "stretch" } : {}, wrapperStyle]}>
+    <View style={[styles.container, variantStyles[variant], fullWidth ? { alignSelf: "stretch" } : {}, wrapperStyle]}>
       <Text style={[styles.label, isFocused && styles.focusedLabel]}>{label}</Text>
       <Text variant="bodyMedium" style={[styles.placeholder, styles.dummyTextForDynamicWidth]}>
         {selectedText}

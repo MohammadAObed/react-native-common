@@ -22,17 +22,17 @@ export const getButtonCustomStyles = (theme: MD3Theme) =>
 
 export const getButtonCustomModeStyles = (theme: MD3Theme) =>
   StyleSheet.create({
-    bare: { paddingHorizontal: 0, paddingVertical: 0 },
+    plain: { paddingHorizontal: 0, paddingVertical: 0 },
     text: {},
     ["text-shadow"]: {},
-    button: {
+    contained: {
       backgroundColor: theme.colors.primary,
     },
   });
 
 export const getButtonCustomModeTextStyles = (theme: MD3Theme) =>
   StyleSheet.create({
-    bare: { color: theme.colors.onSurface },
+    plain: { color: theme.colors.onSurface },
     text: { color: theme.colors.onSurface },
     ["text-shadow"]: {
       fontWeight: "900",
@@ -40,5 +40,5 @@ export const getButtonCustomModeTextStyles = (theme: MD3Theme) =>
       textShadowRadius: 5,
       color: theme.colors.onSurface,
     },
-    button: { color: theme.colors.onPrimary },
+    contained: { color: theme.colors.onPrimary },
   });

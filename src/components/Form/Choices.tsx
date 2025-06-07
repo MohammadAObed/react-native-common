@@ -58,7 +58,7 @@ export const Choices = <Model extends DynamicProps, Value extends ChoiceValueFie
           <ButtonCustomWithIcon
             key={itemValue}
             style={[styles.option, style]}
-            mode={isSelected ? "button" : "text"}
+            mode={isSelected ? "contained" : "text"}
             disabled={disabledValues?.includes(itemValue)}
             onPress={() => onChangeValue(itemValue)}
             icons={isSelected ? icons : undefined}

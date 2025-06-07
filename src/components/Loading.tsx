@@ -10,7 +10,7 @@ export const Loading = ({ loading = true, center, mode = "simple", ...rest }: Lo
   return (
     <>
       {mode === "detailed" && (
-        <Popup visible={loading} mode="bare" hideMode="onCustom">
+        <Popup visible={loading} mode="plain" hideMode="on-custom">
           <LoadingContent loading={loading} {...rest} />
         </Popup>
       )}

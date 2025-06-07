@@ -12,8 +12,7 @@ export const CollapsibleList = <T,>({
   maxHeight,
   titleKey,
   subTitleKey,
-  collapseMode,
-  behavior = "normal",
+  behavior = "multi-expand",
   renderItem,
   renderChild,
 }: CollapsibleListProps<T>) => {
@@ -30,8 +29,7 @@ export const CollapsibleList = <T,>({
             <Collapsible
               style={itemStyle}
               onToggle={() => setExpandedIndex((prev) => (prev === index ? undefined : index))}
-              isExpanded={behavior === "collapse-others" ? index === expandedIndex : undefined}
-              mode={collapseMode}
+              isExpanded={behavior === "single-expand" ? index === expandedIndex : undefined}
               title={item[titleKey] as string}
               subTitle={item[subTitleKey] as string}
             >

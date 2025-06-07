@@ -51,11 +51,11 @@ export const Exception = ({ children, mode, center, error, resetError }: Excepti
           {errorCommon.destination !== "boundary-alone" &&
             children &&
             (isValidComponent(children) ? children : <Text variant="bodyLarge">{children}</Text>)}
-          <ButtonCustom textStyle={styles.buttonText} mode="button" withRadius onPress={resetError}>
+          <ButtonCustom textStyle={styles.buttonText} mode="contained" withRadius onPress={resetError}>
             Try Again
           </ButtonCustom>
           {SHOW_SEND_EMAIL && (
-            <ButtonCustom textStyle={styles.buttonText} mode="button" withRadius onPress={resetError}>
+            <ButtonCustom textStyle={styles.buttonText} mode="contained" withRadius onPress={resetError}>
               Send Email
             </ButtonCustom>
           )}

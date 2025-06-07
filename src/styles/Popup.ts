@@ -37,6 +37,7 @@ export const getPopupStyles = (theme: MD3Theme) =>
       right: 10,
       color: theme.colors.onSurface,
       zIndex: HIGHEST_ZINDEX,
+      fontSize: theme.fonts.displaySmall.fontSize,
     },
     title: {},
   });

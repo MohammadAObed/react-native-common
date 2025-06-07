@@ -13,36 +13,36 @@ const edgeMargin = 10;
 
 export const getFloatingContainerModeStyles = (_theme: MD3Theme) =>
   StyleSheet.create({
-    topLeft: {
+    ["top-left"]: {
       left: edgeMargin,
     },
-    topCenter: {
+    ["top-center"]: {
       alignSelf: "center",
     },
-    topRight: {
+    ["top-right"]: {
       right: edgeMargin,
     },
-    bottomLeft: {
+    ["bottom-left"]: {
       left: edgeMargin,
       bottom: edgeMargin,
     },
-    bottomCenter: {
+    ["bottom-center"]: {
       bottom: edgeMargin,
       alignSelf: "center",
     },
-    bottomRight: {
+    ["bottom-right"]: {
       bottom: edgeMargin,
       right: edgeMargin,
     },
-    middleLeft: {
+    ["middle-left"]: {
       top: "50%",
       left: edgeMargin,
     },
-    middleCenter: {
+    ["middle-center"]: {
       top: "50%",
       alignSelf: "center",
     },
-    middleRight: {
+    ["middle-right"]: {
       top: "50%",
       right: edgeMargin,
     },

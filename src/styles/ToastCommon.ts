@@ -42,6 +42,7 @@ export const getToastCommonStyles = (theme: ThemeCommon) =>
     icon: {
       alignSelf: "center",
       marginTop: 1,
+      fontSize: theme.fonts.titleLarge.fontSize - 2,
     },
     closeBtnText: {
       color: theme.colors.surface,

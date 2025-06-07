@@ -23,6 +23,6 @@ export const getFormRowStyles = (theme: MD3Theme) =>
 
 export const getFormRowModeStyles = () =>
   StyleSheet.create({
-    normal: {},
+    filled: {},
     blend: { backgroundColor: "transparent" },
   });

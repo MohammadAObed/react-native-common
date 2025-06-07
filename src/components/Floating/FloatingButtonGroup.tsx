@@ -13,7 +13,7 @@ export const FloatingButtonGroup = ({
   rippleColor,
   icon,
   openIcon,
-  mode = "bottomRight",
+  mode = "bottom-right",
   visible = true,
   actions,
   onPress,
@@ -28,7 +28,7 @@ export const FloatingButtonGroup = ({
   actions.forEach((action) => {
     action.containerStyle = [action.containerStyle, styles.actionContainerStyle];
     action.labelStyle = [action.labelStyle, styles.actionLabelStyle];
-    if (mode === "topLeft" || mode === "bottomLeft" || mode === "middleLeft") action.label = "";
+    if (mode === "top-left" || mode === "bottom-left" || mode === "middle-left") action.label = "";
   });
   return (
     <SafeAreaViewCustom style={[styles.container, modeStyles[mode], containerStyle]}>

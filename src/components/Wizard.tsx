@@ -44,7 +44,7 @@ export const Wizard = <T extends WizardKey>({ steps, currentStep: step, showNavi
           <>
             <ButtonCustom
               style={styles.buttons}
-              mode="button"
+              mode="contained"
               onPress={goToPrevStep}
               disabled={steps.findIndex((x) => x.step === currentStep) === 0}
               applyDisabledStyle
@@ -53,7 +53,7 @@ export const Wizard = <T extends WizardKey>({ steps, currentStep: step, showNavi
             </ButtonCustom>
             <ButtonCustom
               style={styles.buttons}
-              mode="button"
+              mode="contained"
               onPress={goToNextStep}
               disabled={steps.findIndex((x) => x.step === currentStep) === steps.length}
               applyDisabledStyle

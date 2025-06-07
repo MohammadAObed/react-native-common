@@ -13,7 +13,7 @@ export type DropDownCustomProps<Model, Value extends DropDownValueField> = {
   iconName?: keyof (typeof AntDesign)["glyphMap"];
   valueField: keyof Model;
   labelField: keyof Model;
-  inputMode?: "normal" | "bare";
+  variant?: "filled" | "plain";
   renderItemProps?: DropDownSingleAndMultiProps<Model>["renderItemProps"];
   text?: DropDownSingleAndMultiProps<Model>["text"];
   disabledValues?: Value[];

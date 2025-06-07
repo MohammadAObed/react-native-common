@@ -6,7 +6,7 @@ import { getFormRowModeStyles, getFormRowStyles } from "../../styles";
 import type { FormRowProps } from "../../types/components";
 import { isValidComponent } from "../../utils";
 
-export const FormRow = forwardRef(({ children, label, style, mode = "normal", ...rest }: FormRowProps, ref: React.ForwardedRef<View>) => {
+export const FormRow = forwardRef(({ children, label, style, mode = "filled", ...rest }: FormRowProps, ref: React.ForwardedRef<View>) => {
   const { styles } = useStyles(getFormRowStyles);
   const { styles: modeStyles } = useStyles(getFormRowModeStyles);
 

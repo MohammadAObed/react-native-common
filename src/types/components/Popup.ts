@@ -8,13 +8,13 @@ export type PopupPressType = "Button" | "Out" | "Cancel";
 export type HideModal = (pressType: PopupPressType, isLongPress?: boolean) => void;
 
 export type CommonProps = {
-  mode?: "normal" | "bare";
+  mode?: "dialog" | "plain";
   hideModal: HideModal;
 };
 
 export type PopupProps = OptionalChildren<Omit<ModalProps, "visible" | "onDismiss" | "dismissable">> & {
   visible: boolean;
-  mode?: "normal" | "bare";
+  mode?: "dialog" | "plain";
   containerStyle?: ViewProps["style"];
   titleStyle?: TextProps<any>["style"];
   buttonStyle?: ButtonCustomProps["style"];
@@ -25,14 +25,14 @@ export type PopupProps = OptionalChildren<Omit<ModalProps, "visible" | "onDismis
   onHide?: () => void;
   onButtonClick?: () => void;
   hideMode?:
-    | "onButtonClick"
-    | "onCancelClick"
-    | "onOutClick"
-    | "onButtonOrCancelClick"
-    | "onButtonOrOutClick"
-    | "onCancelOrOutClick"
-    | "onAnyClick"
-    | "onCustom";
+    | "on-button-click"
+    | "on-cancel-click"
+    | "on-out-click"
+    | "on-button-or-cancel-click"
+    | "on-button-or-out-click"
+    | "on-cancel-or-out-click"
+    | "on-any-click"
+    | "on-custom";
 };
 
 export type ShadeProps = CommonProps & {

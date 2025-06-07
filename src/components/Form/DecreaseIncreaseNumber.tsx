@@ -37,7 +37,7 @@ export const DecreaseIncreaseNumber = ({
             <NumberInput
               contentStyle={styles.inputContentStyle}
               variant="bodyLarge"
-              inputMode={inputMode}
+              inputMode={inputMode as any}
               minValue={min}
               maxValue={max}
               decimalPlaces={decimalPlaces}

@@ -31,12 +31,12 @@ export const PressableIcon = forwardRef(
         {name === "plus" ? (
           <>
             {iconMode === "circle" && <PlusCircleIcon color={IconColor} size={size} />}
-            {iconMode === "bare" && <PlusIcon color={IconColor} size={size} />}
+            {iconMode === "plain" && <PlusIcon color={IconColor} size={size} />}
           </>
         ) : name === "minus" ? (
           <>
             {iconMode === "circle" && <MinusCircleIcon color={IconColor} size={size} />}
-            {iconMode === "bare" && <MinusIcon color={IconColor} size={size} />}
+            {iconMode === "plain" && <MinusIcon color={IconColor} size={size} />}
           </>
         ) : name === "trash" ? (
           <>

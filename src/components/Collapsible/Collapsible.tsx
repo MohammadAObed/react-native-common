@@ -9,11 +9,11 @@ import { isValidComponent } from "../../utils";
 import { ButtonCustom } from "../ButtonCustom";
 import { ScrollContainer } from "../ScrollContainer";
 
-export const Collapsible = ({ children, style, title, subTitle, isExpanded, mode = "normal", onToggle }: CollapsibleProps) => {
+export const Collapsible = ({ children, style, title, subTitle, isExpanded, onToggle }: CollapsibleProps) => {
   const { styles } = useStyles(getCollapsibleStyles);
   const [expanded, setExpanded] = useState(false);
   const isExpandedFinal = isExpanded ?? expanded;
-  const numberOfLines = mode !== "title-as-description" || (mode === "title-as-description" && !isExpandedFinal) ? 1 : undefined;
+  const numberOfLines = !isExpandedFinal ? 1 : undefined;
   const onPressRow = () => {
     setExpanded((prev) => {
       onToggle?.(!prev);
@@ -23,14 +23,19 @@ export const Collapsible = ({ children, style, title, subTitle, isExpanded, mode
   return (
     <View style={[styles.container, style]}>
       <ButtonCustom style={styles.row} onPress={onPressRow}>
-        {!isExpandedFinal ? <ChevronRightIcon size={15} color={styles.icon.color} /> : <ChevronDownIcon size={15} color={styles.icon.color} />}
+        {!isExpandedFinal && <ChevronRightIcon size={styles.icon.fontSize} color={styles.icon.color} />}
         <Text numberOfLines={numberOfLines} style={styles.title}>
+          {isExpandedFinal && <ChevronDownIcon size={styles.icon.fontSize} color={styles.icon.color} />}
           {title}
         </Text>
-        {subTitle && <Text style={styles.subTitle}>{subTitle}</Text>}
+        {subTitle && (
+          <Text numberOfLines={numberOfLines} style={styles.subTitle}>
+            {subTitle}
+          </Text>
+        )}
       </ButtonCustom>
 
-      {isExpandedFinal && mode !== "title-as-description" && (
+      {isExpandedFinal && children && (
         <ScrollContainer maxHeight={200}>{isValidComponent(children) ? children : <Text>{children}</Text>}</ScrollContainer>
       )}
     </View>

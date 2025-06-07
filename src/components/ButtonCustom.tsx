@@ -9,7 +9,7 @@ import { isValidComponent } from "../utils";
 
 export const ButtonCustom = forwardRef(
   (
-    { children, textStyle, style, disabled, withRadius, applyDisabledStyle, mode = "bare", variant, ...rest }: ButtonCustomProps,
+    { children, textStyle, style, disabled, withRadius, applyDisabledStyle, mode = "plain", variant, ...rest }: ButtonCustomProps,
     ref: React.ForwardedRef<View>
   ) => {
     const { styles } = useStyles(getButtonCustomStyles);
@@ -40,7 +40,7 @@ export const ButtonCustom = forwardRef(
   }
 );
 
-export const ButtonText = ({ children, textStyle, disabled, variant, mode = "bare" }: ButtonCustomProps) => {
+export const ButtonText = ({ children, textStyle, disabled, variant, mode = "plain" }: ButtonCustomProps) => {
   const { styles: modeTextStyles } = useStyles(getButtonCustomModeTextStyles);
 
   return (
