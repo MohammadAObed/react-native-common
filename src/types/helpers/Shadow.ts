@@ -3,4 +3,4 @@ import type { ViewStyle } from 'react-native';
 
 export type ShadowStyle = ViewStyle;
 export type ShadowChildren = ReactNode;
-export type ShadowChild = ReactElement;
+export type ShadowChild = ReactElement<any>;
