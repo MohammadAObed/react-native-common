@@ -1,6 +1,9 @@
 # react-native-common
 
-a library that contains common react native And React And Typescript Code
+A personal React Native + React + TypeScript utility library.
+
+This is my stash of all the common code I reuse across projects — from components, functions, constants, types, and more.  
+Still under constant changes and improvements. Not really meant for public use, but too lazy to make it private.
 
 ## Installation
 
@@ -8,19 +11,9 @@ a library that contains common react native And React And Typescript Code
 npm install react-native-common
 ```
 
-## Usage
-
-```js
-import { getRandomNumber } from '@mohammad_obed/react-native-common/src/utils';
-
-// ...
-
-const result = await getRandomNumber(0, 10);
-```
-
 ## Contributing
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+This is a personal project — contributions aren't expected, but if you really want to, hit me up or open a PR.
 
 ## License
 
