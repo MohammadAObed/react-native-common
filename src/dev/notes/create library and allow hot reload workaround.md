@@ -34,3 +34,4 @@ Note: now you have two approaches to updating the library inside a certain proje
 
 - just pull changes into your installed library that is inside the node_modules
 - or you published the library and you already setup .git/SPARSE of the library in that project but did not commit stuff or wanna test freshly, then just just make backup of .git folder from @mohammad_obed → react-native-common, run npm i @mohammad_obed/react-native-common, then put the .git folder again in the react-native-common
+- now when you wanna add a new folder index whatever and you want to use it in any project just make sure to look at the package.json: "exports" property and modify it accordingly
