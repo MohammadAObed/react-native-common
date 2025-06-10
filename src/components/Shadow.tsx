@@ -2,12 +2,10 @@ import { View, type ViewStyle } from "react-native";
 import { BLUR_NOT_SUPPORTED_OPACITY } from "../constants";
 import { getContainerStyleFromChildren, getStyleFromChildren, isBlurSupported } from "../helpers";
 import { useStyles } from "../hooks";
-import getShadowStyles from "../styles/Shadow";
+import { getShadowStyles } from "../styles";
 import type { ShadowProps } from "../types/components";
 
-const blurSupported = isBlurSupported();
-
-const Shadow = ({
+export const Shadow = ({
   children,
   style,
   containerStyle,
@@ -19,11 +17,16 @@ const Shadow = ({
   ...rest
 }: ShadowProps) => {
   const { styles } = useStyles(getShadowStyles);
+  const blurSupported = isBlurSupported();
   const transform: ViewStyle["transform"] = [
     { translateX: offset[0] },
     { translateY: offset[1] },
-    { scaleX: blurSupported ? (typeof scale === "number" ? scale : scale?.[0]) : blur[1] },
-    { scaleY: blurSupported ? (typeof scale === "number" ? scale : scale?.[1]) : blur[2] },
+    {
+      scaleX: blurSupported ? (typeof scale === "number" ? scale : scale?.[0]) : blur[1],
+    },
+    {
+      scaleY: blurSupported ? (typeof scale === "number" ? scale : scale?.[1]) : blur[2],
+    },
   ];
   let _containerStyle = getContainerStyleFromChildren(children);
   let _style = getStyleFromChildren(children);
@@ -46,4 +49,3 @@ const Shadow = ({
     </View>
   );
 };
-export default Shadow;

@@ -5,9 +5,9 @@ import { useStyles } from "../../hooks";
 import { getCardCustomStyles } from "../../styles";
 import type { CardCustomProps } from "../../types/components/Card/CardCustom";
 import { ButtonCustom } from "../ButtonCustom";
-import Shadow from "../Shadow";
+import { Shadow } from "../Shadow";
 
-const CardCustom = forwardRef(({ children, style, title, description, ...rest }: CardCustomProps, ref: React.ForwardedRef<View>) => {
+export const CardCustom = forwardRef(({ children, style, title, description, ...rest }: CardCustomProps, ref: React.ForwardedRef<View>) => {
   const { styles } = useStyles(getCardCustomStyles);
 
   return (
@@ -28,5 +28,3 @@ const CardCustom = forwardRef(({ children, style, title, description, ...rest }:
     </Shadow>
   );
 });
-
-export default CardCustom;

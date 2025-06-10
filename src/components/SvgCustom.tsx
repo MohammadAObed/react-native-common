@@ -5,7 +5,7 @@ import { useStyles } from "../hooks";
 import { getSvgCustomStyles } from "../styles";
 import type { SvgCustomProps } from "../types/components";
 
-const SvgCustom = ({ color, shape, isSmall, strokeWidth = 0 }: SvgCustomProps) => {
+export const SvgCustom = ({ color, shape, isSmall, strokeWidth = 0 }: SvgCustomProps) => {
   const { styles } = useStyles(getSvgCustomStyles);
 
   if (!color) {
@@ -77,5 +77,3 @@ const SvgCustom = ({ color, shape, isSmall, strokeWidth = 0 }: SvgCustomProps) =
 
   return <Text variant="titleLarge">?</Text>;
 };
-
-export default SvgCustom;

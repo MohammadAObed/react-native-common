@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import type { MD3Theme } from "react-native-paper";
 
-const getShadowStyles = (theme: MD3Theme) =>
+export const getShadowStyles = (theme: MD3Theme) =>
   StyleSheet.create({
     shadowContainer: {
       position: "relative",
@@ -17,5 +17,3 @@ const getShadowStyles = (theme: MD3Theme) =>
       // elevation: 10, // For Android shadow visibility
     },
   });
-
-export default getShadowStyles;
